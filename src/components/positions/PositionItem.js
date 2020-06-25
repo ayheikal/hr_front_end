@@ -1,30 +1,33 @@
 import React, { component } from 'react';
-
-const PositionItem = () => {
+import { Link } from 'react-router-dom';
+const PositionItem = ({ position }) => {
+  const {
+    id,
+    title,
+    description,
+    accepts_interviews_from_datetime,
+    accepts_interviews_until,
+    interview_duration,
+    status,
+  } = position;
   return (
-    <div className='card' style={{ width: '18rem' }}>
-      <img src='...' className='card-img-top' alt='...' />
+    <div className='card text-center' style={{ width: '18rem' }}>
+      {/* <img src='...' className='card-img-top' alt='...' /> */}
       <div className='card-body'>
         <h5 className='card-title'>
-          <Link to={'/1/1/interview/1'}>java</Link>
+          <Link to={'/1/1/interview/1'}>{title.toUpperCase()}</Link>
         </h5>
-        <p className='card-text'>
-          Some quick details text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
+        <p className='card-text'>{description}</p>
+        <div className='card-text'>
+          <p>Until: {accepts_interviews_until}</p>
+          <p>Duration: {interview_duration}</p>
+        </div>
       </div>
-      <ul className='list-group list-group-flush'>
-        <li className='list-group-item'>Cras justo odio</li>
-        <li className='list-group-item'>Dapibus ac facilisis in</li>
-        <li className='list-group-item'>Vestibulum at eros</li>
-      </ul>
+
       <div className='card-body'>
-        <a href='#' className='card-link'>
-          Card link
-        </a>
-        <a href='#' className='card-link'>
-          Another link
-        </a>
+        <Link className='btn btn-primary' to={'/1/1/interview/1'}>
+          Apply
+        </Link>
       </div>
     </div>
   );

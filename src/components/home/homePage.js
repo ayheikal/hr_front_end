@@ -1,5 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import Positions from '../positions/Positions';
+import Search from './Search';
 const HomePage = () => {
-  return <div style={{ margin: '10px' }}></div>;
+  return (
+    <Fragment>
+      <Search />
+      <Positions />
+    </Fragment>
+  );
 };
 export default HomePage;
