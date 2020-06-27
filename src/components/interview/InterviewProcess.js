@@ -1,53 +1,54 @@
-import React, { Component } from 'react'
+import React, { useContext, useEffect } from 'react';
 import Question from './Question';
 import Answer from './Answer';
-import EndedInterview from './EndedInterview'
-export default class InterviewProcess extends Component {
-  state={
-    question:[
-      {id:1,body:'what is ur name'},
-      {id:2,body:'what is ur last name'},
-      {id:3,body:'what is ur age'},
+import EndedInterview from './EndedInterview';
+import InterviewContext from '../../context/interview/interviewContext';
+const InterviewProcess = (props) => {
+  const interviewContext = useContext(InterviewContext);
 
-
-    ],
-    currentQuestion:0,
-
-  }
-  componentDidMount(){
+  useEffect(() => {
     //axios.get(questions)
-    const {userId,jobId,interviewId}=this.props.match.params;
-    console.log(userId)
-  }
-  submitAnswer=(answer)=>{
-    alert(answer.body+'=>'+answer.questionId)
-    if(this.state.currentQuestion<(this.state.question).length){
-      this.setState({ currentQuestion: this.state.currentQuestion + 1 })
+    /*     const { userId, jobId, interviewId } = props.match.params;
+     */ /* console.log(userId); */
+    interviewContext.getQuestions();
+    //eslint-disable-next-line
+  }, []);
+  const submitAnswer = (answer) => {
+    alert(answer.body + '=>' + answer.questionId);
+    interviewContext.saveAnswer(answer);
+    if (interviewContext.currentQuestion < interviewContext.questions.length) {
+      /* this.setState({ currentQuestion: this.state.currentQuestion + 1 }) */
+      interviewContext.incrementQuestionCounter();
     }
+  };
 
-  }
-
-  skipAnswer=()=>{
-    if(this.state.currentQuestion<(this.state.question).length){
-      this.setState({ currentQuestion: this.state.currentQuestion + 1 })
+  const skipAnswer = () => {
+    if (interviewContext.currentQuestion < interviewContext.questions.length) {
+      interviewContext.incrementQuestionCounter();
     }
+  };
+  console.log('interview counter: ', interviewContext.currentQuestion);
+  console.log('interview length: ', interviewContext.questions.length);
+  if (interviewContext.currentQuestion < interviewContext.questions.length) {
+    return (
+      <div>
+        <Question
+          question={
+            interviewContext.questions[interviewContext.currentQuestion]
+          }
+        />
+        <Answer
+          submitAnswer={submitAnswer}
+          questionId={
+            interviewContext.questions[interviewContext.currentQuestion].id
+          }
+          skipAnswer={skipAnswer}
+        />
+      </div>
+    );
+  } else {
+    return <EndedInterview />;
   }
-  render () {
-    if(this.state.currentQuestion<(this.state.question).length){
-      return(
-        <div>
-          <Question question={this.state.question[this.state.currentQuestion]}/>
-          <Answer
-            submitAnswer={this.submitAnswer}
-           questionId={this.state.question[this.state.currentQuestion].id}
-           skipAnswer={this.skipAnswer}/>
-      </div>)
-    }
-  else{
-    return(
-      <EndedInterview/>
-    )
-  }
+};
 
-  }
-}
+export default InterviewProcess;

@@ -9,25 +9,28 @@ import PageNotFound from './PageNotFound';
 import SignIn from './components/login/SignIn';
 import Login from './components/login/Login';
 import PositionsState from './context/positions/PositionsState';
+import InterviewState from './context/interview/InterviewState';
 function App() {
   return (
     <Router>
       <PositionsState>
-        <div className='App'>
-          <Navbar />
-          <div className='container'>
-            <Switch>
-              <Route path='/signin' component={SignIn}></Route>
-              <Route path='/signup' component={Login} />
-              <Route exact path='/home' component={HomePage}></Route>
-              <Route
-                path='/:userId/:jobId/interview/:interviewId/'
-                component={InterviewProcess}
-              />
-              <Route component={PageNotFound}></Route>
-            </Switch>
+        <InterviewState>
+          <div className='App'>
+            <Navbar />
+            <div className='container'>
+              <Switch>
+                <Route path='/signin' component={SignIn}></Route>
+                <Route path='/signup' component={Login} />
+                <Route exact path='/home' component={HomePage}></Route>
+                <Route
+                  path='/:userId/:jobId/interview/:interviewId/'
+                  component={InterviewProcess}
+                />
+                <Route component={PageNotFound}></Route>
+              </Switch>
+            </div>
           </div>
-        </div>
+        </InterviewState>
       </PositionsState>
     </Router>
   );

@@ -1,14 +1,13 @@
-import React, { component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 const PositionItem = ({ position }) => {
   const {
-    id,
+    /* id, */
     title,
     description,
-    accepts_interviews_from_datetime,
     accepts_interviews_until,
     interview_duration,
-    status,
+    /*  status, */
   } = position;
   return (
     <div className='card text-center' style={{ width: '18rem' }}>

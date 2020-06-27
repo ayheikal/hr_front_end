@@ -1,4 +1,4 @@
-import React, { component, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Spinner from '../layouts/Spinner';
 import PositionItem from './PositionItem';
 import PositionsContext from '../../context/positions/positionsContext';
@@ -7,6 +7,7 @@ const Positions = () => {
   const positionsContext = useContext(PositionsContext);
   useEffect(() => {
     positionsContext.getPositions();
+    //eslint-disable-next-line
   }, []);
 
   const { loading, positions } = positionsContext;

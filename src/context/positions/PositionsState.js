@@ -1,7 +1,5 @@
 import React, { useReducer } from 'react';
-import axios from 'axios';
 
-import PositionsContext from './positionsContext';
 import PositionsReducer from './positionsReducer';
 
 import { SET_LOADING, GET_POSITIONS, GET_POSITION } from '../types';

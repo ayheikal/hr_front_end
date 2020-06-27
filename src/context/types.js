@@ -1,3 +1,8 @@
 export const GET_POSITIONS = 'GET_POSITIONS';
 export const SET_LOADING = 'SET_LOADING';
 export const GET_POSITION = 'GET_POSITION';
+export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const INCREMENT_QUESTION_COUNTER = 'INCREMENT_QUESTION_COUNTER';
+export const SAVE_ANSWERS = 'SAVE_ANSWERS';
+export const SET_STT = 'SET_STT';
+export const DELETE_STT = 'DELETE_STT';

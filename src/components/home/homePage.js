@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import Positions from '../positions/Positions';
 import Search from './Search';
 const HomePage = () => {

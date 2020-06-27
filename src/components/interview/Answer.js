@@ -1,52 +1,74 @@
-import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
-export default class Answer extends Component {
-  constructor (props) {
-    super(props)
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { startReco, endReco } from './NewSTT';
+import Speech from './scriptSTT';
+import InterviewContext from '../../context/interview/interviewContext';
+const Answer = (props) => {
+  const [answer, setAnswer] = useState({});
+  const [text, setText] = useState('');
+  const [stt, setStt] = useState('');
+  const interviewContext = useContext(InterviewContext);
 
-    this.state = {
-      answer:{userId:'1',jobId:'1',interviewId:1,questionId:'',body:''}
-    }
-  }
-
-  handleAnswer=(event)=>{
-  //this.setState({...this.state.answer, body:event.target.value});
-  let answer = Object.assign({}, this.state);
-  answer.answer.body = event.target.value;
-  answer.answer.questionId=this.props.questionId;
-  this.setState(answer);
-
-  }
-  handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
+    var value = document.getElementById('answer').innerHTML;
+    var userid = 1;
+    var jobid = 1;
+    var interviewid = 1;
+    var answer = {
+      userId: userid,
+      jobId: jobid,
+      interviewId: interviewid,
+      body: value,
+      questionId: props.questionId,
+    };
+    setAnswer(answer);
     e.preventDefault();
-    this.props.submitAnswer(this.state.answer)
+    props.submitAnswer(answer);
+    interviewContext.deleteSpeechToText(' ');
+  };
 
-  }
+  const handleSkip = (e) => {
+    e.preventDefault();
+    props.skipAnswer();
+  };
 
-handleSkip=(e)=>{
-  e.preventDefault();
-  this.props.skipAnswer();
-}
+  const handleEnd = (e) => {
+    props.submitAnswer(answer);
+  };
 
-handleEnd=(e)=>{
-  this.props.submitAnswer(this.state.answer)
-}
-  render () {
-    return (
-      <div>
-        <form autoComplete="off" className={'w-50'}>
-            <div className="form-group green-border-focus">
-              <label htmlFor="exampleFormControlTextarea5">Answer</label>
-              <textarea className="form-control" id="exampleFormControlTextarea5" rows="3"
-                onChange={this.handleAnswer} ></textarea>
-            </div>
-            <div className='m-10'>
-              <Link className="btn btn-primary" onClick={this.handleSubmit}>submit</Link>{' | '}
-              <Link className="btn btn-secondary"onClick={this.handleSkip}>Skip</Link>{' | '}
-              <Link to='/home' className="btn btn-danger" onClick={this.handleEnd}>End</Link>
-            </div>
-        </form>
-      </div>
-    )
-  }
-}
+  return (
+    <div>
+      <form autoComplete='off' className={'w-50'}>
+        <div className='form-group green-border-focus '>
+          <label htmlFor='exampleFormControlTextarea5'>Answer</label>
+
+          <div
+            contenteditable='true'
+            id='answer'
+            style={{ border: '1px solid', display: 'block', overflow: 'auto' }}
+          >
+            {interviewContext.speechToText}
+          </div>
+
+          <Speech></Speech>
+        </div>
+        <div className='m-10'>
+          <button className='btn btn-primary' onClick={handleSubmit}>
+            submit
+          </button>
+          {' | '}
+
+          <button className='btn btn-secondary' onClick={handleSkip}>
+            Skip
+          </button>
+          {' | '}
+          <Link to='/home' className='btn btn-danger' onClick={handleEnd}>
+            End
+          </Link>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Answer;
