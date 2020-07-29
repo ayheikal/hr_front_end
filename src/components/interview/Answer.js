@@ -56,6 +56,7 @@ const Answer = (props) => {
           <button className='btn btn-primary' onClick={handleSubmit}>
             submit
           </button>
+
           {' | '}
 
           <button className='btn btn-secondary' onClick={handleSkip}>

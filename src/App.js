@@ -10,6 +10,8 @@ import SignIn from './components/login/SignIn';
 import Login from './components/login/Login';
 import PositionsState from './context/positions/PositionsState';
 import InterviewState from './context/interview/InterviewState';
+import CreatePosition from './components/positions/CreatePosition';
+import RecruiterDashboard from './components/positions/RecruiterDashboard';
 function App() {
   return (
     <Router>
@@ -26,6 +28,11 @@ function App() {
                   path='/:userId/:jobId/interview/:interviewId/'
                   component={InterviewProcess}
                 />
+                <Route path='/addJob' component={CreatePosition}></Route>
+                <Route
+                  path='/recruiterPositions'
+                  component={RecruiterDashboard}
+                ></Route>
                 <Route component={PageNotFound}></Route>
               </Switch>
             </div>

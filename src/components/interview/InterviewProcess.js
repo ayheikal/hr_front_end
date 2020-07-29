@@ -19,19 +19,21 @@ const InterviewProcess = (props) => {
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
       /* this.setState({ currentQuestion: this.state.currentQuestion + 1 }) */
       interviewContext.incrementQuestionCounter();
+      interviewContext.deleteSpeechToText();
     }
   };
 
   const skipAnswer = () => {
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
       interviewContext.incrementQuestionCounter();
+      interviewContext.deleteSpeechTOText();
     }
   };
   console.log('interview counter: ', interviewContext.currentQuestion);
   console.log('interview length: ', interviewContext.questions.length);
   if (interviewContext.currentQuestion < interviewContext.questions.length) {
     return (
-      <div>
+      <div className='center'>
         <Question
           question={
             interviewContext.questions[interviewContext.currentQuestion]

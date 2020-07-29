@@ -89,7 +89,13 @@ const Speech = (props) => {
         id='microphone-btn'
         style={button}
         onClick={toggleListen}
-      />
+      >
+        {listening ? (
+          <i className='fas fa-microphone'></i>
+        ) : (
+          <i class='fas fa-microphone-alt-slash'></i>
+        )}
+      </button>
     </div>
   );
 };
