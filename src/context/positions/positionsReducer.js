@@ -1,4 +1,10 @@
-import { SET_LOADING, GET_POSITIONS, GET_POSITION } from '../types';
+import {
+  SET_LOADING,
+  GET_POSITIONS,
+  GET_POSITION,
+  POST_POSITION,
+  GET_POSITIONS_OF_RECRUITER,
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -17,6 +23,12 @@ export default (state, action) => {
       return {
         ...state,
         positions: action.payload,
+        loading: false,
+      };
+    case GET_POSITIONS_OF_RECRUITER:
+      return {
+        ...state,
+        recruiterPositions: action.payload,
         loading: false,
       };
     default:

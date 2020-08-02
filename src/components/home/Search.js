@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import PositionsContext from '../../context/positions/positionsContext';
 const Search = () => {
   const positionsContext = useContext(PositionsContext);
