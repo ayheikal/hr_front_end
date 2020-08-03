@@ -1,16 +1,18 @@
-import React, { useContext, useEffect } from 'react';
-import Question from './Question';
+import React, { useContext, useLayoutEffect } from 'react';
 import Answer from './Answer';
 import EndedInterview from './EndedInterview';
 import InterviewContext from '../../context/interview/interviewContext';
+import QuestionState from './QuestionState';
+
 const InterviewProcess = (props) => {
   const interviewContext = useContext(InterviewContext);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     //axios.get(questions)
     /*     const { userId, jobId, interviewId } = props.match.params;
      */ /* console.log(userId); */
     interviewContext.getQuestions();
+    console.log('use effect call');
     //eslint-disable-next-line
   }, []);
   const submitAnswer = (answer) => {
@@ -26,19 +28,20 @@ const InterviewProcess = (props) => {
   const skipAnswer = () => {
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
       interviewContext.incrementQuestionCounter();
-      interviewContext.deleteSpeechTOText();
+      alert('skipt');
+      interviewContext.deleteSpeechToText();
     }
   };
-  console.log('interview counter: ', interviewContext.currentQuestion);
-  console.log('interview length: ', interviewContext.questions.length);
+
   if (interviewContext.currentQuestion < interviewContext.questions.length) {
     return (
       <div className='center'>
-        <Question
+        <QuestionState
           question={
             interviewContext.questions[interviewContext.currentQuestion]
           }
         />
+
         <Answer
           submitAnswer={submitAnswer}
           questionId={

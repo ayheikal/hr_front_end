@@ -1,7 +1,5 @@
-'use strict';
-import React, { Component, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import InterviewContext from '../../context/interview/interviewContext';
-import interviewContext from '../../context/interview/interviewContext';
 //------------------------SPEECH RECOGNITION-----------------------------
 
 const SpeechRecognition =
@@ -45,12 +43,12 @@ const Speech = (props) => {
     };
 
     recognition.onresult = (event) => {
-      let interimTranscript = '';
+      // let interimTranscript = '';
 
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
         if (event.results[i].isFinal) finalTranscript += transcript + ' ';
-        else interimTranscript += transcript;
+        // else interimTranscript += transcript;
       }
       interviewContext.setSpeechToText(finalTranscript);
       /* document.getElementById('interim').innerHTML = interimTranscript;
@@ -93,7 +91,7 @@ const Speech = (props) => {
         {listening ? (
           <i className='fas fa-microphone'></i>
         ) : (
-          <i class='fas fa-microphone-alt-slash'></i>
+          <i className='fas fa-microphone-alt-slash'></i>
         )}
       </button>
     </div>

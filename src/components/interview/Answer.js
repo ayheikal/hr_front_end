@@ -1,12 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { startReco, endReco } from './NewSTT';
 import Speech from './scriptSTT';
 import InterviewContext from '../../context/interview/interviewContext';
 const Answer = (props) => {
   const [answer, setAnswer] = useState({});
-  const [text, setText] = useState('');
-  const [stt, setStt] = useState('');
   const interviewContext = useContext(InterviewContext);
 
   const handleSubmit = (e) => {
@@ -24,7 +21,6 @@ const Answer = (props) => {
     setAnswer(answer);
     e.preventDefault();
     props.submitAnswer(answer);
-    interviewContext.deleteSpeechToText(' ');
   };
 
   const handleSkip = (e) => {
@@ -43,7 +39,7 @@ const Answer = (props) => {
           <label htmlFor='exampleFormControlTextarea5'>Answer</label>
 
           <div
-            contenteditable='true'
+            contentEditable='true'
             id='answer'
             style={{ border: '1px solid', display: 'block', overflow: 'auto' }}
           >

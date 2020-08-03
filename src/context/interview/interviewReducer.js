@@ -31,7 +31,7 @@ export default (state, action) => {
     case DELETE_STT:
       return {
         ...state,
-        speechToText: null,
+        speechToText: action.payload,
       };
     default:
       return state;

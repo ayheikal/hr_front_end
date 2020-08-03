@@ -5,10 +5,6 @@ const Question = (props) => {
   // 0 not spoke , 1 spoken
   const [flag, setFlag] = useState(props.question.id);
 
-  const say = (text) => {
-    speechSynthesis.speak(new SpeechSynthesisUtterance(text));
-    speechSynthesis.resume();
-  };
   return (
     <div>
       <form>
@@ -18,7 +14,6 @@ const Question = (props) => {
           </label>
 
           <textarea
-            onBeforeInput={say(props.question.body)}
             className='form-control'
             id='exampleFormControlTextarea5'
             rows='3'

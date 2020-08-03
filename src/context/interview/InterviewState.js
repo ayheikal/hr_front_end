@@ -35,6 +35,7 @@ const InterviewState = (props) => {
   const deleteSpeechToText = () => {
     dispatch({
       type: DELETE_STT,
+      payload: '',
     });
   };
   //get the questions of the interview
@@ -49,6 +50,7 @@ const InterviewState = (props) => {
       type: GET_QUESTIONS,
       payload: res,
     });
+    return true;
   };
   // saveANswer
   const saveAnswer = (answer) => {

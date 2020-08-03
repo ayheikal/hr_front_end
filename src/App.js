@@ -24,10 +24,12 @@ function App() {
                 <Route path='/signin' component={SignIn}></Route>
                 <Route path='/signup' component={Login} />
                 <Route exact path='/home' component={HomePage}></Route>
+                {console.log('router brfore')}
                 <Route
                   path='/:userId/:jobId/interview/:interviewId/'
                   component={InterviewProcess}
                 />
+                {console.log('router after')}
                 <Route path='/addJob' component={CreatePosition}></Route>
                 <Route
                   path='/recruiterPositions'
