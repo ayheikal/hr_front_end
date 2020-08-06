@@ -33,11 +33,12 @@ const UserState=(props)=>{
         })
         .then( res =>{
             console.log("res :", res)
+            history.push('/signin')
+
         }).catch( err => {
             console.log(err.response.data)
         })
 
-        history.push('/signin')
 
     }
 
