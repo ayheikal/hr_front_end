@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import PositionsReducer from './positionsReducer';
 
 import {
@@ -16,70 +16,78 @@ const PositionsState = (props) => {
     positions: [],
     loading: false,
     recruiterPositions: [],
-    currentPage:0,
-    numberOfPages:0,
-    error:'',
-
+    currentPage: 0,
+    numberOfPages: 0,
+    error: '',
   };
   const [state, dispatch] = useReducer(PositionsReducer, initialState);
 
   //set laoding of data
   const setLoading = () => dispatch({ type: SET_LOADING });
 
- const setError=(errorType)=>dispatch({type:SET_ERROR,error:errorType})
+  const setError = (errorType) =>
+    dispatch({ type: SET_ERROR, error: errorType });
 
   //get all positions to show in home page "getPositions"
   const getPositions = () => {
     console.log("ddddd" , process.env.REACT_APP_HOST_NAME)
     setLoading();
-    axios.get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs`).then((res)=>{
-      dispatch({
-        type: GET_POSITIONS,
-        payload: res.data.data,
-        currentPage:res.data.meta.current_page,
-        numberOfPages:Math.ceil(res.data.meta.total/res.data.meta.per_page),
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs`)
+      .then((res) => {
+        dispatch({
+          type: GET_POSITIONS,
+          payload: res.data.data,
+          currentPage: res.data.meta.current_page,
+          numberOfPages: Math.ceil(
+            res.data.meta.total / res.data.meta.per_page
+          ),
+        });
       })
-    }).catch((error)=>{
-      setError(error)
-      console.log('error: ',error)
-    })
-    
+      .catch((error) => {
+        setError(error);
+        console.log('error: ', error);
+      });
+
     // getPositionsBypage(0,10);
-
-    
   };
-  //const getPositionsBypage 
-  const getPositionsBypage=(pageNumber,numberOfPages)=>{
+  //const getPositionsBypage
+  const getPositionsBypage = (pageNumber, numberOfPages) => {
     setLoading();
-    
-    axios.get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs?page=${pageNumber}`).then((res)=>{
-      dispatch({
-        type: GET_POSITIONS,
-        payload: res.data.data,
-        currentPage:res.data.meta.current_page,
-        numberOfPages:Math.ceil(res.data.meta.total/res.data.meta.per_page),
-      })
-    }).catch((error)=>{
-      setError(error)
-    })
-   
 
-  }
+    axios
+      .get(
+        `${process.env.REACT_APP_HOST_NAME}/api/availableJobs?page=${pageNumber}`
+      )
+      .then((res) => {
+        dispatch({
+          type: GET_POSITIONS,
+          payload: res.data.data,
+          currentPage: res.data.meta.current_page,
+          numberOfPages: Math.ceil(
+            res.data.meta.total / res.data.meta.per_page
+          ),
+        });
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
 
   //get positions by searching "getPositionsBySearch"
   const getPositionsBySearch = (text) => {
     setLoading();
-    axios.get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs?title=${text}`)
-    .then((res)=>{
-      dispatch({
-        type: GET_POSITION,
-        payload: res.data.data,
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs?title=${text}`)
+      .then((res) => {
+        dispatch({
+          type: GET_POSITION,
+          payload: res.data.data,
+        });
       })
-    })
-    .catch((error)=>{
-      setError(error)
-    })
-  
+      .catch((error) => {
+        setError(error);
+      });
   };
   //add new position by recruiter
   const addNewPosition = (object) => {
@@ -146,9 +154,9 @@ const PositionsState = (props) => {
         positions: state.positions,
         loading: state.loading,
         recruiterPositions: state.recruiterPositions,
-        numberOfPages:state.numberOfPages,
-        currentPage:state.currentPage,
-        error:state.error,
+        numberOfPages: state.numberOfPages,
+        currentPage: state.currentPage,
+        error: state.error,
         getPositions,
         getPositionsBySearch,
         addNewPosition,

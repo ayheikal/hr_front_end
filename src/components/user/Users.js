@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import UserItem from './UserItem';
 import Spinner from '../layouts/Spinner';
-import UserContext from '../../context/user/userContext'
-
+import UserContext from '../../context/user/userContext';
 
 const Users = () => {
   const userContext = useContext(UserContext);
   useEffect(() => {
-     userContext.getAllUsers();
-  }, [])
+    userContext.getAllUsers();
+  }, []);
   const { loading, users } = userContext;
 
   if (loading) {

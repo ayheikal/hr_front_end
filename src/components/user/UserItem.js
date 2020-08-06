@@ -1,21 +1,23 @@
 import React from 'react';
-
-const UserItem = (props) => {
-  const { name, email } = props.user;
+import { Link } from 'react-router-dom';
+const UserItem = ({ user }) => {
+  const { id, name, email, phone } = user;
 
   return (
     <div className='card text-center'>
-      <img
+      {/* <img
         className='round-img'
         src={avatar_url}
         style={{ width: '60px' }}
         alt='userItem'
-      />
+      /> */}
       <h3>{name}</h3>
-      {/* <Link className='btn btn-dark btn-sm my-1' to={`/user/${login}`}>
-        
-      </Link> */}
+
       <h3>{email}</h3>
+      <h3>{phone}</h3>
+      <Link className='btn btn-dark btn-sm my-1' to={`/user/${id}`}>
+        more
+      </Link>
     </div>
   );
 };
