@@ -17,10 +17,7 @@ const UserState=(props)=>{
     const initialState={
         users:[],
         user:null,
-        isAuthenticated:false,
         loading:false,
-        
-
 
     }
 
@@ -29,17 +26,16 @@ const UserState=(props)=>{
     const setLoading=()=>dispatch({type:SET_USER_LOADING})
 
     const userRegister=(user)=>{
-        console.log('userRegister: ',user)
-        return axios
+        axios
         .post(`${process.env.REACT_APP_HOST_NAME}/api/register`, user, {
             header: {'Content-Type': 'application/json', 'Accept': 'application/json'}
         })
         .then( res =>{
-            console.log(res)
-            return res
+            console.log("res :", res)
         }).catch( err => {
-            console.log(err)
+            console.log(err.response.data)
         })
+
         history.push('/signin')
 
     }
@@ -49,17 +45,28 @@ const UserState=(props)=>{
             header: {'Content-Type': 'application/json', 'Accept': 'application/json'}
         })
         .then(res=>{
-            console.log(res)
             localStorage.setItem('login',JSON.stringify({
-                login:true,
-                token:res.token
+                token:res.data.data.access_token,
+                userId: res.data.data.user.id
             }))
-            dispatch({
-                type:LOGIN,
-                paylaod:res,
-            })
         })
+       .catch( err=>{
+            console.log("err",err.response)
+        })
+        history.push('/')
     }
+
+
+const getToken = () =>{
+    // return localStorage.getItem('token');
+    return 'token';
+}
+
+const isAuthenticated = () =>{
+    let token = getToken()
+    return (token) ? true : false
+}
+
 
 
 // get user info

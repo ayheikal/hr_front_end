@@ -4,6 +4,7 @@ import {
   GET_POSITION,
   GET_POSITIONS_OF_RECRUITER,
   SET_ERROR,
+  SET_INTERVIEW_ID
 } from '../types';
 
 export default (state, action) => {

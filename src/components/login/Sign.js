@@ -9,7 +9,7 @@ const Sign = () => {
   const onSubmit = (data) =>userContext.signIn(data)
   return (
     <div>
-      <h1>signIn</h1>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='form-group'>
           <label>Email</label>
@@ -17,13 +17,14 @@ const Sign = () => {
             type='text'
             name='email'
             className='form-control'
-            ref={register({
-                required: "Required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "invalid email address"
-                }
-              })}
+            ref={register}
+            // ref={register({
+            //     required: "Required",
+            //     pattern: {
+            //       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            //       message: "invalid email address"
+            //     }
+            //   })}
           />
           {errors.email&&"Invalid email address"}
         </div>
@@ -33,14 +34,15 @@ const Sign = () => {
             type='password'
             name='password'
             className='form-control'
-            ref={register({
-                required: "Required",
-                minLength:8,
-                pattern: {
+            ref={register}
+            // ref={register({
+            //     required: "Required",
+            //     minLength:8,
+            //     pattern: {
                    
-                  message: "invalid email address"
-                }
-              })}
+            //       message: "invalid email address"
+            //     }
+            //   })}
           />
           {errors.password&&"password minLength 8 characters"}
         </div>

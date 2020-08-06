@@ -9,6 +9,7 @@ const Answer = (props) => {
   const interviewContext = useContext(InterviewContext);
 
   const handleSubmit = (e) => {
+    e.preventDefault()
     var value = document.getElementById('answer').innerHTML;
     var userid = 1;
     var jobid = 1;
@@ -21,7 +22,6 @@ const Answer = (props) => {
       questionId: props.questionId,
     };
     setAnswer(answer);
-    e.preventDefault();
     props.submitAnswer(answer);
     interviewContext.deleteSpeechToText(' ');
   };

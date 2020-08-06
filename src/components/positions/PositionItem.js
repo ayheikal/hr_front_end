@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
+import PositionsContext from '../../context/positions/positionsContext'
+
 const PositionItem = ({ position }) => {
+  const positionContext = useContext(PositionsContext);
+
+
   const {
-    /* id, */
+    id,
     title,
     desc,
     accept_interviews_until,
@@ -29,12 +34,18 @@ const PositionItem = ({ position }) => {
       </div>
 
       <div className='card-body'>
-        <Link className='btn btn-primary' to={'/1/1/interview/1'}>
+        <button className='btn btn-primary' onClick={() => { 
+            let userId = 1
+            positionContext.handleApply(id, userId )
+            }
+            }>
           Apply
-        </Link>
+        </button>
       </div>
     </div>
   );
 };
+
+
 
 export default PositionItem;

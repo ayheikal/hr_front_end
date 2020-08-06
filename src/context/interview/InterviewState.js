@@ -7,6 +7,7 @@ import {
   INCREMENT_QUESTION_COUNTER,
   SET_STT,
   DELETE_STT,
+  SET_INTERVIEW_ID,
 } from '../types';
 const InterviewState = (props) => {
   const initialState = {
@@ -14,6 +15,7 @@ const InterviewState = (props) => {
     answers: [],
     currentQuestion: 0,
     speechToText: '',
+    interviewId: null
   };
 
   const [state, dispatch] = useReducer(InterviewReducer, initialState);

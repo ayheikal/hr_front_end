@@ -6,7 +6,6 @@ const Register = () => {
   const { register,errors, handleSubmit } = useForm();
   const userContext = useContext(UserContext);
   const onSubmit = (data) =>userContext.userRegister(data)
-  console.log('name: ',userContext.name)
   return (
     <div>
       <h1>signup</h1>
@@ -17,7 +16,8 @@ const Register = () => {
             type='text'
             name='name'
             className='form-control'
-            ref={register({ required: true,minLength:2 })}
+            // ref={register({ required: true,minLength:2 })}
+            ref={register}
           />
           {errors.name&&"First Name is Required and more than two characters"}
         </div>
@@ -27,13 +27,14 @@ const Register = () => {
             type='text'
             name='email'
             className='form-control'
-            ref={register({
-                required: "Required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "invalid email address"
-                }
-              })}
+            ref={register}
+            // ref={register({
+            //     required: "Required",
+            //     pattern: {
+            //       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            //       message: "invalid email address"
+            //     }
+            //   })}
           />
           {errors.email&&"Invalid email address"}
         </div>
@@ -43,16 +44,35 @@ const Register = () => {
             type='password'
             name='password'
             className='form-control'
-            ref={register({
-                required: "Required",
-                minLength:8,
-                pattern: {
+            ref={register}
+            // ref={register({
+            //     required: "Required",
+            //     minLength:8,
+            //     pattern: {
                    
-                  message: "invalid email address"
-                }
-              })}
+            //       message: "invalid email address"
+            //     }
+            //   })}
           />
           {errors.password&&"password minLength 8 characters"}
+        </div>
+        <div className='form-group'>
+          <label>Confirm Password</label>
+          <input
+            type='password'
+            name='password_confirmation'
+            className='form-control'
+            ref={register}
+            // ref={register({
+            //     required: "Required",
+            //     minLength:8,
+            //     pattern: {
+                   
+            //       message: "invalid email address"
+            //     }
+            //   })}
+          />
+          {errors.confirm_password&&"password minLength 8 characters"}
         </div>
         <div className='form-group'>
           <label>role</label>

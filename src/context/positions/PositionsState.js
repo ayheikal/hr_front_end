@@ -30,8 +30,9 @@ const PositionsState = (props) => {
 
   //get all positions to show in home page "getPositions"
   const getPositions = () => {
+    console.log("ddddd" , process.env.REACT_APP_HOST_NAME)
     setLoading();
-    axios.get('https://3a74a200ee9a.ngrok.io/api/availableJobs').then((res)=>{
+    axios.get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs`).then((res)=>{
       dispatch({
         type: GET_POSITIONS,
         payload: res.data.data,
@@ -68,14 +69,14 @@ const PositionsState = (props) => {
   //get positions by searching "getPositionsBySearch"
   const getPositionsBySearch = (text) => {
     setLoading();
-    axios.get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs?title=${text}`).
-    then((res)=>{
+    axios.get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs?title=${text}`)
+    .then((res)=>{
       dispatch({
         type: GET_POSITION,
         payload: res.data.data,
       })
-    }).
-    catch((error)=>{
+    })
+    .catch((error)=>{
       setError(error)
     })
   
@@ -116,6 +117,24 @@ const PositionsState = (props) => {
       payload: res,
     });
   };
+
+  const handleApply = (jobId, applicantId) => {
+    // create interview 
+    axios.post(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interview`,
+    {"job_id": jobId,"applicant_id": applicantId},
+    {
+      'headers': {'Content-Type':'application/json', 'Accept':'application/json'}
+    }).then( res => {
+      let job_id = res.data.data.job_id
+      let interview_id = res.data.data.id
+      console.log('created interview', job_id, interview_id);
+    }).catch( err => {
+      console.log(err)
+    })
+    // redirect to the interview process
+  }
+
+
   // //delete position by recruiter
   // const deletePositionByid = () => {
   //   //axios delete by id
@@ -135,7 +154,8 @@ const PositionsState = (props) => {
         addNewPosition,
         getPositionsByRecruiterName,
         getPositionsBypage,
-        setError
+        setError,
+        handleApply
       }}
     >
       {props.children}
