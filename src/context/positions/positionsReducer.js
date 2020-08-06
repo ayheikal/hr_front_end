@@ -2,8 +2,8 @@ import {
   SET_LOADING,
   GET_POSITIONS,
   GET_POSITION,
-  POST_POSITION,
   GET_POSITIONS_OF_RECRUITER,
+  SET_ERROR,
 } from '../types';
 
 export default (state, action) => {
@@ -12,6 +12,8 @@ export default (state, action) => {
       return {
         ...state,
         positions: action.payload,
+        currentpage:action.currentpage,
+        numberOfPages:action.numberOfPages,
         loading: false,
       };
     case SET_LOADING:
@@ -31,6 +33,11 @@ export default (state, action) => {
         recruiterPositions: action.payload,
         loading: false,
       };
+      case SET_ERROR:
+        return{
+          ...state,
+          error:action.error,
+        }
     default:
       return state;
   }

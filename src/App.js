@@ -6,24 +6,29 @@ import Navbar from './components/layouts/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomePage from './components/home/homePage';
 import PageNotFound from './PageNotFound';
-import SignIn from './components/login/SignIn';
-import Login from './components/login/Login';
+// import SignIn from './components/login/SignIn';
+// import Login from './components/login/Login';
 import PositionsState from './context/positions/PositionsState';
 import InterviewState from './context/interview/InterviewState';
 import CreatePosition from './components/positions/CreatePosition';
 import RecruiterDashboard from './components/positions/RecruiterDashboard';
+import UserState from './context/user/UserState';
+import Register from './components/login/Register';
+import sign from './components/login/Sign';
 function App() {
+  
   return (
     <Router>
       <PositionsState>
         <InterviewState>
-          <div className='App'>
+          <UserState>
+          <div >
             <Navbar />
             <div className='container'>
               <Switch>
-                <Route path='/signin' component={SignIn}></Route>
-                <Route path='/signup' component={Login} />
-                <Route exact path='/home' component={HomePage}></Route>
+                <Route path='/signin' component={sign}></Route>
+                <Route path='/signup' component={Register} />
+                <Route exact path='/' component={HomePage} ></Route>
                 <Route
                   path='/:userId/:jobId/interview/:interviewId/'
                   component={InterviewProcess}
@@ -37,6 +42,7 @@ function App() {
               </Switch>
             </div>
           </div>
+          </UserState>
         </InterviewState>
       </PositionsState>
     </Router>

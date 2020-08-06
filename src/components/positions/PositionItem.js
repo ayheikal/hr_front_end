@@ -4,9 +4,11 @@ const PositionItem = ({ position }) => {
   const {
     /* id, */
     title,
-    description,
-    accepts_interviews_until,
-    interview_duration,
+    desc,
+    accept_interviews_until,
+    interviews_duration,
+    updated_at,
+    recruiter_id,
     /*  status, */
   } = position;
   return (
@@ -16,10 +18,13 @@ const PositionItem = ({ position }) => {
         <h5 className='card-title'>
           <Link to={'/1/1/interview/1'}>{title.toUpperCase()}</Link>
         </h5>
-        <p className='card-text'>{description}</p>
+        <p className='card-text'>{desc}</p>
         <div className='card-text'>
-          <p>Until: {accepts_interviews_until}</p>
-          <p>Duration: {interview_duration}</p>
+          <p>Until: {accept_interviews_until}</p>
+          <p>Duration: {interviews_duration}</p>
+          <span>{updated_at}</span>
+          <h3>Recruiter:{recruiter_id}</h3>
+ 
         </div>
       </div>
 

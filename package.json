@@ -8,11 +8,12 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
-    "node-sass": "^4.13.1",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
-    "react-hook-form": "^6.1.2",
+    "react-hook-form": "^6.2.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
@@ -27,6 +28,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy":"https://3a74a200ee9a.ngrok.io",
   "browserslist": {
     "production": [
       ">0.2%",

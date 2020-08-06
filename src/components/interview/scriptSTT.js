@@ -1,7 +1,5 @@
-'use strict';
-import React, { Component, useContext, useState } from 'react';
+import React, {  useContext, useState } from 'react';
 import InterviewContext from '../../context/interview/interviewContext';
-import interviewContext from '../../context/interview/interviewContext';
 //------------------------SPEECH RECOGNITION-----------------------------
 
 const SpeechRecognition =
@@ -45,12 +43,12 @@ const Speech = (props) => {
     };
 
     recognition.onresult = (event) => {
-      let interimTranscript = '';
+      //let interimTranscript = '';
 
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
         if (event.results[i].isFinal) finalTranscript += transcript + ' ';
-        else interimTranscript += transcript;
+        //else interimTranscript += transcript;
       }
       interviewContext.setSpeechToText(finalTranscript);
       /* document.getElementById('interim').innerHTML = interimTranscript;
@@ -76,11 +74,13 @@ const Speech = (props) => {
 
     recognition.onerror = (event) => {
       console.log('Error occurred in recognition: ' + event.error);
+      if( event.error==='network')
+        alert('Error occurred in recognition: ' + event.error)
     };
   };
-  const showValue = () => {
-    alert(document.getElementById('final').innerHTML);
-  };
+  // const showValue = () => {
+  //   alert(document.getElementById('final').innerHTML);
+  // };
 
   return (
     <div style={container}>
@@ -93,7 +93,7 @@ const Speech = (props) => {
         {listening ? (
           <i className='fas fa-microphone'></i>
         ) : (
-          <i class='fas fa-microphone-alt-slash'></i>
+          <i className='fas fa-microphone-alt-slash'></i>
         )}
       </button>
     </div>
@@ -134,4 +134,4 @@ const styles = {
   },
 };
 
-const { container, button, interim, final } = styles;
+const { container, button } = styles;

@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-
+import axios from 'axios'
 import PositionsReducer from './positionsReducer';
 
 import {
@@ -7,6 +7,7 @@ import {
   GET_POSITIONS,
   GET_POSITION,
   GET_POSITIONS_OF_RECRUITER,
+  SET_ERROR,
 } from '../types';
 import positionsContext from './positionsContext';
 
@@ -15,97 +16,69 @@ const PositionsState = (props) => {
     positions: [],
     loading: false,
     recruiterPositions: [],
+    currentPage:0,
+    numberOfPages:0,
+    error:'',
+
   };
   const [state, dispatch] = useReducer(PositionsReducer, initialState);
 
   //set laoding of data
   const setLoading = () => dispatch({ type: SET_LOADING });
 
+ const setError=(errorType)=>dispatch({type:SET_ERROR,error:errorType})
+
   //get all positions to show in home page "getPositions"
   const getPositions = () => {
     setLoading();
-    //axios get positions
-    const res = [
-      {
-        id: 1,
-        title: 'java',
-        description: 'java software engineer',
-        accepts_interviews_from_datetime: '1/6/2020',
-        accepts_interviews_until: '1/7/2020',
-        interview_duration: 2,
-        status: 'pending',
-      },
-      {
-        id: 1,
-        title: 'python',
-        description: 'java software engineer',
-        accepts_interviews_from_datetime: '1/6/2020',
-        accepts_interviews_until: '1/7/2020',
-        interview_duration: 2,
-        status: 'pending',
-      },
-      {
-        id: 2,
-        title: 'javascript',
-        description: 'java software engineer',
-        accepts_interviews_from_datetime: '1/6/2020',
-        accepts_interviews_until: '1/7/2020',
-        interview_duration: 2,
-        status: 'pending',
-      },
-      {
-        id: 3,
-        title: 'ruby',
-        description: 'java software engineer',
-        accepts_interviews_from_datetime: '1/6/2020',
-        accepts_interviews_until: '1/7/2020',
-        interview_duration: 2,
-        status: 'pending',
-      },
-      {
-        id: 4,
-        title: 'go',
-        description: 'java software engineer',
-        accepts_interviews_from_datetime: '1/6/2020',
-        accepts_interviews_until: '1/7/2020',
-        interview_duration: 2,
-        status: 'pending',
-      },
-    ];
+    axios.get('https://3a74a200ee9a.ngrok.io/api/availableJobs').then((res)=>{
+      dispatch({
+        type: GET_POSITIONS,
+        payload: res.data.data,
+        currentPage:res.data.meta.current_page,
+        numberOfPages:Math.ceil(res.data.meta.total/res.data.meta.per_page),
+      })
+    }).catch((error)=>{
+      setError(error)
+      console.log('error: ',error)
+    })
+    
+    // getPositionsBypage(0,10);
 
-    dispatch({
-      type: GET_POSITIONS,
-      payload: res,
-    });
+    
   };
+  //const getPositionsBypage 
+  const getPositionsBypage=(pageNumber,numberOfPages)=>{
+    setLoading();
+    
+    axios.get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs?page=${pageNumber}`).then((res)=>{
+      dispatch({
+        type: GET_POSITIONS,
+        payload: res.data.data,
+        currentPage:res.data.meta.current_page,
+        numberOfPages:Math.ceil(res.data.meta.total/res.data.meta.per_page),
+      })
+    }).catch((error)=>{
+      setError(error)
+    })
+   
+
+  }
 
   //get positions by searching "getPositionsBySearch"
   const getPositionsBySearch = (text) => {
     setLoading();
-    const res = [
-      {
-        id: 2,
-        title: 'javascript',
-        description: 'java software engineer',
-        accepts_interviews_from_datetime: '1/6/2020',
-        accepts_interviews_until: '1/7/2020',
-        interview_duration: 2,
-        status: 'pending',
-      },
-      {
-        id: 3,
-        title: 'ruby',
-        description: 'java software engineer',
-        accepts_interviews_from_datetime: '1/6/2020',
-        accepts_interviews_until: '1/7/2020',
-        interview_duration: 2,
-        status: 'pending',
-      },
-    ];
-    dispatch({
-      type: GET_POSITION,
-      payload: res,
-    });
+    axios.get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs?title=${text}`).
+    then((res)=>{
+      dispatch({
+        type: GET_POSITION,
+        payload: res.data.data,
+      })
+    }).
+    catch((error)=>{
+      setError(error)
+    })
+  
   };
   //add new position by recruiter
   const addNewPosition = (object) => {
@@ -116,6 +89,7 @@ const PositionsState = (props) => {
   // get positions that certain recruiter posted
   const getPositionsByRecruiterName = () => {
     //axios get positions by recruiter name
+    //https://3a74a200ee9a.ngrok.io/
     setLoading();
     const res = [
       {
@@ -142,10 +116,10 @@ const PositionsState = (props) => {
       payload: res,
     });
   };
-  //delete position by recruiter
-  const deletePositionByid = () => {
-    //axios delete by id
-  };
+  // //delete position by recruiter
+  // const deletePositionByid = () => {
+  //   //axios delete by id
+  // };
 
   return (
     <positionsContext.Provider
@@ -153,10 +127,15 @@ const PositionsState = (props) => {
         positions: state.positions,
         loading: state.loading,
         recruiterPositions: state.recruiterPositions,
+        numberOfPages:state.numberOfPages,
+        currentPage:state.currentPage,
+        error:state.error,
         getPositions,
         getPositionsBySearch,
         addNewPosition,
         getPositionsByRecruiterName,
+        getPositionsBypage,
+        setError
       }}
     >
       {props.children}

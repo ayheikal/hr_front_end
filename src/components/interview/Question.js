@@ -1,28 +1,30 @@
-import React, { useState } from 'react';
-import TTS from './TTS';
+import React from 'react';
 
-const Question = (props) => {
+const Question = ({question,mounted}) => {
   // 0 not spoke , 1 spoken
-  const [flag, setFlag] = useState(props.question.id);
+ 
+  
 
-  const say = (text) => {
-    speechSynthesis.speak(new SpeechSynthesisUtterance(text));
-    speechSynthesis.resume();
+  const say = (body) => {
+    var synth = window.speechSynthesis;
+    synth.speak(new SpeechSynthesisUtterance(body));
+   
   };
+  const{body,id}=question;
   return (
+    
     <div>
       <form>
         <div className='form-group green-border w-50'>
           <label htmlFor='exampleFormControlTextarea5 '>
-            Question{props.question.id}
+            Question{id}
           </label>
-
+          <button type='button' onClick={(e)=>{say(body)}}>say </button>
           <textarea
-            onBeforeInput={say(props.question.body)}
             className='form-control'
             id='exampleFormControlTextarea5'
             rows='3'
-            value={props.question.body}
+            value={body}
             disabled
           ></textarea>
         </div>

@@ -10,6 +10,7 @@ const InterviewProcess = (props) => {
     //axios.get(questions)
     /*     const { userId, jobId, interviewId } = props.match.params;
      */ /* console.log(userId); */
+     console.log('useLayoutEffect')
     interviewContext.getQuestions();
     //eslint-disable-next-line
   }, []);
@@ -32,12 +33,14 @@ const InterviewProcess = (props) => {
   console.log('interview counter: ', interviewContext.currentQuestion);
   console.log('interview length: ', interviewContext.questions.length);
   if (interviewContext.currentQuestion < interviewContext.questions.length) {
+
     return (
       <div className='center'>
         <Question
           question={
             interviewContext.questions[interviewContext.currentQuestion]
           }
+          mounted={true}
         />
         <Answer
           submitAnswer={submitAnswer}
