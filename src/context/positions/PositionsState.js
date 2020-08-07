@@ -32,25 +32,59 @@ const PositionsState = (props) => {
   const getPositions = () => {
     console.log("ddddd" , process.env.REACT_APP_HOST_NAME)
     setLoading();
-    axios
-      .get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs`)
-      .then((res) => {
+    let res = {
+      data:{
+        data:[
+          {
+            title: "Rebeca Wolff",
+            desc: "Magni animi ducimus molestiae tempore aperiam vitae exercitationem. Cum quisquam hic dolores consectetur enim odit voluptatem. Optio placeat officiis maxime accusantium et laudantium. Qui quisquam labore alias distinctio sequi eius sequi.",
+            accept_interviews_from: "2010-07-29 13:56:32.0",
+            accept_interviews_until: "1971-09-01 00:32:49.0",
+            interview_duration: 5114,
+            recruiter_id: 1,
+            updated_at: "2020-08-07 14:27:07",
+            created_at: "2020-08-07 14:27:07",
+            id: 1,
+          },
+          {
+            title: "Demo Wolff",
+            desc: "Magni animi ducimus molestiae tempore aperiam vitae exercitationem. Cum quisquam hic dolores consectetur enim odit voluptatem. Optio placeat officiis maxime accusantium et laudantium. Qui quisquam labore alias distinctio sequi eius sequi.",
+            accept_interviews_from: "2010-07-29 13:56:32.0",
+            accept_interviews_until: "1971-09-01 00:32:49.0",
+            interview_duration: 5114,
+            recruiter_id: 1,
+            updated_at: "2020-08-07 14:27:07",
+            created_at: "2020-08-07 14:27:07",
+            id: 1,
+          }
+       
+        ],
+        meta:{
+          current_page:1,
+          total:0,
+          per_page:15
+        }
+      }
+    }
+    // axios
+      // .get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs`)
+      // .then((res) => {
         dispatch({
           type: GET_POSITIONS,
           payload: res.data.data,
           currentPage: res.data.meta.current_page,
           numberOfPages: Math.ceil(
             res.data.meta.total / res.data.meta.per_page
-          ),
-        });
-      })
-      .catch((error) => {
-        setError(error);
-        console.log('error: ', error);
-      });
+        )})
+        // });
+      // })
+      // .catch((error) => {
+      //   setError(error);
+      //   console.log('error: ', error);
+      // });
 
     // getPositionsBypage(0,10);
-  };
+  }
   //const getPositionsBypage
   const getPositionsBypage = (pageNumber, numberOfPages) => {
     setLoading();
