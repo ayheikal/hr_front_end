@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 import PositionsReducer from './positionsReducer';
+import { useHistory } from "react-router-dom";
 
 import {
   SET_LOADING,
@@ -12,6 +13,7 @@ import {
 import positionsContext from './positionsContext';
 
 const PositionsState = (props) => {
+  let history = useHistory();
   const initialState = {
     positions: [],
     loading: false,
@@ -55,7 +57,7 @@ const PositionsState = (props) => {
             recruiter_id: 1,
             updated_at: "2020-08-07 14:27:07",
             created_at: "2020-08-07 14:27:07",
-            id: 1,
+            id: 2,
           }
        
         ],
@@ -162,18 +164,24 @@ const PositionsState = (props) => {
 
   const handleApply = (jobId, applicantId) => {
     // create interview 
-    axios.post(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interview`,
+    axios.post(`${process.env.REACT_APP_HOST_NAME}/api/applicant/jobs/${jobId}/apply`,
     {"job_id": jobId,"applicant_id": applicantId},
     {
-      'headers': {'Content-Type':'application/json', 'Accept':'application/json'}
+      'headers': {'Content-Type':'application/json', 'Accept':'application/json', 
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
     }).then( res => {
-      let job_id = res.data.data.job_id
-      let interview_id = res.data.data.id
-      console.log('created interview', job_id, interview_id);
+      let jobId = res.data.data.job_id
+      let interviewId = res.data.data.id
+      console.log('created interview', jobId, interviewId);
+      // redirect to the interview process
+      let userId = localStorage.getItem('userId')
+      history.push(`/users/${userId}/jobs/${jobId}/interviews/${interviewId}/`)
     }).catch( err => {
-      console.log(err)
+      console.log('err :',err.response)
+      history.push('/signin')
     })
-    // redirect to the interview process
+    
   }
 
 

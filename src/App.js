@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InterviewProcess from './components/interview/InterviewProcess';
 import Navbar from './components/layouts/Navbar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import HomePage from './components/home/homePage';
 import PageNotFound from './PageNotFound';
 import Users from './components/user/Users';
@@ -16,7 +16,9 @@ import UserState from './context/user/UserState';
 import Register from './components/login/Register';
 import sign from './components/login/Sign';
 import Alert from './components/layouts/Alert';
-function App() {
+import UserContext from './context/user/userContext';
+const App = () => {
+  
   return (
     <Router>
       <PositionsState>
@@ -27,8 +29,13 @@ function App() {
 
               <div className='container'>
                 <Switch>
+                <Route
+                path='/users/:userId/jobs/:jobId/interviews/:interviewId'
+                 render={(props)=> localStorage.getItem('token') ? <InterviewProcess {...props}/>:
+                <Redirect to={{pathname:'/signin'}}/>  }
+              />
                   <Route
-                    path='/users'
+                    exact path='/users'
                     render={(props) => (
                       <Fragment>
                         <Users />
@@ -43,10 +50,7 @@ function App() {
                   <Route path='/signin' component={sign}></Route>
                   <Route path='/signup' component={Register} />
                   <Route exact path='/' component={HomePage}></Route>
-                  <Route
-                    path='/:userId/:jobId/interview/:interviewId/'
-                    component={InterviewProcess}
-                  />
+                  
                   <Route path='/addJob' component={CreatePosition}></Route>
                   <Route
                     path='/recruiterPositions'

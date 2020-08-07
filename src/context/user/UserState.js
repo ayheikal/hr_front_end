@@ -47,21 +47,22 @@ const UserState=(props)=>{
             header: {'Content-Type': 'application/json', 'Accept': 'application/json'}
         })
         .then(res=>{
-            localStorage.setItem('login',JSON.stringify({
-                token:res.data.data.access_token,
-                userId: res.data.data.user.id
-            }))
+            console.log('logged', res)
+            localStorage.setItem('token',res.data.data.access_token )
+            localStorage.setItem('userId',res.data.data.user.id )
+            localStorage.setItem('role',res.data.data.user.role)
+            history.push('/')
+
         })
        .catch( err=>{
             console.log("err",err.response)
         })
-        history.push('/')
     }
 
 
 const getToken = () =>{
-    // return localStorage.getItem('token');
-    return 'token';
+     return localStorage.getItem('token');
+    
 }
 
 const isAuthenticated = () =>{
@@ -125,7 +126,12 @@ const isAuthenticated = () =>{
       payload: res,
     });
   };
-
+// logout out 
+const logOut=()=>{
+  console.log('logOut: ')
+  localStorage.clear();
+  window.location.href = '/';
+}
   return (
     <userContext.Provider
       value={{
@@ -137,6 +143,8 @@ const isAuthenticated = () =>{
         signIn,
         getAllUsers,
         getUserInfo,
+        isAuthenticated,
+        logOut,
       }}
     >
       {props.children}

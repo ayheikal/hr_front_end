@@ -1,9 +1,12 @@
-import React from 'react';
+import React,{useContext, useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
-
+import UserContext from '../../context/user/userContext'
 const Navbar = () => {
 
-const guestLinks=(
+  const userContext=useContext(UserContext);
+  const authed=userContext.isAuthenticated();
+
+  const guestLinks=(
   <>  <li className='nav-item'>
   <a className='nav-link' href='/signUp'>signUp</a>
   </li>
@@ -12,6 +15,15 @@ const guestLinks=(
   </li>
   </>
 
+)
+const applicantLinks=(
+  <>  <li className='nav-item'>
+  <a onClick={()=>userContext.logOut()} className='nav-link' href='/'>logOut</a>
+  </li>
+  <li className='nav-item'>
+  <a className='nav-link' href='/profile'>Profile</a>
+  </li>
+  </>
 )
   
   return (
@@ -34,9 +46,8 @@ const guestLinks=(
             <a className='nav-link' href='/about'>
               About
             </a>
-          </li>
-          {guestLinks}
-         
+          </li>   
+            { authed ? applicantLinks :guestLinks }
           
         </ul>
         
