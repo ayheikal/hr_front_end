@@ -1,10 +1,9 @@
-import React,{useReducer} from 'react'
-import UserReducer from './userReducer'
-import userContext from './userContext'
-import axios from 'axios'
-import { Redirect } from 'react-router'
-import { useHistory } from "react-router-dom";
-
+import React, { useReducer, useContext } from 'react';
+import UserReducer from './userReducer';
+import userContext from './userContext';
+import axios from 'axios';
+import { Redirect } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import {
   GET_ALL_USERS,
   SET_USER_LOADING,
@@ -13,64 +12,66 @@ import {
   GET_USER,
 } from '../types';
 
-const UserState=(props)=>{
-    let history = useHistory();
-    const initialState={
-        users:[],
-        user:null,
-        loading:false,
+const UserState = (props) => {
+  let history = useHistory();
+  const initialState = {
+    users: [],
+    user: null,
+    loading: false,
+  };
 
-    }
+  const [state, dispatch] = useReducer(UserReducer, initialState);
+  const setLoading = () => dispatch({ type: SET_USER_LOADING });
 
+  const userRegister = (user) => {
+    axios
+      .post(`${process.env.REACT_APP_HOST_NAME}/api/register`, user, {
+        header: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+      .then((res) => {
+        history.push('/signin');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    const [state, dispatch] = useReducer(UserReducer, initialState);
-    const setLoading=()=>dispatch({type:SET_USER_LOADING})
+  const signIn = (userObject) => {
+    axios
+      .post(`${process.env.REACT_APP_HOST_NAME}/api/login`, userObject, {
+        header: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+      .then((res) => {
+        localStorage.setItem(
+          'login',
+          JSON.stringify({
+            token: res.data.data.access_token,
+            userId: res.data.data.user.id,
+          })
+        );
+        history.push('/');
+      })
 
-    const userRegister=(user)=>{
-        axios
-        .post(`${process.env.REACT_APP_HOST_NAME}/api/register`, user, {
-            header: {'Content-Type': 'application/json', 'Accept': 'application/json'}
-        })
-        .then( res =>{
-            console.log("res :", res)
-            history.push('/signin')
+      .catch((err) => {
+        console.log('err', err.response);
+      });
+  };
 
-        }).catch( err => {
-            console.log(err.response.data)
-        })
-
-
-    }
-
-    const signIn=(userObject)=>{
-        axios.post(`${process.env.REACT_APP_HOST_NAME}/api/login`,userObject,{
-            header: {'Content-Type': 'application/json', 'Accept': 'application/json'}
-        })
-        .then(res=>{
-            localStorage.setItem('login',JSON.stringify({
-                token:res.data.data.access_token,
-                userId: res.data.data.user.id
-            }))
-        })
-       .catch( err=>{
-            console.log("err",err.response)
-        })
-        history.push('/')
-    }
-
-
-const getToken = () =>{
+  const getToken = () => {
     // return localStorage.getItem('token');
     return 'token';
-}
+  };
 
-const isAuthenticated = () =>{
-    let token = getToken()
-    return (token) ? true : false
-}
-
-
-
+  const isAuthenticated = () => {
+    let token = getToken();
+    return token ? true : false;
+  };
 
   // get user info
   const getUserInfo = (id) => {

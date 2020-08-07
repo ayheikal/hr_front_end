@@ -1,13 +1,9 @@
 import React, { useContext } from 'react';
-// import AlertContext from '../../context/alert/alertContext';
-import positionsContext from '../../context/positions/positionsContext';
+import AlertContext from '../../context/alert/alertContext';
 
 function Alert() {
-  //   const alertContext = useContext(AlertContext);
-  //   const { alert } = alertContext;
-  const positionState = useContext(positionsContext);
-  const alert = positionsContext.error;
-
+  const alertContext = useContext(AlertContext);
+  const { alert } = alertContext;
   return (
     alert && (
       <div className={`alert alert-${alert.type}`}>

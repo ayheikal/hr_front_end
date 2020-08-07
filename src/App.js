@@ -16,46 +16,49 @@ import UserState from './context/user/UserState';
 import Register from './components/login/Register';
 import sign from './components/login/Sign';
 import Alert from './components/layouts/Alert';
+import AlertState from './context/alert/AlertState';
 function App() {
   return (
     <Router>
       <PositionsState>
         <InterviewState>
           <UserState>
-            <div>
-              <Navbar />
-
-              <div className='container'>
-                <Switch>
-                  <Route
-                    path='/users'
-                    render={(props) => (
-                      <Fragment>
-                        <Users />
-                      </Fragment>
-                    )}
-                  />
-                  <Route
-                    exact
-                    path='/user/:id'
-                    render={(props) => <User {...props} />}
-                  />
-                  <Route path='/signin' component={sign}></Route>
-                  <Route path='/signup' component={Register} />
-                  <Route exact path='/' component={HomePage}></Route>
-                  <Route
-                    path='/:userId/:jobId/interview/:interviewId/'
-                    component={InterviewProcess}
-                  />
-                  <Route path='/addJob' component={CreatePosition}></Route>
-                  <Route
-                    path='/recruiterPositions'
-                    component={RecruiterDashboard}
-                  ></Route>
-                  <Route component={PageNotFound}></Route>
-                </Switch>
+            <AlertState>
+              <div>
+                <Navbar />
+                <Alert />
+                <div className='container'>
+                  <Switch>
+                    <Route
+                      path='/users'
+                      render={(props) => (
+                        <Fragment>
+                          <Users />
+                        </Fragment>
+                      )}
+                    />
+                    <Route
+                      exact
+                      path='/user/:id'
+                      render={(props) => <User {...props} />}
+                    />
+                    <Route path='/signin' component={sign}></Route>
+                    <Route path='/signup' component={Register} />
+                    <Route exact path='/' component={HomePage}></Route>
+                    <Route
+                      path='/:userId/:jobId/interview/:interviewId/'
+                      component={InterviewProcess}
+                    />
+                    <Route path='/addJob' component={CreatePosition}></Route>
+                    <Route
+                      path='/recruiterPositions'
+                      component={RecruiterDashboard}
+                    ></Route>
+                    <Route component={PageNotFound}></Route>
+                  </Switch>
+                </div>
               </div>
-            </div>
+            </AlertState>
           </UserState>
         </InterviewState>
       </PositionsState>

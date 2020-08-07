@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import UserContext from '../../context/user/userContext'
-import {Link} from 'react-router-dom'
+import UserContext from '../../context/user/userContext';
+import { Link } from 'react-router-dom';
+import AlertContext from '../../context/alert/alertContext';
 const Register = () => {
-  const { register,errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit } = useForm();
   const userContext = useContext(UserContext);
-  const onSubmit = (data) =>userContext.userRegister(data)
+  const alertContext = useContext(AlertContext);
+  const onSubmit = (data) => {
+    userContext.userRegister(data);
+  };
+
   return (
     <div>
       <h1>signup</h1>
@@ -19,7 +24,7 @@ const Register = () => {
             // ref={register({ required: true,minLength:2 })}
             ref={register}
           />
-          {errors.name&&"First Name is Required and more than two characters"}
+          {errors.name && 'First Name is Required and more than two characters'}
         </div>
         <div className='form-group'>
           <label>Email</label>
@@ -36,7 +41,7 @@ const Register = () => {
             //     }
             //   })}
           />
-          {errors.email&&"Invalid email address"}
+          {errors.email && 'Invalid email address'}
         </div>
         <div className='form-group'>
           <label>Password</label>
@@ -49,12 +54,12 @@ const Register = () => {
             //     required: "Required",
             //     minLength:8,
             //     pattern: {
-                   
+
             //       message: "invalid email address"
             //     }
             //   })}
           />
-          {errors.password&&"password minLength 8 characters"}
+          {errors.password && 'password minLength 8 characters'}
         </div>
         <div className='form-group'>
           <label>Confirm Password</label>
@@ -67,31 +72,31 @@ const Register = () => {
             //     required: "Required",
             //     minLength:8,
             //     pattern: {
-                   
+
             //       message: "invalid email address"
             //     }
             //   })}
           />
-          {errors.confirm_password&&"password minLength 8 characters"}
+          {errors.confirm_password && 'password minLength 8 characters'}
         </div>
         <div className='form-group'>
           <label>role</label>
-          <select
-          name='role'
-            className='form-control '
-            ref={register}
-          >
-            <option value="recruiter">recruiter</option>
-            <option value="applicant">applicant</option>
-            </select>
+          <select name='role' className='form-control ' ref={register}>
+            <option value='recruiter'>recruiter</option>
+            <option value='applicant'>applicant</option>
+          </select>
         </div>
-       
 
         <button type='submit' className='btn btn-primary'>
           Register
         </button>
         {' |  '}
-        <Link to='signin' className='btn btn-primary' type='submit' name='action'>
+        <Link
+          to='signin'
+          className='btn btn-primary'
+          type='submit'
+          name='action'
+        >
           <i className='material-icons right'>Signin</i>
         </Link>
       </form>

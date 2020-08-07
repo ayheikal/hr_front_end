@@ -14,3 +14,4 @@ export const GET_USER_BY_NAME_AND_TITLE = 'GET_USER_BY_NAME_AND_TITLE';
 export const LOGIN = 'LOGIN';
 export const SET_USER_LOADING = 'SET_USER_LOADING';
 export const GET_USER = 'GET_USER';
+export const SET_ALERT = 'SET_ALERT';
