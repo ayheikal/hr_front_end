@@ -11,7 +11,8 @@ const InterviewProcess = (props) => {
     /*     const { userId, jobId, interviewId } = props.match.params;
      */ /* console.log(userId); */
      console.log('useLayoutEffect')
-    interviewContext.getQuestions();
+     console.log('params',props.match.params.interviewId)
+    interviewContext.getQuestions(props.match.params.interviewId);
     //eslint-disable-next-line
   }, []);
   const submitAnswer = (answer) => {
@@ -27,7 +28,7 @@ const InterviewProcess = (props) => {
   const skipAnswer = () => {
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
       interviewContext.incrementQuestionCounter();
-      interviewContext.deleteSpeechTOText();
+      interviewContext.deleteSpeechToText();
     }
   };
   console.log('interview counter: ', interviewContext.currentQuestion);
