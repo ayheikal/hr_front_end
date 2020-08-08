@@ -11,12 +11,13 @@ const InterviewProcess = (props) => {
     /*     const { userId, jobId, interviewId } = props.match.params;
      */ /* console.log(userId); */
      console.log('useLayoutEffect')
-    interviewContext.getQuestions();
+     console.log('params',props.match.params.interviewId)
+    interviewContext.getQuestions(props.match.params.interviewId);
     //eslint-disable-next-line
   }, []);
   const submitAnswer = (answer) => {
     alert(answer.body + '=>' + answer.questionId);
-    interviewContext.saveAnswer(answer);
+    interviewContext.saveAnswer({"body":answer.body},answer.questionId,props.match.params.interviewId);
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
       /* this.setState({ currentQuestion: this.state.currentQuestion + 1 }) */
       interviewContext.incrementQuestionCounter();
@@ -27,7 +28,7 @@ const InterviewProcess = (props) => {
   const skipAnswer = () => {
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
       interviewContext.incrementQuestionCounter();
-      interviewContext.deleteSpeechTOText();
+      interviewContext.deleteSpeechToText();
     }
   };
   console.log('interview counter: ', interviewContext.currentQuestion);

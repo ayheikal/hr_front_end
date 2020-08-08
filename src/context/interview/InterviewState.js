@@ -9,6 +9,7 @@ import {
   DELETE_STT,
   SET_INTERVIEW_ID,
 } from '../types';
+import Axios from 'axios';
 const InterviewState = (props) => {
   const initialState = {
     questions: [],
@@ -40,25 +41,34 @@ const InterviewState = (props) => {
     });
   };
   //get the questions of the interview
-  const getQuestions = () => {
+  const getQuestions = (interviewId) => {
     //axios get questions
-    const res = [
-      { id: 1, body: 'what is ur name' },
-      { id: 2, body: 'what is ur last name' },
-      { id: 3, body: 'what is ur age' },
-    ];
-    dispatch({
-      type: GET_QUESTIONS,
-      payload: res,
-    });
+    Axios.get(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/${interviewId}/questions`,{
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    })
+    .then(res=>{
+      console.log('questions:', res.data.data)
+      dispatch({
+        type: GET_QUESTIONS,
+        payload: res.data.data,
+      });
+    })
+    .catch(err=>{console.log('question error: ',err.response)})
+   
+   
   };
   // saveANswer
-  const saveAnswer = (answer) => {
-    //axios put answer
-    dispatch({
-      type: SAVE_ANSWERS,
-      payload: answer,
-    });
+  const saveAnswer = (answer, questionId, interviewId) => {
+    return Axios.post(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/${interviewId}/questions/${questionId}/answers`, answer,{
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    })
+    .then( res =>{
+      console.log(res.data)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+    
   };
   return (
     <InterviewContext.Provider
