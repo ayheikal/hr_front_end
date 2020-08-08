@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 import PositionsReducer from './positionsReducer';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 import {
   SET_LOADING,
@@ -32,68 +32,61 @@ const PositionsState = (props) => {
 
   //get all positions to show in home page "getPositions"
   const getPositions = () => {
-    console.log("ddddd" , process.env.REACT_APP_HOST_NAME)
-    setLoading();
-    let res = {
-      data:{
-        data:[
-          {
-            title: "Rebeca Wolff",
-            desc: "Magni animi ducimus molestiae tempore aperiam vitae exercitationem. Cum quisquam hic dolores consectetur enim odit voluptatem. Optio placeat officiis maxime accusantium et laudantium. Qui quisquam labore alias distinctio sequi eius sequi.",
-            accept_interviews_from: "2010-07-29 13:56:32.0",
-            accept_interviews_until: "1971-09-01 00:32:49.0",
-            interview_duration: 5114,
-            recruiter_id: 1,
-            updated_at: "2020-08-07 14:27:07",
-            created_at: "2020-08-07 14:27:07",
-            id: 1,
-          },
-          {
-            title: "Demo Wolff",
-            desc: "Magni animi ducimus molestiae tempore aperiam vitae exercitationem. Cum quisquam hic dolores consectetur enim odit voluptatem. Optio placeat officiis maxime accusantium et laudantium. Qui quisquam labore alias distinctio sequi eius sequi.",
-            accept_interviews_from: "2010-07-29 13:56:32.0",
-            accept_interviews_until: "1971-09-01 00:32:49.0",
-            interview_duration: 5114,
-            recruiter_id: 1,
-            updated_at: "2020-08-07 14:27:07",
-            created_at: "2020-08-07 14:27:07",
-            id: 2,
-          }
-       
-        ],
-        meta:{
-          current_page:1,
-          total:0,
-          per_page:15
+    const isAuthed = localStorage.getItem('token');
+    const headers = isAuthed
+      ? {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         }
-      }
-    }
-    // axios
-      // .get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs`)
-      // .then((res) => {
+      : {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        };
+
+    setLoading();
+
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/applicant/jobs`, {
+        headers: headers,
+      })
+      .then((res) => {
+        console.log('res: ', res.data.data);
         dispatch({
           type: GET_POSITIONS,
           payload: res.data.data,
           currentPage: res.data.meta.current_page,
           numberOfPages: Math.ceil(
             res.data.meta.total / res.data.meta.per_page
-        )})
-        // });
-      // })
-      // .catch((error) => {
-      //   setError(error);
-      //   console.log('error: ', error);
-      // });
+          ),
+        });
+      })
+      .catch((error) => {
+        setError(error);
+        console.log('error: ', error);
+      });
 
-    // getPositionsBypage(0,10);
-  }
+    //getPositionsBypage(0, 10);
+  };
   //const getPositionsBypage
   const getPositionsBypage = (pageNumber, numberOfPages) => {
+    const isAuthed = localStorage.getItem('token');
+    const headers = isAuthed
+      ? {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        }
+      : {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        };
     setLoading();
 
     axios
       .get(
-        `${process.env.REACT_APP_HOST_NAME}/api/availableJobs?page=${pageNumber}`
+        `${process.env.REACT_APP_HOST_NAME}/api/applicant/jobs?page=${pageNumber}`,
+        { headers: headers }
       )
       .then((res) => {
         dispatch({
@@ -163,27 +156,34 @@ const PositionsState = (props) => {
   };
 
   const handleApply = (jobId, applicantId) => {
-    // create interview 
-    axios.post(`${process.env.REACT_APP_HOST_NAME}/api/applicant/jobs/${jobId}/apply`,
-    {"job_id": jobId,"applicant_id": applicantId},
-    {
-      'headers': {'Content-Type':'application/json', 'Accept':'application/json', 
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-    }).then( res => {
-      let jobId = res.data.data.job_id
-      let interviewId = res.data.data.id
-      console.log('created interview', jobId, interviewId);
-      // redirect to the interview process
-      let userId = localStorage.getItem('userId')
-      history.push(`/users/${userId}/jobs/${jobId}/interviews/${interviewId}/`)
-    }).catch( err => {
-      console.log('err :',err.response)
-      history.push('/signin')
-    })
-    
-  }
-
+    // create interview
+    axios
+      .post(
+        `${process.env.REACT_APP_HOST_NAME}/api/applicant/jobs/${jobId}/apply`,
+        { job_id: jobId, applicant_id: applicantId },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        let jobId = res.data.data.job_id;
+        let interviewId = res.data.data.id;
+        console.log('created interview', jobId, interviewId);
+        // redirect to the interview process
+        let userId = localStorage.getItem('userId');
+        history.push(
+          `/users/${userId}/jobs/${jobId}/interviews/${interviewId}/`
+        );
+      })
+      .catch((err) => {
+        console.log('err :', err.response);
+        history.push('/signin');
+      });
+  };
 
   // //delete position by recruiter
   // const deletePositionByid = () => {
@@ -205,7 +205,7 @@ const PositionsState = (props) => {
         getPositionsByRecruiterName,
         getPositionsBypage,
         setError,
-        handleApply
+        handleApply,
       }}
     >
       {props.children}

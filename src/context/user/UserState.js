@@ -39,28 +39,29 @@ const UserState = (props) => {
       });
   };
 
-    const signIn=(userObject)=>{
-        axios.post(`${process.env.REACT_APP_HOST_NAME}/api/login`,userObject,{
-            header: {'Content-Type': 'application/json', 'Accept': 'application/json'}
-        })
-        .then(res=>{
-            console.log('logged', res)
-            localStorage.setItem('token',res.data.data.access_token )
-            localStorage.setItem('userId',res.data.data.user.id )
-            localStorage.setItem('role',res.data.data.user.role)
-            history.push('/')
+  const signIn = (userObject) => {
+    axios
+      .post(`${process.env.REACT_APP_HOST_NAME}/api/login`, userObject, {
+        header: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+      .then((res) => {
+        console.log('logged', res);
+        localStorage.setItem('token', res.data.data.access_token);
+        localStorage.setItem('userId', res.data.data.user.id);
+        localStorage.setItem('role', res.data.data.user.role);
+        history.push('/');
+      })
+      .catch((err) => {
+        console.log('err', err.response);
+      });
+  };
 
-        })
-       .catch( err=>{
-            console.log("err",err.response)
-        })
-    }
-
-
-const getToken = () =>{
-     return localStorage.getItem('token');
-
-}
+  const getToken = () => {
+    return localStorage.getItem('token');
+  };
 
   const isAuthenticated = () => {
     let token = getToken();
@@ -120,12 +121,12 @@ const getToken = () =>{
       payload: res,
     });
   };
-// logout out
-const logOut=()=>{
-  console.log('logOut: ')
-  localStorage.clear();
-  window.location.href = '/';
-}
+  // logout out
+  const logOut = () => {
+    console.log('logOut: ');
+    localStorage.clear();
+    window.location.href = '/';
+  };
   return (
     <userContext.Provider
       value={{
