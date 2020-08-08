@@ -72,7 +72,7 @@ function App() {
                     <Route
                       exact
                       path='/users/:userId/profile'
-                      component={UserProfile}
+                      render={(props) => <UserProfile {...props} />}
                     ></Route>
 
                     <Route component={PageNotFound}></Route>

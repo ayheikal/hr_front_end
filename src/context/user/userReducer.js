@@ -1,4 +1,9 @@
-import { GET_ALL_USERS, SET_USER_LOADING, GET_USER } from '../types';
+import {
+  GET_ALL_USERS,
+  SET_USER_LOADING,
+  GET_USER,
+  SET_APPLICANT_PROCESSING_INTERVIEW,
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -17,6 +22,12 @@ export default (state, action) => {
       return {
         ...state,
         user: action.payload,
+        loading: false,
+      };
+    case SET_APPLICANT_PROCESSING_INTERVIEW:
+      return {
+        ...state,
+        userAppliedJobs: action.payload,
         loading: false,
       };
     default:

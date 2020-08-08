@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 import UserReducer from './userReducer';
 import userContext from './userContext';
 import axios from 'axios';
@@ -10,14 +10,16 @@ import {
   GET_USER_BY_NAME_AND_TITLE,
   LOGIN,
   GET_USER,
+  SET_APPLICANT_PROCESSING_INTERVIEW,
 } from '../types';
 
 const UserState = (props) => {
   let history = useHistory();
   const initialState = {
     users: [],
-    user: null,
+    user: {},
     loading: false,
+    userAppliedJobs: [],
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -75,15 +77,13 @@ const UserState = (props) => {
     setLoading();
     //axios get info
     // get name and email,
-    const res = [
-      {
-        id: 1,
-        name: 'heikal',
-        email: 'heikal@gmail.com',
-        bio: 'boy with bull shit',
-        hireable: false,
-      },
-    ];
+    const res = {
+      id: 1,
+      name: 'heikal',
+      email: 'heikal@gmail.com',
+      bio: 'boy with bull shit',
+      hireable: false,
+    };
 
     dispatch({
       type: GET_USER,
@@ -92,27 +92,64 @@ const UserState = (props) => {
   };
 
   //get job that a user applied and their status
-  const getStatusOfJobs = (id) => {
+  const getInterviewDescriptionOfApplicant = (userId) => {
+    setLoading();
     //axios to get job
+    const res = [
+      {
+        id: 1,
+        title: 'java',
+        desc: 'java my love',
+      },
+      {
+        id: 2,
+        title: 'javascript',
+        desc: 'java my love',
+      },
+    ];
+    dispatch({
+      type: SET_APPLICANT_PROCESSING_INTERVIEW,
+      payload: res,
+    });
   };
 
   //get all users
   const getAllUsers = () => {
     //axios get all users
-    setLoading();
-    axios
-      .get(`${process.env.REACT_APP_HOST_NAME}/api/users`)
-      .then((res) => {
-        dispatch({
-          type: GET_ALL_USERS,
-          payload: res.data.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    // setLoading();
+    // axios
+    //   .get(`${process.env.REACT_APP_HOST_NAME}/api/users`)
+    //   .then((res) => {
+    //     dispatch({
+    //       type: GET_ALL_USERS,
+    //       payload: res.data.data,
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
+    setLoading();
+    const res = [
+      {
+        id: 1,
+        email: 'email.com',
+        name: 'ayman heikal',
+        phone: '01120280097',
+      },
+      {
+        id: 2,
+        email: 'email.com',
+        name: 'heikal heikal',
+        phone: '01120280097',
+      },
+    ];
+
+    dispatch({
+      type: GET_ALL_USERS,
+      payload: res,
+    });
+  };
   // const search for a user by his title or name
   const getUserByNameAndTitle = (searchAddress) => {
     //axios
@@ -135,12 +172,14 @@ const UserState = (props) => {
         users: state.users,
         user: state.user,
         loading: state.loading,
+        userAppliedJobs: state.userAppliedJobs,
         userRegister,
         signIn,
         getAllUsers,
         getUserInfo,
         isAuthenticated,
         logOut,
+        getInterviewDescriptionOfApplicant,
       }}
     >
       {props.children}

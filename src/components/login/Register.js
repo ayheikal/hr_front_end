@@ -12,7 +12,7 @@ const Register = () => {
     userContext.userRegister(data);
     const err = localStorage.getItem('alert');
     if (err) {
-      alertContext.setAlert(err, 'mohamed');
+      alertContext.setAlert(err, 'danger');
     }
   };
   return (

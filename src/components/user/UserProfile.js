@@ -1,26 +1,27 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react';
+import UserContext from '../../context/user/userContext';
+import ApplicantInterviewSummaries from './ApplicantInterviewSummaries';
 
-// const getUserInfo = () =>{
-//     let user = {
-//         id: 11,
-//         name: "Courtney Doyle",
-//         email: "jykysywib@mailinator.com",
-//         role: "applicant",
-//         created_at: "2020-08-07 00:14:19",
-//         updated_at: "2020-08-07 00:14:19",
-//       }
-   
-//     return user
-// }
+const UserProfile = ({ match }) => {
+  const userContext = useContext(UserContext);
+  const userId = match.params.userId;
+  useEffect(() => {
+    userContext.getUserInfo(userId);
+    userContext.getInterviewDescriptionOfApplicant(userId);
+  }, []);
+  const { name, email, bio } = userContext.user;
 
-const UserProfile = () =>{
-    return (
-        <div className="profile-container">
-            <div className="profile-info" >
-                profile
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className='profile-container'>
+      <div className='profile-info'>profile:{match.params.userId}</div>
+      <div> {name}</div>
+      <div> {email}</div>
+      <div> {bio}</div>
+      <ApplicantInterviewSummaries
+        interviewSummaries={userContext.userAppliedJobs}
+      />
+    </div>
+  );
+};
 
-export default UserProfile
+export default UserProfile;
