@@ -12,6 +12,7 @@ const AlertState = (props) => {
   //set alert
   const setAlert = (msg, type) => {
     /* this.setState({ alert: { msg, type } }); */
+
     dispatch({
       type: SET_ALERT,
       alert: { msg, type },
@@ -21,6 +22,7 @@ const AlertState = (props) => {
         type: SET_ALERT,
         alert: null,
       });
+      localStorage.removeItem('alert');
     }, 5000);
   };
   return (

@@ -32,10 +32,11 @@ const UserState = (props) => {
         },
       })
       .then((res) => {
+        localStorage.removeItem('alert');
         history.push('/signin');
       })
       .catch((err) => {
-        console.log(err);
+        localStorage.setItem('alert', err.response.data.message);
       });
   };
 

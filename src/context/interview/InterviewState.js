@@ -16,7 +16,7 @@ const InterviewState = (props) => {
     answers: [],
     currentQuestion: 0,
     speechToText: '',
-    interviewId: null
+    interviewId: null,
   };
 
   const [state, dispatch] = useReducer(InterviewReducer, initialState);
@@ -43,32 +43,52 @@ const InterviewState = (props) => {
   //get the questions of the interview
   const getQuestions = (interviewId) => {
     //axios get questions
-    Axios.get(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/${interviewId}/questions`,{
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-    })
-    .then(res=>{
-      console.log('questions:', res.data.data)
-      dispatch({
-        type: GET_QUESTIONS,
-        payload: res.data.data,
+    Axios.get(
+      `${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/${interviewId}/questions`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    )
+      .then((res) => {
+        console.log('questions:', res.data.data);
+        dispatch({
+          type: GET_QUESTIONS,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => {
+        console.log('question error: ', err.response);
       });
-    })
-    .catch(err=>{console.log('question error: ',err.response)})
-   
-   
   };
   // saveANswer
   const saveAnswer = (answer, questionId, interviewId) => {
-    return Axios.post(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/${interviewId}/questions/${questionId}/answers`, answer,{
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-    })
-    .then( res =>{
-      console.log(res.data)
-    })
-    .catch(err=>{
-      console.log(err)
-    })
-    
+    return Axios.post(
+      `${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/${interviewId}/questions/${questionId}/answers`,
+      answer,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  //ennd interview
+  const endInterview = (interviewId) => {
+    Axios.put(`${process.env.REACT_APP_HOST_NAME}/api/applicant`)
+      .then((res) => {})
+      .catch((err) => {});
   };
   return (
     <InterviewContext.Provider

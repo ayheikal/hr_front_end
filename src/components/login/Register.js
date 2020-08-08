@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import UserContext from '../../context/user/userContext';
 import { Link } from 'react-router-dom';
@@ -7,10 +7,14 @@ const Register = () => {
   const { register, errors, handleSubmit } = useForm();
   const userContext = useContext(UserContext);
   const alertContext = useContext(AlertContext);
+
   const onSubmit = (data) => {
     userContext.userRegister(data);
+    const err = localStorage.getItem('alert');
+    if (err) {
+      alertContext.setAlert(err, 'mohamed');
+    }
   };
-
   return (
     <div>
       <h1>signup</h1>
@@ -21,7 +25,7 @@ const Register = () => {
             type='text'
             name='name'
             className='form-control'
-            // ref={register({ required: true,minLength:2 })}
+            //ref={register({ required: true,minLength:2 })}
             ref={register}
           />
           {errors.name && 'First Name is Required and more than two characters'}
