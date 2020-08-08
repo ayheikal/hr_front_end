@@ -8,6 +8,7 @@ import HomePage from './components/home/homePage';
 import PageNotFound from './PageNotFound';
 import Users from './components/user/Users';
 import User from './components/user/User';
+import UserProfile from './components/user/UserProfile'
 import PositionsState from './context/positions/PositionsState';
 import InterviewState from './context/interview/InterviewState';
 import CreatePosition from './components/positions/CreatePosition';
@@ -43,19 +44,17 @@ const App = () => {
                     )}
                   />
                   <Route
-                    exact
-                    path='/user/:id'
+                    exact path='/user/:id'
                     render={(props) => <User {...props} />}
                   />
-                  <Route path='/signin' component={sign}></Route>
-                  <Route path='/signup' component={Register} />
+                  <Route exact path='/signin' component={sign}></Route>
+                  <Route exact path='/signup' component={Register} />
                   <Route exact path='/' component={HomePage}></Route>
                   
                   <Route path='/addJob' component={CreatePosition}></Route>
-                  <Route
-                    path='/recruiterPositions'
-                    component={RecruiterDashboard}
-                  ></Route>
+                  <Route exact path='/recruiterPositions' component={RecruiterDashboard}></Route>
+                  <Route exact path='/users/:userId/profile' component={UserProfile} ></Route>
+
                   <Route component={PageNotFound}></Route>
                 </Switch>
               </div>

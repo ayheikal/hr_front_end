@@ -17,7 +17,7 @@ const InterviewProcess = (props) => {
   }, []);
   const submitAnswer = (answer) => {
     alert(answer.body + '=>' + answer.questionId);
-    interviewContext.saveAnswer(answer);
+    interviewContext.saveAnswer({"body":answer.body},answer.questionId,props.match.params.interviewId);
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
       /* this.setState({ currentQuestion: this.state.currentQuestion + 1 }) */
       interviewContext.incrementQuestionCounter();

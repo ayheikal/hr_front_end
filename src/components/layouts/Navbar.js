@@ -21,7 +21,7 @@ const applicantLinks=(
   <a onClick={()=>userContext.logOut()} className='nav-link' href='/'>logOut</a>
   </li>
   <li className='nav-item'>
-  <a className='nav-link' href='/profile'>Profile</a>
+  <a className='nav-link' href={`/users/${localStorage.getItem('userId')}/profile`}>Profile</a>
   </li>
   </>
 )

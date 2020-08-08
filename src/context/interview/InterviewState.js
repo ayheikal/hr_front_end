@@ -58,12 +58,17 @@ const InterviewState = (props) => {
    
   };
   // saveANswer
-  const saveAnswer = (answer) => {
-    //axios put answer
-    dispatch({
-      type: SAVE_ANSWERS,
-      payload: answer,
-    });
+  const saveAnswer = (answer, questionId, interviewId) => {
+    return Axios.post(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/${interviewId}/questions/${questionId}/answers`, answer,{
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    })
+    .then( res =>{
+      console.log(res.data)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+    
   };
   return (
     <InterviewContext.Provider
