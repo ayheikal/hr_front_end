@@ -15,31 +15,26 @@ const UserProfile = ({ match }) => {
   const { name, email, bio } = userContext.user;
 
   return (
+    <div className="wrap-profile">
+        <div className="row">
+            <div className="col-md-3">
+                <div className="row">
+                    <div className="col-md-12">
+                        <UserInfo />
+                    </div>
+                </div>
 
-          <div className="wrap-profile container">
-              
-              <div className="row">
-                  <div className="col-md-3">
-                      <div className="row">
-                          <div className="col-md-12">
-                              <UserInfo />
-                          </div>
-                      </div>
-
-                  </div>
-                  <div className="col-md-9">
-                      <div className="row">
-                          <div className="col-md-12">
-                              <ListApplicantInterviews />
-                              {/* <ApplicantInterviewSummary /> */}
-                          </div>
-                      </div>
-                      
-                  </div>
-              </div>
-                  
-          </div>
-      
+            </div>
+            <div className="col-md-9">
+                <div className="row">
+                    <div className="col-md-12">
+                        <ListApplicantInterviews />
+                        {/* <ApplicantInterviewSummary /> */}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   );
 };
 

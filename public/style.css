@@ -29,7 +29,7 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     min-height: 100vh;
     background: #fff;
     border-radius: 10px;
-    padding-top: 20px;
+    padding: 20px;
 }
  
 .user-info small,

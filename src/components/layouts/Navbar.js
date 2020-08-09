@@ -21,24 +21,36 @@ const Navbar = () => {
     </>
   );
   const applicantLinks = (
-    <>
-      {' '}
+    <>      
+      <li className='nav-item'>
+        <a
+          className='nav-link'
+          href={`/users/${localStorage.getItem('userId')}/profile`}>
+          Profile
+        </a>
+      </li>
       <li className='nav-item'>
         <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
           logOut
         </a>
       </li>
-      <li className='nav-item'>
-        <a
-          className='nav-link'
-          href={`/users/${localStorage.getItem('userId')}/profile`}
-        >
-          Profile
-        </a>
-      </li>
     </>
   );
 
+  const recruiterLinks = (
+    <>
+      <li className='nav-item'>
+        <a className='nav-link' href='/recruiter/positions'>
+          positions
+        </a>
+      </li>
+      <li className='nav-item'>
+        <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
+          logOut
+        </a>
+      </li>
+    </>
+  )
   return (
 
 
@@ -59,7 +71,7 @@ const Navbar = () => {
             About
           </a>
         </li>
-        {authed ? applicantLinks : guestLinks}
+        {authed ? (recruiterLinks) : guestLinks}
       </ul>
     </nav>
 

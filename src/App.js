@@ -17,7 +17,7 @@ import UserProfile from './components/user/UserProfile';
 import PositionsState from './context/positions/PositionsState';
 import InterviewState from './context/interview/InterviewState';
 import CreatePosition from './components/positions/CreatePosition';
-import RecruiterDashboard from './components/positions/RecruiterDashboard';
+import RecruiterPositionOperations from './components/positions/RecruiterPositionOperations';
 import UserState from './context/user/UserState';
 import Register from './components/login/Register';
 import sign from './components/login/Sign';
@@ -30,10 +30,9 @@ function App() {
         <InterviewState>
           <UserState>
             <AlertState>
-              <div>
                 <Navbar />
                 <Alert />
-                <div className='container'>
+                <div className='container '>
                   <Switch>
                     <Route
                       path='/users/:userId/jobs/:jobId/interviews/:interviewId'
@@ -63,12 +62,8 @@ function App() {
                     <Route exact path='/signup' component={Register} />
                     <Route exact path='/' component={HomePage}></Route>
 
-                    <Route path='/addJob' component={CreatePosition}></Route>
-                    <Route
-                      exact
-                      path='/recruiterPositions'
-                      component={RecruiterDashboard}
-                    ></Route>
+                    <Route exact path='/recruiter/positions/create' component={CreatePosition}></Route>
+                    <Route exact path='/recruiter/positions' component={RecruiterPositionOperations}></Route>
                     <Route
                       exact
                       path='/users/:userId/profile'
@@ -78,7 +73,7 @@ function App() {
                     <Route component={PageNotFound}></Route>
                   </Switch>
                 </div>
-              </div>
+            
             </AlertState>
           </UserState>
         </InterviewState>
