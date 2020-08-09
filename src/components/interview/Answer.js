@@ -5,12 +5,15 @@ import Speech from './scriptSTT';
 import InterviewContext from '../../context/interview/interviewContext';
 const Answer = (props) => {
   const [answer, setAnswer] = useState({});
-  
+
   const interviewContext = useContext(InterviewContext);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     var value = document.getElementById('answer').innerHTML;
+    if (value == null) {
+      value = ' null';
+    }
     var userid = 1;
     var jobid = 1;
     var interviewid = 1;
@@ -32,7 +35,7 @@ const Answer = (props) => {
   };
 
   const handleEnd = (e) => {
-    props.submitAnswer(answer);
+    props.handleEndInterview();
   };
 
   return (

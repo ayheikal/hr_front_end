@@ -1,4 +1,4 @@
-import React, {  useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import InterviewContext from '../../context/interview/interviewContext';
 //------------------------SPEECH RECOGNITION-----------------------------
 
@@ -74,8 +74,8 @@ const Speech = (props) => {
 
     recognition.onerror = (event) => {
       console.log('Error occurred in recognition: ' + event.error);
-      if( event.error==='network')
-        alert('Error occurred in recognition: ' + event.error)
+      // if( event.error==='network')
+      //   alert('Error occurred in recognition: ' + event.error)
     };
   };
   // const showValue = () => {

@@ -4,7 +4,7 @@ const SpeechRecognition = window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 var final_transcript = '';
 recognition.continous = true;
-// var interim_transcript = '';
+var interim_transcript = '';
 recognition.interimResults = true;
 recognition.lang = 'en-US';
 recognition.onresult = function (event) {
@@ -12,7 +12,7 @@ recognition.onresult = function (event) {
     if (event.results[i].isFinal) {
       final_transcript += event.results[i][0].transcript;
     } else {
-      //interim_transcript += event.results[i][0].transcript;
+      interim_transcript += event.results[i][0].transcript;
     }
   }
 };

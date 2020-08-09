@@ -86,9 +86,22 @@ const InterviewState = (props) => {
   };
   //ennd interview
   const endInterview = (interviewId) => {
-    Axios.put(`${process.env.REACT_APP_HOST_NAME}/api/applicant`)
-      .then((res) => {})
-      .catch((err) => {});
+    Axios.post(
+      `${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/${interviewId}/submit`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    )
+      .then((res) => {
+        console.log('endInterview: ', interviewId);
+      })
+      .catch((err) => {
+        console.log('err: ', err.response);
+      });
   };
   return (
     <InterviewContext.Provider
@@ -102,6 +115,7 @@ const InterviewState = (props) => {
         saveAnswer,
         setSpeechToText,
         deleteSpeechToText,
+        endInterview,
       }}
     >
       {props.children}
