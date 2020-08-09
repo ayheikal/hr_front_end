@@ -12,6 +12,7 @@ import {
   GET_USER,
   SET_APPLICANT_PROCESSING_INTERVIEW,
 } from '../types';
+import Axios from 'axios';
 
 const UserState = (props) => {
   let history = useHistory();
@@ -94,6 +95,16 @@ const UserState = (props) => {
   const getInterviewDescriptionOfApplicant = (userId) => {
     setLoading();
     //axios to get job
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => console.log('getInterviewDescriptionOfApplicant: ', res))
+      .catch((err) => console.log(err.response));
     const res = [
       {
         id: 1,
