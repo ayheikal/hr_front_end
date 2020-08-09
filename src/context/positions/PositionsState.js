@@ -45,9 +45,10 @@ const PositionsState = (props) => {
         };
 
     setLoading();
+    const link = isAuthed ? 'applicant/jobs' : 'guest/jobs';
 
     axios
-      .get(`${process.env.REACT_APP_HOST_NAME}/api/applicant/jobs`, {
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/${link}`, {
         headers: headers,
       })
       .then((res) => {
@@ -82,10 +83,10 @@ const PositionsState = (props) => {
           Accept: 'application/json',
         };
     setLoading();
-
+    const link = isAuthed ? 'applicant/jobs' : 'guest/jobs';
     axios
       .get(
-        `${process.env.REACT_APP_HOST_NAME}/api/applicant/jobs?page=${pageNumber}`,
+        `${process.env.REACT_APP_HOST_NAME}/api/${link}?page=${pageNumber}`,
         { headers: headers }
       )
       .then((res) => {
@@ -105,9 +106,23 @@ const PositionsState = (props) => {
 
   //get positions by searching "getPositionsBySearch"
   const getPositionsBySearch = (text) => {
+    const isAuthed = localStorage.getItem('token');
+    const headers = isAuthed
+      ? {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        }
+      : {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        };
     setLoading();
+    const link = isAuthed ? 'applicant/jobs' : 'guest/jobs';
     axios
-      .get(`${process.env.REACT_APP_HOST_NAME}/api/availableJobs?title=${text}`)
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/${link}?title=${text}`, {
+        headers: headers,
+      })
       .then((res) => {
         dispatch({
           type: GET_POSITION,
