@@ -24,6 +24,7 @@ const InterviewProcess = (props) => {
       answer.questionId,
       interviewId
     );
+
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
       /* this.setState({ currentQuestion: this.state.currentQuestion + 1 }) */
       interviewContext.incrementQuestionCounter();
@@ -50,6 +51,9 @@ const InterviewProcess = (props) => {
     ) {
       interviewContext.endInterview(props.match.params.interviewId);
     }
+  };
+  const handleEndInterview = () => {
+    interviewContext.endInterview(props.match.params.interviewId);
   };
   console.log('interview counter: ', interviewContext.currentQuestion);
   console.log('interview length: ', interviewContext.questions.length);
