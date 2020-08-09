@@ -54,14 +54,13 @@ const RecruiterPositionOperations = () => {
                           </a>
 
 
-                          <form action="{{ route( $folder_name . '.destroy', $routeArray ) }}" method="post">
                             <button type="submit" rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Delete {{ $module_name }}">
                               <i className="fa fa-trash"></i>
                             </button>
-                          </form>
 
                         </td>
                       </tr>
+
                       <tr>
                         <td>Android Developer</td>
                         <td>Here is the Description of the job job</td>
@@ -72,14 +71,13 @@ const RecruiterPositionOperations = () => {
                           </a>
 
 
-                          <form action="{{ route( $folder_name . '.destroy', $routeArray ) }}" method="post">
                             <button type="submit" rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Delete {{ $module_name }}">
                               <i className="fa fa-trash"></i>
                             </button>
-                          </form>
 
                         </td>
                       </tr>
+
                       <tr>
                         <td>Android Developer</td>
                         <td>Here is the Description of the job job</td>
@@ -90,32 +88,13 @@ const RecruiterPositionOperations = () => {
                           </a>
 
 
-                          <form action="{{ route( $folder_name . '.destroy', $routeArray ) }}" method="post">
                             <button type="submit" rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Delete {{ $module_name }}">
                               <i className="fa fa-trash"></i>
                             </button>
-                          </form>
 
                         </td>
                       </tr>
-                      <tr>
-                        <td>Android Developer</td>
-                        <td>Here is the Description of the job job</td>
-                        <td>In Progress</td>
-                        <td className="td-actions text-right">
-                          <a href="{{ route( $folder_name . '.edit', $routeArray) }}" rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Edit {{ $module_name }}">
-                            <i className="fa fa-pencil-square-o"></i>
-                          </a>
-
-
-                          <form action="{{ route( $folder_name . '.destroy', $routeArray ) }}" method="post">
-                            <button type="submit" rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Delete {{ $module_name }}">
-                              <i className="fa fa-trash"></i>
-                            </button>
-                          </form>
-
-                        </td>
-                      </tr>
+                      
                     </tbody>
                   </table>
                 </div>
