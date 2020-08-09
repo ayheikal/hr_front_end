@@ -26,19 +26,21 @@ const UserState = (props) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
   const setLoading = () => dispatch({ type: SET_USER_LOADING });
 
-  const userRegister = (user) => {
-    axios
+  const userRegister = async(user) => {
+    await axios
       .post(`${process.env.REACT_APP_HOST_NAME}/api/register`, user, {
-        header: {
+        headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
+          'Accept': 'application/json',
         },
       })
       .then((res) => {
+        console.log(res)
         localStorage.removeItem('alert');
         history.push('/signin');
       })
       .catch((err) => {
+        console.log(err.response)
         localStorage.setItem('alert', err.response.data.message);
       });
   };

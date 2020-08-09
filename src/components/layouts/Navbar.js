@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../context/user/userContext';
 const Navbar = () => {
   const userContext = useContext(UserContext);
+  let role = 'guest'
   const authed = userContext.isAuthenticated();
+  if(authed){
+    role = localStorage.getItem('role')
+  }
 
   const guestLinks = (
     <>
-      {' '}
       <li className='nav-item'>
         <a className='nav-link' href='/signUp'>
           signUp
@@ -51,6 +54,17 @@ const Navbar = () => {
       </li>
     </>
   )
+
+  let navLinks = null
+
+  if(!authed){
+    navLinks = guestLinks
+  }else if( role === 'applicant'){
+    navLinks = applicantLinks
+  }else{
+    navLinks = recruiterLinks
+  }
+
   return (
 
 
@@ -71,7 +85,7 @@ const Navbar = () => {
             About
           </a>
         </li>
-        {authed ? (recruiterLinks) : guestLinks}
+          {navLinks}
       </ul>
     </nav>
 
