@@ -12,6 +12,7 @@ import {
   GET_USER,
   SET_APPLICANT_PROCESSING_INTERVIEW,
 } from '../types';
+import Axios from 'axios';
 
 const UserState = (props) => {
   let history = useHistory();
@@ -81,8 +82,7 @@ const UserState = (props) => {
       id: 1,
       name: 'heikal',
       email: 'heikal@gmail.com',
-      bio: 'boy with bull shit',
-      hireable: false,
+      joinedAt: 'february- 2017',
     };
 
     dispatch({
@@ -95,16 +95,40 @@ const UserState = (props) => {
   const getInterviewDescriptionOfApplicant = (userId) => {
     setLoading();
     //axios to get job
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => console.log('getInterviewDescriptionOfApplicant: ', res))
+      .catch((err) => console.log(err.response));
     const res = [
       {
         id: 1,
         title: 'java',
-        desc: 'java my love',
+        desc: 'here we set all the description of',
+        status: 'reviewing',
+        feedback: 'nothing',
+        joinedAt: '2020-08-07 00:14:19',
       },
       {
         id: 2,
         title: 'javascript',
         desc: 'java my love',
+        status: 'reviewing',
+        feedback: 'nothing',
+        joinedAt: '2020-08-07 00:14:19',
+      },
+      {
+        id: 3,
+        title: 'football player',
+        desc: 'java my love 3m elnas',
+        status: 'reviewing',
+        feedback: 'nothing',
+        joinedAt: '2020-08-07 00:14:19',
       },
     ];
     dispatch({

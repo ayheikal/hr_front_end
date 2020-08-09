@@ -88,6 +88,7 @@ const InterviewState = (props) => {
   const endInterview = (interviewId) => {
     Axios.post(
       `${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/${interviewId}/submit`,
+      null,
       {
         headers: {
           Accept: 'application/json',
@@ -97,7 +98,7 @@ const InterviewState = (props) => {
       }
     )
       .then((res) => {
-        console.log('endInterview: ', interviewId);
+        console.log('endInterview: ', res);
       })
       .catch((err) => {
         console.log('err: ', err.response);

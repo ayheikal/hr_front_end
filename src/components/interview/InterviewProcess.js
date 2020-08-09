@@ -15,7 +15,7 @@ const InterviewProcess = (props) => {
     interviewContext.getQuestions(props.match.params.interviewId);
     //eslint-disable-next-line
   }, []);
-  const submitAnswer = (answer) => {
+  const submitAnswer = async (answer) => {
     alert(answer.body + '=>' + answer.questionId);
 
     const interviewId = props.match.params.interviewId;
@@ -27,7 +27,7 @@ const InterviewProcess = (props) => {
 
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
       /* this.setState({ currentQuestion: this.state.currentQuestion + 1 }) */
-      interviewContext.incrementQuestionCounter();
+      await interviewContext.incrementQuestionCounter();
       interviewContext.deleteSpeechToText();
     }
     console.log('submit answer->current', interviewContext.currentQuestion);
@@ -35,14 +35,15 @@ const InterviewProcess = (props) => {
       interviewContext.currentQuestion + 1 ===
       interviewContext.questions.length
     ) {
+      console.log('inside submit answer end interview');
       interviewContext.endInterview(interviewId);
     }
   };
 
-  const skipAnswer = () => {
+  const skipAnswer = async () => {
     console.log('skip answer->current', interviewContext.currentQuestion);
     if (interviewContext.currentQuestion < interviewContext.questions.length) {
-      interviewContext.incrementQuestionCounter();
+      await interviewContext.incrementQuestionCounter();
       interviewContext.deleteSpeechToText();
     }
     if (
@@ -72,6 +73,7 @@ const InterviewProcess = (props) => {
             interviewContext.questions[interviewContext.currentQuestion].id
           }
           skipAnswer={skipAnswer}
+          handleEndInterview={handleEndInterview}
         />
       </div>
     );
