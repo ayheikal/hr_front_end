@@ -29,6 +29,10 @@ const UserProfile = ({ match }) => {
         <div className='col-md-9'>
           <div className='row'>
             <div className='col-md-12'>
+              {console.log(
+                'inside userProfile: ',
+                userContext.userAppliedJobs[0]
+              )}
               <ApplicantInterviews
                 userAppliedJobs={userContext.userAppliedJobs}
                 userName={name}

@@ -24,11 +24,12 @@ const Navbar = () => {
     </>
   );
   const applicantLinks = (
-    <>      
+    <>
       <li className='nav-item'>
         <a
           className='nav-link'
-          href={`/users/${localStorage.getItem('userId')}/profile`}>
+          href={`/users/${localStorage.getItem('userId')}/profile`}
+        >
           Profile
         </a>
       </li>
@@ -66,6 +67,11 @@ const Navbar = () => {
   }
 
   return (
+    <div className='container'>
+      <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
+        <Link className='navbar-brand' to={'/'}>
+          HRBOT
+        </Link>
 
 
     <div className= "container">
@@ -90,7 +96,6 @@ const Navbar = () => {
     </nav>
 
     </div>
-
   );
 };
 

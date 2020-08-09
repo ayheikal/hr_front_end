@@ -105,16 +105,24 @@ const UserState = (props) => {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       })
-      .then((res) => console.log('getInterviewDescriptionOfApplicant: ', res))
+      .then((res) => {
+        // console.log('getInterviewDescriptionOfApplicant: ', res);
+        const interviews = res.data.data;
+        console.log('inter :', interviews);
+        dispatch({
+          type: SET_APPLICANT_PROCESSING_INTERVIEW,
+          payload: res.data.data,
+        });
+      })
       .catch((err) => console.log(err.response));
     const res = [
       {
         id: 1,
         title: 'java',
-        desc: 'here we set all the description of',
-        status: 'reviewing',
-        feedback: 'nothing',
-        joinedAt: '2020-08-07 00:14:19',
+        desc: 'ldksjdj',
+        status: '----',
+        feedback: '---',
+        joinedAt: '---',
       },
       {
         id: 2,
@@ -133,10 +141,6 @@ const UserState = (props) => {
         joinedAt: '2020-08-07 00:14:19',
       },
     ];
-    dispatch({
-      type: SET_APPLICANT_PROCESSING_INTERVIEW,
-      payload: res,
-    });
   };
 
   //get all users

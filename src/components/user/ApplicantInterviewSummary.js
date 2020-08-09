@@ -1,7 +1,13 @@
 import React from 'react';
 
 const ApplicantInterviewSummary = (props) => {
-  const { title, desc, status, feedback, joinedAt } = props.user;
+  const {
+    title,
+    description,
+    status,
+    feedback,
+    accept_interviews_from,
+  } = props.userAppliedJob;
   return (
     <div className='job-cards'>
       <div className='card'>
@@ -24,7 +30,7 @@ const ApplicantInterviewSummary = (props) => {
               <tbody>
                 <tr>
                   <td>Job Description</td>
-                  <td>{desc}</td>
+                  <td>{description}</td>
                 </tr>
                 <tr>
                   <td>Status</td>
@@ -39,7 +45,7 @@ const ApplicantInterviewSummary = (props) => {
                     <small>JoinedAt</small>
                   </td>
                   <td>
-                    <small>{joinedAt}</small>
+                    <small>{accept_interviews_from}</small>
                   </td>
                 </tr>
               </tbody>
