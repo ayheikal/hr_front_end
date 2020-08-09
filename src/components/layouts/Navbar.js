@@ -40,6 +40,9 @@ const Navbar = () => {
   );
 
   return (
+
+
+    <div className= "container">
     <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
       <Link className='navbar-brand' to={'/'}>
         HRBOT
@@ -59,6 +62,9 @@ const Navbar = () => {
         {authed ? applicantLinks : guestLinks}
       </ul>
     </nav>
+
+    </div>
+
   );
 };
 
