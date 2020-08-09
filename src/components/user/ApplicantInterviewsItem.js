@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ApplicantInterviewSummary from './ApplicantInterviewSummary';
 const ApplicantInterviewsItem = ({ userAppliedJob, userName }) => {
-  const { title, desc, joinedAt } = userAppliedJob;
+  const { title, description, accept_interviews_from } = userAppliedJob.job;
   const [flag, setFlag] = useState(false);
   const switchFlag = () => {
     setFlag(!flag);
@@ -16,9 +16,9 @@ const ApplicantInterviewsItem = ({ userAppliedJob, userName }) => {
             <span>{title}</span>
           </div>
           <div className='card-body'>
-            <p className='card-text'>{desc}</p>
+            <p className='card-text'>{description}</p>
             <div className='card-footer'>
-              <small>Joined at: {joinedAt}</small>
+              <small>Joined at: {accept_interviews_from}</small>
 
               <a
                 className='button-more btn btn-primary'
@@ -33,7 +33,10 @@ const ApplicantInterviewsItem = ({ userAppliedJob, userName }) => {
     </div>
   );
   return flag ? (
-    <ApplicantInterviewSummary user={userAppliedJob} switchFlag={switchFlag} />
+    <ApplicantInterviewSummary
+      userAppliedJob={userAppliedJob.job}
+      switchFlag={switchFlag}
+    />
   ) : (
     component
   );

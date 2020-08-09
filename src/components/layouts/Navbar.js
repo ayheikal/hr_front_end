@@ -21,11 +21,12 @@ const Navbar = () => {
     </>
   );
   const applicantLinks = (
-    <>      
+    <>
       <li className='nav-item'>
         <a
           className='nav-link'
-          href={`/users/${localStorage.getItem('userId')}/profile`}>
+          href={`/users/${localStorage.getItem('userId')}/profile`}
+        >
           Profile
         </a>
       </li>
@@ -50,33 +51,29 @@ const Navbar = () => {
         </a>
       </li>
     </>
-  )
+  );
   return (
+    <div className='container'>
+      <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
+        <Link className='navbar-brand' to={'/'}>
+          HRBOT
+        </Link>
 
-
-    <div className= "container">
-    <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
-      <Link className='navbar-brand' to={'/'}>
-        HRBOT
-      </Link>
-
-      <ul className='navbar-nav '>
-        <li className='nav-item active'>
-          <Link className='nav-link' to='/'>
-            Home <span className='sr-only'>(current)</span>
-          </Link>
-        </li>
-        <li className='nav-item'>
-          <a className='nav-link' href='/about'>
-            About
-          </a>
-        </li>
-        {authed ? (recruiterLinks) : guestLinks}
-      </ul>
-    </nav>
-
+        <ul className='navbar-nav '>
+          <li className='nav-item active'>
+            <Link className='nav-link' to='/'>
+              Home <span className='sr-only'>(current)</span>
+            </Link>
+          </li>
+          <li className='nav-item'>
+            <a className='nav-link' href='/about'>
+              About
+            </a>
+          </li>
+          {authed ? applicantLinks : guestLinks}
+        </ul>
+      </nav>
     </div>
-
   );
 };
 
