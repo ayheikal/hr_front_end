@@ -17,7 +17,9 @@ import UserProfile from './components/user/UserProfile';
 import PositionsState from './context/positions/PositionsState';
 import InterviewState from './context/interview/InterviewState';
 import CreatePosition from './components/positions/CreatePosition';
+import UpdatePosition from './components/positions/UpdatePosition'
 import RecruiterPositionOperations from './components/positions/RecruiterPositionOperations';
+import RecruiterManagePositionItem from './components/positions/RecruiterManagePositionItem'
 import UserState from './context/user/UserState';
 import Register from './components/login/Register';
 import sign from './components/login/Sign';
@@ -63,6 +65,8 @@ function App() {
                     <Route exact path='/' component={HomePage}></Route>
 
                     <Route exact path='/recruiter/positions/create' component={CreatePosition}></Route>
+                    <Route exact path='/recruiter/positions/:positionId/update' component={UpdatePosition}></Route>
+                    <Route exact path='/recruiter/positions/:positionId/show' component={RecruiterManagePositionItem}></Route>
                     <Route exact path='/recruiter/positions' component={RecruiterPositionOperations}></Route>
                     <Route
                       exact

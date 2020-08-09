@@ -45,11 +45,11 @@ const RecruiterPositionOperations = () => {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Android Developer</td>
+                        <td><a href="/recruiter/positions/1">Android Developer</a></td>
                         <td>Here is the Description of the job job</td>
                         <td>In Progress</td>
                         <td className="td-actions text-right">
-                          <a href="{{ route( $folder_name . '.edit', $routeArray) }}" rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Edit {{ $module_name }}">
+                          <a href={`/recruiter/positions/${localStorage.getItem('userId')}/update`} rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Edit {{ $module_name }}">
                             <i className="fa fa-pencil-square-o"></i>
                           </a>
 
