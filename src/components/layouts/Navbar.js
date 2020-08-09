@@ -27,10 +27,9 @@ const applicantLinks=(
 )
   
   return (
-    <nav
-      className='navbar navbar-expand-md navbar-dark bg-dark'
-      
-    >
+    <div className= "container">
+
+<nav className='navbar navbar-expand-md navbar-dark bg-dark'>
       <Link className='navbar-brand' to={'/home'}>
         HRBOT
       </Link>
@@ -53,6 +52,9 @@ const applicantLinks=(
         
       
     </nav>
+
+    </div>
+    
   );
 };
 
