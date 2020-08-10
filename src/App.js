@@ -35,6 +35,10 @@ import QuesionsOperations from './components/questions/QuestionsOperations'
 import CreateQuestion from './components/questions/CreateQuestion'
 import UpdateQuestion from './components/questions/UpdateQuestion'
 
+import ModelAnswersOperations from './components/modelAnswers/ModelAnswersOperations'
+import CreateModelAnswer from './components/modelAnswers/CreateModelAnswer'
+import UpdateModelAnswer from './components/modelAnswers/UpdateModelAnswer'
+
 function App() {
 
   return (
@@ -88,6 +92,11 @@ function App() {
                     <Route exact path='/admin/questions' component={QuesionsOperations}></Route>
                     <Route exact path='/admin/questions/create' component={CreateQuestion}></Route>
                     <Route exact path='/admin/questions/:questionId/update' component={UpdateQuestion}></Route>
+                    
+                    <Route exact path='/admin/questions/:questionId/answers' component={ModelAnswersOperations}></Route>
+                    <Route exact path='/admin/questions/:questionId/answers/create' component={CreateModelAnswer}></Route>
+                    <Route exact path='/admin/questions/:questionId/answers/:answerId/update' component={UpdateModelAnswer}></Route>
+                    
                     
                     <Route
                       exact
