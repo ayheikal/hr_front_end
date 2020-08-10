@@ -47,7 +47,7 @@ const RecruiterPositionOperations = () => {
                     </tr>
                   </thead>
                   {recruiterPositions.map((position) => (
-                    <tbody>
+                    <tbody key={position.id}>
                       <tr>
                         <td>
                           <a href='/recruiter/positions/1'>{position.title}</a>
@@ -69,15 +69,13 @@ const RecruiterPositionOperations = () => {
                             rel='tooltip'
                             className='btn btn-white btn-link btn-sm'
                             data-original-title='Delete {{ $module_name }}'
+                            onClick={() =>
+                              positionsContext.deletePositionByRecruiter(
+                                position.id
+                              )
+                            }
                           >
-                            <i
-                              onClick={() =>
-                                positionsContext.deletePositionByRecruiter(
-                                  position.id
-                                )
-                              }
-                              className='fa fa-trash'
-                            ></i>
+                            <i className='fa fa-trash'></i>
                           </button>
                         </td>
                       </tr>

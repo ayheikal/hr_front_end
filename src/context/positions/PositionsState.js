@@ -187,7 +187,7 @@ const PositionsState = (props) => {
         }
       )
       .then((res) => {
-        history.push('recruiter/positions/');
+        history.push('/recruiter/positions');
       })
       .catch((err) => console.log(err.response));
   };
@@ -207,7 +207,6 @@ const PositionsState = (props) => {
         }
       )
       .then((res) => {
-        console.log('getPositionsByRecruiterName: ', res);
         dispatch({
           type: GET_POSITIONS_OF_RECRUITER,
           payload: res.data.data,
@@ -273,10 +272,10 @@ const PositionsState = (props) => {
   // //delete position by recruiter
 
   const deletePositionByRecruiter = (jobId) => {
+    console.log('positionId', jobId, localStorage.getItem('token'));
     axios
       .delete(
         `${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs/${jobId}`,
-        null,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -286,32 +285,34 @@ const PositionsState = (props) => {
         }
       )
       .then((res) => {
-        history.push('recruiter/positions/');
+        window.location.reload();
       })
       .catch((err) => alert(err.response.data.message));
   };
-  const deletePositionByid = (positionId) => {
-    axios
-      .delete(
-        `${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs/${positionId}`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        }
-      )
-      .then((res) => {
-        alert('Deleted Successfully');
-      })
-      .catch((err) => {
-        alert(err.response.data.message);
-      });
-  };
-
-  //   //axios delete by id
+  // const deletePositionByid = (positionId) => {
+  //   console.log('positionId', positionId, localStorage.getItem('token'));
+  //   // axios
+  //   //   .delete(
+  //     `${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs/${positionId}`,
+  //     null,
+  //     {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Accept: 'application/json',
+  //         Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //       },
+  //     }
+  //   )
+  //   .then((res) => {
+  //     alert('Deleted Successfully');
+  //   })
+  //   .catch((err) => {
+  //     alert(err.response.data.message);
+  //   });
   // };
+
+  // //   //axios delete by id
+  // // };
 
   return (
     <positionsContext.Provider
@@ -332,6 +333,7 @@ const PositionsState = (props) => {
         handleApply,
         getPositionById,
         deletePositionByRecruiter,
+        updatePosition,
       }}
     >
       {props.children}

@@ -1,3 +1,4 @@
 import { createContext } from 'react';
 
-export default adminContext = createContext();
+const adminContext = createContext();
+export default adminContext;

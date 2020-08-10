@@ -7,10 +7,10 @@ const CreatePosition = () => {
   const positionsContext = useContext(PositionsContext);
   const onSubmit = (data) => positionsContext.addNewPosition(data);
   return (
-    <div class='card'>
-      <div class='card-header'>Add A New Position</div>
-      <div class='card-body'>
-        <div class='card-text'>
+    <div className='card'>
+      <div className='card-header'>Add A New Position</div>
+      <div className='card-body'>
+        <div className='card-text'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='row'>
               <div className='col-md-5'>
