@@ -21,7 +21,7 @@ const Sign = () => {
         <div className="card">
 
           <div className="header">
-            <h1><span className="logo">Logo</span> HRBot</h1>
+            <h1><span className="logo">Logo</span> HRBOT</h1>
           </div>
 
         <div className="card-body">

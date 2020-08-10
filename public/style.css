@@ -20,7 +20,7 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     width: 100%;  
     min-height: 100vh;
     padding: 0px;
-    background: #329CB2;
+    background: #000000;
 
     /* background-image: url('./bg6.jpeg'); */
 
@@ -101,9 +101,10 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 /*** start login page ***/
 
 .wrap-login{
-    min-height: 100vh;
+    height: 100%;
 }
 .wrap-login .card{
+    margin: 0;
     color: #fff;
     min-height: 100vh;
     padding: 50px;
@@ -112,11 +113,17 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 
 .wrap-login .card .header{
     font-family: serif;
-    padding: 50px;
+    padding: 5px 50px;
 }
-.wrap-login .logo{
-    color: #EB0881;
+.wrap-login .header img{
+    max-width: 100%;
 }
+
+.wrap-login .header .logo{
+    color: #86137B;
+    text-decoration: underline;
+}
+
 
 .wrap-login .card label{
     color: rgb(184, 183, 183);
@@ -126,19 +133,20 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 
 .wrap-login .card input{
     background-color: transparent !important;
+    color: rgb(184, 183, 183);
 }
 
-.wrap-login .card input:focus{
+/* .wrap-login .card input:focus{
     background-color: transparent !important;
 }
 
 .wrap-login .card input:active{
     background-color: transparent !important;
-}
+} */
 
 .wrap-login form button{
     color: rgb(184, 183, 183);
-    margin: 50px 0;
+    margin: 30px 0;
     width: 100%;
     background-color: #0074AB;
 }
