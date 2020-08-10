@@ -5,11 +5,10 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #9053c7;
-    background: -webkit-linear-gradient(-135deg, #292826, #8899ec);
+    /* background: -webkit-linear-gradient(-135deg, #292826, #8899ec);
     background: -o-linear-gradient(-135deg, hsl(305, 8%, 31%), #8899ec);
     background: -moz-linear-gradient(-135deg, #292826, #8899ec);
-    background: linear-gradient(-135deg, #292826, #8899ec);
+    background: linear-gradient(-135deg, #292826, #8899ec); */
   }
   
 code {
@@ -20,9 +19,10 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 .app-container {
     width: 100%;  
     min-height: 100vh;
-    padding: 0 15px;
+    padding: 0px;
+    background: #329CB2;
 
-    background-image: url('./bg.jpg');
+    /* background-image: url('./bg6.jpeg'); */
 
 }
   
@@ -90,3 +90,65 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 .back-arrow{
     cursor: pointer;
 }
+
+
+/*** start navbar ***/
+.nav-bar{
+    background-color: #5F1E26;
+}
+/*** end navbar **/
+
+/*** start login page ***/
+
+.wrap-login{
+    min-height: 100vh;
+}
+.wrap-login .card{
+    color: #fff;
+    min-height: 100vh;
+    padding: 50px;
+    background-color: #0D0F12;
+}
+
+.wrap-login .card .header{
+    font-family: serif;
+    padding: 50px;
+}
+.wrap-login .logo{
+    color: #EB0881;
+}
+
+.wrap-login .card label{
+    color: rgb(184, 183, 183);
+    font-size: 13px;
+    margin: 0;
+}
+
+.wrap-login .card input{
+    background-color: transparent !important;
+}
+
+.wrap-login .card input:focus{
+    background-color: transparent !important;
+}
+
+.wrap-login .card input:active{
+    background-color: transparent !important;
+}
+
+.wrap-login form button{
+    color: rgb(184, 183, 183);
+    margin: 50px 0;
+    width: 100%;
+    background-color: #0074AB;
+}
+
+.wrap-login hr{
+    background-color: rgb(184, 183, 183);
+}
+.wrap-login .links{
+    margin-top: 5px;
+    font-size: 13px;
+    color: #0074AB;
+}
+/*** end login page ***/

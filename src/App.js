@@ -40,16 +40,14 @@ import CreateModelAnswer from './components/modelAnswers/CreateModelAnswer'
 import UpdateModelAnswer from './components/modelAnswers/UpdateModelAnswer'
 
 function App() {
-
   return (
     <Router>
       <PositionsState>
         <InterviewState>
           <UserState>
             <AlertState>
-                <Navbar />
+                { localStorage.getItem('token') ?   <Navbar/> : null}
                 <Alert />
-                <div className='container '>
                   <Switch>
                     <Route
                       path='/users/:userId/jobs/:jobId/interviews/:interviewId'
@@ -106,7 +104,6 @@ function App() {
 
                     <Route component={PageNotFound}></Route>
                   </Switch>
-                </div>
             
             </AlertState>
           </UserState>

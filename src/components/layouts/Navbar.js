@@ -13,12 +13,12 @@ const Navbar = () => {
     <>
       <li className='nav-item'>
         <a className='nav-link' href='/signUp'>
-          signUp
+          Register
         </a>
       </li>
       <li className='nav-item'>
         <a className='nav-link' href='/signin'>
-          signIn
+          Login
         </a>
       </li>
     </>
@@ -90,8 +90,8 @@ const Navbar = () => {
 
   return (
 
-    <div className= "container">
-      <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
+    <div className= "">
+      <nav className='navbar navbar-expand-md navbar-dark nav-bar'>
         <Link className='navbar-brand' to={'/'}>
           HRBOT
         </Link>
