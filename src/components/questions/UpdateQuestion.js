@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 
 
-const UpdateSkill = () =>{
+const UpdateQuestion = () =>{
 
     const { register, handleSubmit } = useForm();
     const onSubmit = (data) => console.log(data);
@@ -10,7 +10,7 @@ const UpdateSkill = () =>{
     return (
         <div class="card">
           <div class="card-header">
-            Edit Skill
+            Edit Question
           </div>
           <div class="card-body">
             <div class="card-text">
@@ -19,18 +19,29 @@ const UpdateSkill = () =>{
                   <div className="col-md-5">
     
                     <div className='form-group'>
-                      <label>Skill Name</label>
+                      <label>Question Body</label>
                       <input
                         type='text'
-                        name='name'
+                        name='body'
                         className='form-control'
-                        value="skill_name"
+                        value="question_body_is_here?"
                         ref={register}
                       />
                     </div>
     
                   </div>
                 
+                  <div className="col-md-5">
+                    <div className='form-group'>
+                      <label>Skill</label>
+                      <select name='skill' className='form-control ' ref={register}>
+                        <option value='skill_id'>HTML</option>
+                        <option value='skill_id'>CSS</option>
+                        <option value='skill_id'>JS</option>
+                      </select>
+                    </div>
+                  </div>
+
                 </div>
     
                 <div className="row">
@@ -43,10 +54,6 @@ const UpdateSkill = () =>{
                             
                 </div>
         
-    
-                
-                
-    
               </form>
             </div>
           </div>
@@ -54,4 +61,4 @@ const UpdateSkill = () =>{
     )
 }
 
-export default UpdateSkill
+export default UpdateQuestion

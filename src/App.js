@@ -19,16 +19,22 @@ import InterviewState from './context/interview/InterviewState';
 import CreatePosition from './components/positions/CreatePosition';
 import UpdatePosition from './components/positions/UpdatePosition'
 import RecruiterPositionOperations from './components/positions/RecruiterPositionOperations';
-import JobQuestionsOperations from './components/questions/JobQuestionsOperations'
+// import JobQuestionsOperations from './components/questions/JobQuestionsOperations'
 import QuestionModelAnswersOperations from './components/answers/QuestionModelAnswersOperations'
 import UserState from './context/user/UserState';
 import Register from './components/login/Register';
 import sign from './components/login/Sign';
 import Alert from './components/layouts/Alert';
 import AlertState from './context/alert/AlertState';
+
 import SkillsOperations from './components/skills/SkillsOperations';
 import CreateSkill from './components/skills/CreateSkill'
 import UpdateSkill from './components/skills/UpdateSkill'
+
+import QuesionsOperations from './components/questions/QuestionsOperations'
+import CreateQuestion from './components/questions/CreateQuestion'
+import UpdateQuestion from './components/questions/UpdateQuestion'
+
 function App() {
 
   return (
@@ -71,12 +77,18 @@ function App() {
 
                     <Route exact path='/recruiter/positions/create' component={CreatePosition}></Route>
                     <Route exact path='/recruiter/positions/:positionId/update' component={UpdatePosition}></Route>
-                    <Route exact path='/recruiter/positions/:positionsId/questions' component={JobQuestionsOperations}></Route>
+                    {/* <Route exact path='/recruiter/positions/:positionsId/questions' component={JobQuestionsOperations}></Route> */}
                     <Route exact path='/recruiter/questions/:quesionId/modelAnswers' component={QuestionModelAnswersOperations}></Route>
                     <Route exact path='/recruiter/positions' component={RecruiterPositionOperations}></Route>
+                    
                     <Route exact path='/admin/skills' component={SkillsOperations}></Route>
                     <Route exact path='/admin/skills/create' component={CreateSkill}></Route>
                     <Route exact path='/admin/skills/:skillId/update' component={UpdateSkill}></Route>
+                    
+                    <Route exact path='/admin/questions' component={QuesionsOperations}></Route>
+                    <Route exact path='/admin/questions/create' component={CreateQuestion}></Route>
+                    <Route exact path='/admin/questions/:questionId/update' component={UpdateQuestion}></Route>
+                    
                     <Route
                       exact
                       path='/users/:userId/profile'
