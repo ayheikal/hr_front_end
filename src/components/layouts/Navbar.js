@@ -56,46 +56,58 @@ const Navbar = () => {
     </>
   )
 
+  const adminLinks = (
+    <>
+      <li className='nav-item'>
+        <a className='nav-link' href='/admin/skills'>
+          skills
+        </a>
+      </li>
+      <li className='nav-item'>
+        <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
+          logOut
+        </a>
+      </li>
+    </>
+  )
+
   let navLinks = null
 
   if(!authed){
     navLinks = guestLinks
   }else if( role === 'applicant'){
     navLinks = applicantLinks
-  }else{
+  }else if( role === 'recruiter'){
     navLinks = recruiterLinks
+  }else {
+    navLinks = adminLinks
   }
 
   return (
-    <div className='container'>
+
+    <div className= "container">
       <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
         <Link className='navbar-brand' to={'/'}>
           HRBOT
         </Link>
 
-
-    <div className= "container">
-    <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
-      <Link className='navbar-brand' to={'/'}>
-        HRBOT
-      </Link>
-
-      <ul className='navbar-nav '>
-        <li className='nav-item active'>
-          <Link className='nav-link' to='/'>
-            Home <span className='sr-only'>(current)</span>
-          </Link>
-        </li>
-        <li className='nav-item'>
-          <a className='nav-link' href='/about'>
-            About
-          </a>
-        </li>
-          {navLinks}
-      </ul>
-    </nav>
+        <ul className='navbar-nav '>
+          <li className='nav-item active'>
+            <Link className='nav-link' to='/'>
+              Home <span className='sr-only'>(current)</span>
+            </Link>
+          </li>
+          <li className='nav-item'>
+            <a className='nav-link' href='/about'>
+              About
+            </a>
+          </li>
+            {navLinks}
+        </ul>
+      </nav>
 
     </div>
+    
   );
 };
 

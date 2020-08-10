@@ -39,14 +39,18 @@ const RecruiterPositionOperations = () => {
                       <tr>
                         <th>Title</th>
                         <th>Description</th>
+                        <th>Questions</th>
+                        <th>Interviews</th>
                         <th>Status</th>
                         <th className="text-right">control</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td><a href="/recruiter/positions/1">Android Developer</a></td>
+                        <td>Android Developer</td>
                         <td>Here is the Description of the job job</td>
+                        <td><a href="/recruiter/positions/1/questions">Explore</a></td>
+                        <td><a href="/">Explore</a></td>
                         <td>In Progress</td>
                         <td className="td-actions text-right">
                           <a href={`/recruiter/positions/${localStorage.getItem('userId')}/update`} rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Edit {{ $module_name }}">
@@ -64,6 +68,8 @@ const RecruiterPositionOperations = () => {
                       <tr>
                         <td>Android Developer</td>
                         <td>Here is the Description of the job job</td>
+                        <td><a href="/">Explore</a></td>
+                        <td><a href="/">Explore</a></td>
                         <td>In Progress</td>
                         <td className="td-actions text-right">
                           <a href="{{ route( $folder_name . '.edit', $routeArray) }}" rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Edit {{ $module_name }}">
@@ -81,6 +87,8 @@ const RecruiterPositionOperations = () => {
                       <tr>
                         <td>Android Developer</td>
                         <td>Here is the Description of the job job</td>
+                        <td><a href="/">Explore</a></td>
+                        <td><a href="/">Explore</a></td>
                         <td>In Progress</td>
                         <td className="td-actions text-right">
                           <a href="{{ route( $folder_name . '.edit', $routeArray) }}" rel="tooltip" className="btn btn-white btn-link btn-sm" data-original-title="Edit {{ $module_name }}">

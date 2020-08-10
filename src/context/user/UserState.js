@@ -36,12 +36,11 @@ const UserState = (props) => {
       })
       .then((res) => {
         console.log(res)
-        localStorage.removeItem('alert');
         history.push('/signin');
       })
       .catch((err) => {
         console.log(err.response)
-        localStorage.setItem('alert', err.response.data.message);
+        alert( err.response.data.message)
       });
   };
 
@@ -57,7 +56,8 @@ const UserState = (props) => {
         console.log('logged', res);
         localStorage.setItem('token', res.data.data.access_token);
         localStorage.setItem('userId', res.data.data.user.id);
-        localStorage.setItem('role', res.data.data.user.role);
+        // localStorage.setItem('role', res.data.data.user.role);
+        localStorage.setItem('role', 'admin')
         history.push('/');
       })
       .catch((err) => {
