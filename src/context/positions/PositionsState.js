@@ -140,7 +140,7 @@ const PositionsState = (props) => {
     return Moment(object, 'YYYY-MM-DDTHH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
   };
   //add new position by recruiter
-  const addNewPosition = (object) => {
+  const addNewPosition = async (object) => {
     //axios add position
     object.accept_interviews_from = convertToTime(
       object.accept_interviews_from
@@ -149,7 +149,7 @@ const PositionsState = (props) => {
       object.accept_interviews_until
     );
 
-    axios
+    await axios
       .post(`${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs`, object, {
         headers: {
           'Content-Type': 'application/json',
@@ -160,7 +160,10 @@ const PositionsState = (props) => {
       .then((res) => {
         history.push('/recruiter/positions');
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        // console.log(err.response);
+        alert(err.response.data.message);
+      });
   };
   //update position by recruiter
   const updatePosition = (object, jobId) => {
@@ -190,33 +193,27 @@ const PositionsState = (props) => {
   };
   // get positions that certain recruiter posted
   const getPositionsByRecruiterName = () => {
-    //axios get positions by recruiter name
-    //https://3a74a200ee9a.ngrok.io/
     setLoading();
-    const res = [
-      {
-        id: 1,
-        title: 'node',
-        description: 'mean software engineer',
-        accepts_interviews_from_datetime: '1/6/2020',
-        accepts_interviews_until: '1/7/2020',
-        interview_duration: 2,
-        status: 'pending',
-      },
-      {
-        id: 3,
-        title: 'ruby',
-        description: 'ruby on rails software engineer',
-        accepts_interviews_from_datetime: '1/6/2020',
-        accepts_interviews_until: '1/7/2020',
-        interview_duration: 2,
-        status: 'pending',
-      },
-    ];
-    dispatch({
-      type: GET_POSITIONS_OF_RECRUITER,
-      payload: res,
-    });
+    axios
+      .get(
+        `${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs`,
+
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log('getPositionsByRecruiterName: ', res);
+        dispatch({
+          type: GET_POSITIONS_OF_RECRUITER,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => console.log(err.response));
   };
 
   const handleApply = (jobId, applicantId) => {
@@ -250,21 +247,27 @@ const PositionsState = (props) => {
   };
   const getPositionById = (positionId) => {
     console.log('hello i am here');
-    const res = {
-      id: 1,
-      title: 'node',
-      description: 'mean software engineer',
-      accepts_interviews_from_datetime: '1/6/2020',
-      accepts_interviews_until: '1/7/2020',
-      interview_duration: 2,
-      status: 'pending',
-    };
-    //axios
-
-    dispatch({
-      type: GET_POSITION_BY_ID,
-      payload: res,
-    });
+    axios
+      .get(
+        `${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs/${positionId}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log('res:', res);
+        dispatch({
+          type: GET_POSITION_BY_ID,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
   };
 
   // //delete position by recruiter
@@ -287,7 +290,26 @@ const PositionsState = (props) => {
       })
       .catch((err) => alert(err.response.data.message));
   };
-  // const deletePositionByid = () => {
+  const deletePositionByid = (positionId) => {
+    axios
+      .delete(
+        `${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs/${positionId}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        alert('Deleted Successfully');
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+
   //   //axios delete by id
   // };
 
