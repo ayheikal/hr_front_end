@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../context/user/userContext';
 const Navbar = () => {
   const userContext = useContext(UserContext);
-  let role = 'guest'
+  let role = 'guest';
   const authed = userContext.isAuthenticated();
-  if(authed){
-    role = localStorage.getItem('role')
+  if (authed) {
+    role = localStorage.getItem('role');
   }
 
   const guestLinks = (
@@ -54,7 +54,7 @@ const Navbar = () => {
         </a>
       </li>
     </>
-  )
+  );
 
   const adminLinks = (
     <>

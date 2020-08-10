@@ -4,7 +4,8 @@ import {
   GET_POSITION,
   GET_POSITIONS_OF_RECRUITER,
   SET_ERROR,
-  SET_INTERVIEW_ID
+  SET_INTERVIEW_ID,
+  GET_POSITION_BY_ID,
 } from '../types';
 
 export default (state, action) => {
@@ -13,8 +14,8 @@ export default (state, action) => {
       return {
         ...state,
         positions: action.payload,
-        currentpage:action.currentpage,
-        numberOfPages:action.numberOfPages,
+        currentpage: action.currentpage,
+        numberOfPages: action.numberOfPages,
         loading: false,
       };
     case SET_LOADING:
@@ -34,11 +35,16 @@ export default (state, action) => {
         recruiterPositions: action.payload,
         loading: false,
       };
-      case SET_ERROR:
-        return{
-          ...state,
-          error:action.error,
-        }
+    case GET_POSITION_BY_ID:
+      return {
+        ...state,
+        position: action.payload,
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.error,
+      };
     default:
       return state;
   }
