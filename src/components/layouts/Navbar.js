@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../context/user/userContext';
 const Navbar = () => {
   const userContext = useContext(UserContext);
-  let role = 'guest'
+  let role = 'guest';
   const authed = userContext.isAuthenticated();
-  if(authed){
-    role = localStorage.getItem('role')
+  if (authed) {
+    role = localStorage.getItem('role');
   }
 
   const guestLinks = (
@@ -54,16 +54,16 @@ const Navbar = () => {
         </a>
       </li>
     </>
-  )
+  );
 
-  let navLinks = null
+  let navLinks = null;
 
-  if(!authed){
-    navLinks = guestLinks
-  }else if( role === 'applicant'){
-    navLinks = applicantLinks
-  }else{
-    navLinks = recruiterLinks
+  if (!authed) {
+    navLinks = guestLinks;
+  } else if (role === 'applicant') {
+    navLinks = applicantLinks;
+  } else {
+    navLinks = recruiterLinks;
   }
 
   return (
@@ -73,28 +73,20 @@ const Navbar = () => {
           HRBOT
         </Link>
 
-
-    <div className= "container">
-    <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
-      <Link className='navbar-brand' to={'/'}>
-        HRBOT
-      </Link>
-
-      <ul className='navbar-nav '>
-        <li className='nav-item active'>
-          <Link className='nav-link' to='/'>
-            Home <span className='sr-only'>(current)</span>
-          </Link>
-        </li>
-        <li className='nav-item'>
-          <a className='nav-link' href='/about'>
-            About
-          </a>
-        </li>
+        <ul className='navbar-nav '>
+          <li className='nav-item active'>
+            <Link className='nav-link' to='/'>
+              Home <span className='sr-only'>(current)</span>
+            </Link>
+          </li>
+          <li className='nav-item'>
+            <a className='nav-link' href='/about'>
+              About
+            </a>
+          </li>
           {navLinks}
-      </ul>
-    </nav>
-
+        </ul>
+      </nav>
     </div>
   );
 };

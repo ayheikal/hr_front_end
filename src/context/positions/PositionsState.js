@@ -2,13 +2,14 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import PositionsReducer from './positionsReducer';
 import { useHistory } from 'react-router-dom';
-
+import Moment from 'moment';
 import {
   SET_LOADING,
   GET_POSITIONS,
   GET_POSITION,
   GET_POSITIONS_OF_RECRUITER,
   SET_ERROR,
+  GET_POSITION_BY_ID,
 } from '../types';
 import positionsContext from './positionsContext';
 
@@ -16,6 +17,7 @@ const PositionsState = (props) => {
   let history = useHistory();
   const initialState = {
     positions: [],
+    position: {},
     loading: false,
     recruiterPositions: [],
     currentPage: 0,
@@ -133,11 +135,58 @@ const PositionsState = (props) => {
         setError(error);
       });
   };
+  //convert time to database timedate formate
+  const convertToTime = (object) => {
+    return Moment(object, 'YYYY-MM-DDTHH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
+  };
   //add new position by recruiter
   const addNewPosition = (object) => {
     //axios add position
-    console.log(object);
-    return 1;
+    object.accept_interviews_from = convertToTime(
+      object.accept_interviews_from
+    );
+    object.accept_interviews_until = convertToTime(
+      object.accept_interviews_until
+    );
+
+    axios
+      .post(`${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs`, object, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        history.push('/recruiter/positions');
+      })
+      .catch((err) => console.log(err.response));
+  };
+  //update position by recruiter
+  const updatePosition = (object, jobId) => {
+    object.accept_interviews_from = convertToTime(
+      object.accept_interviews_from
+    );
+    object.accept_interviews_until = convertToTime(
+      object.accept_interviews_until
+    );
+
+    axios
+      .put(
+        `${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs/${jobId}`,
+        object,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        history.push('recruiter/positions/');
+      })
+      .catch((err) => console.log(err.response));
   };
   // get positions that certain recruiter posted
   const getPositionsByRecruiterName = () => {
@@ -146,7 +195,7 @@ const PositionsState = (props) => {
     setLoading();
     const res = [
       {
-        id: 2,
+        id: 1,
         title: 'node',
         description: 'mean software engineer',
         accepts_interviews_from_datetime: '1/6/2020',
@@ -199,8 +248,45 @@ const PositionsState = (props) => {
         history.push('/signin');
       });
   };
+  const getPositionById = (positionId) => {
+    console.log('hello i am here');
+    const res = {
+      id: 1,
+      title: 'node',
+      description: 'mean software engineer',
+      accepts_interviews_from_datetime: '1/6/2020',
+      accepts_interviews_until: '1/7/2020',
+      interview_duration: 2,
+      status: 'pending',
+    };
+    //axios
+
+    dispatch({
+      type: GET_POSITION_BY_ID,
+      payload: res,
+    });
+  };
 
   // //delete position by recruiter
+
+  const deletePositionByRecruiter = (jobId) => {
+    axios
+      .delete(
+        `${process.env.REACT_APP_HOST_NAME}/api/recruiter/jobs/${jobId}`,
+        null,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        history.push('recruiter/positions/');
+      })
+      .catch((err) => alert(err.response.data.message));
+  };
   // const deletePositionByid = () => {
   //   //axios delete by id
   // };
@@ -214,6 +300,7 @@ const PositionsState = (props) => {
         numberOfPages: state.numberOfPages,
         currentPage: state.currentPage,
         error: state.error,
+        position: state.position,
         getPositions,
         getPositionsBySearch,
         addNewPosition,
@@ -221,6 +308,8 @@ const PositionsState = (props) => {
         getPositionsBypage,
         setError,
         handleApply,
+        getPositionById,
+        deletePositionByRecruiter,
       }}
     >
       {props.children}
