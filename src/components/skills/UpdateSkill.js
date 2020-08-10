@@ -5,10 +5,12 @@ const UpdateSkill = (props) => {
   const adminContext = useContext(AdminContext);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    adminContext.updateSkill(id);
+    console.log('updateAkill: ', data);
+    adminContext.updateSkill(data, props.match.params.skillId);
   };
 
   useEffect(() => {
+    console.log('update skill: ', props.match.params.skillId);
     adminContext.getSkillById(props.match.params.skillId);
   }, []);
   const { id, name } = adminContext.skill;

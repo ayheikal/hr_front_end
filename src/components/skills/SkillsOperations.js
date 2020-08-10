@@ -41,14 +41,14 @@ const SkillsOperations = (props) => {
                   </tr>
                 </thead>
                 {adminContext.skills.map((skill) => (
-                  <tbody>
+                  <tbody key={skill.id}>
                     <tr>
                       <td>{skill.name}</td>
-                      <td>2020-10-05 22:23:22</td>
-                      <td>2020-10-05 22:23:22</td>
+                      <td>{skill.created_at}</td>
+                      <td>{skill.updated_at}</td>
                       <td className='td-actions text-right'>
                         <a
-                          href={`/admin/skills/1/update`}
+                          href={`/admin/skills/${skill.id}/update`}
                           rel='tooltip'
                           className='btn btn-white btn-link btn-sm'
                           data-original-title='Edit {{ $module_name }}'
@@ -57,9 +57,7 @@ const SkillsOperations = (props) => {
                         </a>
 
                         <button
-                          onClick={() =>
-                            adminContext.deleteSkill(props.match.params.skillId)
-                          }
+                          onClick={() => adminContext.deleteSkill(skill.id)}
                           type='submit'
                           rel='tooltip'
                           className='btn btn-white btn-link btn-sm'

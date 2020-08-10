@@ -67,7 +67,7 @@ const AdminState = (props) => {
         }
       )
       .then((res) => {
-        console.log('update', res);
+        history.push('/admin/skills');
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -87,7 +87,7 @@ const AdminState = (props) => {
         }
       )
       .then((res) => {
-        console.log('delte', res);
+        window.location.reload();
       })
       .catch((err) => {
         alert(err.response.data.message);
