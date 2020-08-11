@@ -120,7 +120,7 @@ function App() {
 
                     <Route
                       exact
-                      path='/admin/questions'
+                      path='/admin/skills/:skillId/questions'
                       component={QuesionsOperations}
                     ></Route>
                     <Route

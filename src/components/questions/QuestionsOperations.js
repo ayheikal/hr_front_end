@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import AdminContext from '../../context/admin/adminContext';
 
-const QuesionsOperations = () => {
+const QuesionsOperations = (props) => {
   const adminContext = useContext(AdminContext);
   useEffect(() => {
-    adminContext.getQuestions();
+    adminContext.getQuestionsOfSkill(props.match.params.skillId);
   }, []);
   const questions = adminContext.questions;
   return (
@@ -41,35 +41,39 @@ const QuesionsOperations = () => {
                     <th className='text-right'>control</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Here is the Question Body ?</td>
-                    <td>HTML</td>
-                    <td>
-                      <a href='/admin/questions/1/answers'>Explore(5)</a>
-                    </td>
-                    <td>NO</td>
-                    <td className='td-actions text-right'>
-                      <a
-                        href={`/admin/questions/1/update`}
-                        rel='tooltip'
-                        className='btn btn-white btn-link btn-sm'
-                        data-original-title='Edit {{ $module_name }}'
-                      >
-                        <i className='fa fa-pencil-square-o'></i>
-                      </a>
+                {questions.map((question) => (
+                  <tbody key={question.id}>
+                    <tr>
+                      <td>{question.body}</td>
+                      <td></td>
+                      <td>
+                        <a href='/admin/questions/1/answers'>Explore(5)</a>
+                      </td>
+                      <td>NO</td>
+                      <td className='td-actions text-right'>
+                        <a
+                          href={`/admin/questions/1/update`}
+                          rel='tooltip'
+                          className='btn btn-white btn-link btn-sm'
+                          data-original-title='Edit {{ $module_name }}'
+                        >
+                          <i className='fa fa-pencil-square-o'></i>
+                        </a>
 
-                      <button
-                        onClick={() => adminContext.deleteQuestion(1)}
-                        type='submit'
-                        rel='tooltip'
-                        className='btn btn-white btn-link btn-sm'
-                      >
-                        <i className='fa fa-trash'></i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
+                        <button
+                          onClick={() =>
+                            adminContext.deleteQuestion(question.id)
+                          }
+                          type='submit'
+                          rel='tooltip'
+                          className='btn btn-white btn-link btn-sm'
+                        >
+                          <i className='fa fa-trash'></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                ))}
               </table>
             </div>
           </div>

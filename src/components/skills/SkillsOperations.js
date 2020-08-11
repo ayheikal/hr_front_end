@@ -37,6 +37,7 @@ const SkillsOperations = (props) => {
                     <th>Skill Name</th>
                     <th>Created at</th>
                     <th>Updated at</th>
+                    <th>Questions</th>
                     <th className='text-right'>control</th>
                   </tr>
                 </thead>
@@ -46,6 +47,13 @@ const SkillsOperations = (props) => {
                       <td>{skill.name}</td>
                       <td>{skill.created_at}</td>
                       <td>{skill.updated_at}</td>
+                      <td>
+                        <a
+                          href={`/admin/skills/${skill.id}/questions?skill=${skill.name}`}
+                        >
+                          Explore
+                        </a>
+                      </td>
                       <td className='td-actions text-right'>
                         <a
                           href={`/admin/skills/${skill.id}/update`}

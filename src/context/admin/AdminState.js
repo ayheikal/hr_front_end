@@ -195,16 +195,19 @@ const AdminState = (props) => {
         alert(err.response.data.message);
       });
   };
-  const getQuestions = () => {
+  const getQuestionsOfSkill = (skillId) => {
     setLoading();
     axios
-      .get(`${process.env.REACT_APP_HOST_NAME}/api/admin/questions`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_HOST_NAME}/api/admin/skills/${skillId}/questions`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
       .then((res) => {
         console.log('getQuestions', res);
         dispatch({
@@ -251,7 +254,7 @@ const AdminState = (props) => {
         updateSkill,
         createQuestion,
         getSkills,
-        getQuestions,
+        getQuestionsOfSkill,
         getSkillById,
       }}
     >
