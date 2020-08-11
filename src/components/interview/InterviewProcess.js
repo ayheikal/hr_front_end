@@ -3,6 +3,7 @@ import Question from './Question';
 import Answer from './Answer';
 import EndedInterview from './EndedInterview';
 import InterviewContext from '../../context/interview/interviewContext';
+import Timer from './Timer'
 import interviewerImage from './../../images/interviewer.jpg'
 const InterviewProcess = (props) => {
   const interviewContext = useContext(InterviewContext);
@@ -67,6 +68,10 @@ const InterviewProcess = (props) => {
         <div className='card'>
           <div className="card-header">
             INTERVIEW ROOM <span>.</span>
+            <span className='timer'>
+              {/* console.log() */}
+              {/* <Timer secondes={InterviewContext.} /> */}
+            </span>
           </div>
           <div className="row">
             <div className="col-md-6">

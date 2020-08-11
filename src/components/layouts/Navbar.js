@@ -61,16 +61,6 @@ const Navbar = () => {
 
   const adminLinks = (
     <>
-    <li>
-        <a className='nav-link' href='/admin/skills'>
-          skills
-        </a>
-        </li>
-        <li>
-        <a className='nav-link' href='/admin/questions'>
-          Quesetions
-        </a>
-        </li>
         <li>
         <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
           logOut

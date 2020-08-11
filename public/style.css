@@ -344,6 +344,11 @@ background-color: #f00;
     font-family: sans-serif;
 }
 
+.timer{
+    color: #fff;
+    float: right;
+}
+
 .inerview-room .card-header span{
     font-weight: bold;
     font-size: 50px;

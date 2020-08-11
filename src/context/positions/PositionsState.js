@@ -232,6 +232,7 @@ const PositionsState = (props) => {
       .then((res) => {
         let jobId = res.data.data.job_id;
         let interviewId = res.data.data.id;
+        console.log('duration', res.data.data)
         console.log('created interview', jobId, interviewId);
         // redirect to the interview process
         let userId = localStorage.getItem('userId');

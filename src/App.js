@@ -81,7 +81,21 @@ function App() {
                     />
                     <Route exact path='/signin' component={sign}></Route>
                     <Route exact path='/signup' component={Register} />
-                    <Route exact path='/' component={HomePage}></Route>
+
+
+
+                    <Route
+                      exact path='/'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <Redirect to={{ pathname: '/admin/skills' }} />
+                        ):(
+                          <HomePage {...props} />
+                        )
+                      }
+                    ></Route>
+
+
 
                     <Route
                       exact
@@ -106,51 +120,106 @@ function App() {
                     ></Route>
 
                     <Route
-                      exact
-                      path='/admin/skills'
-                      component={SkillsOperations}
-                    ></Route>
-                    <Route
-                      exact
-                      path='/admin/skills/create'
-                      component={CreateSkill}
-                    ></Route>
-                    <Route
-                      exact
-                      path='/admin/skills/:skillId/update'
-                      component={UpdateSkill}
+                      exact path='/admin/skills'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <SkillsOperations {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
                     ></Route>
 
                     <Route
-                      exact
-                      path='/admin/skills/:skillId/questions'
-                      component={QuesionsOperations}
+                      exact path='/admin/skills/create'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <CreateSkill {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
                     ></Route>
-                    <Route
-                      exact
-                      path='/admin/questions/create'
-                      component={CreateQuestion}
+
+
+                     <Route
+                      exact path='/admin/skills/:skillId/update'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <UpdateSkill {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
                     ></Route>
-                    <Route
-                      exact
-                      path='/admin/skills/:skillId/questions/:questionId/update'
-                      component={UpdateQuestion}
+
+
+                     <Route
+                      exact path='/admin/skills/:skillId/questions'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <QuesionsOperations {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
                     ></Route>
 
                     <Route
-                      exact
-                      path='/admin/questions/:questionId/answers'
-                      component={ModelAnswersOperations}
+                      exact path='/admin/questions/create'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <CreateQuestion {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
                     ></Route>
+
                     <Route
-                      exact
-                      path='/admin/questions/:questionId/answers/create'
-                      component={CreateModelAnswer}
+                      exact path='/admin/skills/:skillId/questions/:questionId/update'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <UpdateQuestion {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
                     ></Route>
+
                     <Route
-                      exact
-                      path='/admin/questions/:questionId/answers/:answerId/update'
-                      component={UpdateModelAnswer}
+                      exact path='/admin/questions/:questionId/answers'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <ModelAnswersOperations {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
+                    ></Route>
+
+
+                    <Route
+                      exact path='/admin/questions/:questionId/answers/create'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <CreateModelAnswer {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
+                    ></Route>
+
+
+                    <Route
+                      exact path='/admin/questions/:questionId/answers/:answerId/update'
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                          <UpdateModelAnswer {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
                     ></Route>
 
                     <Route

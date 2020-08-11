@@ -61,7 +61,7 @@ const PositionItem = ({ position }) => {
             {interview_duration}
             </small>
           </div>
-          <div className="col-md-5 text-right">
+          <div className="col-md-4 text-right">
             <button className='btn btn-primary' onClick={() => { 
               let userId = 1
               positionContext.handleApply(id, userId )

@@ -30,7 +30,6 @@ class Timer extends Component {
                 secondsElapsed: this.state.secondsElapsed - 1
             })
         }, 1000)
-        alert('starting...')
     }
 
     handelStopClick = () =>{
