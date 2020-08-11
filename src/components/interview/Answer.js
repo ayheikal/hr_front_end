@@ -39,38 +39,51 @@ const Answer = (props) => {
   };
 
   return (
-    <div>
-      <form autoComplete='off' className={'w-50'}>
-        <div className='form-group green-border-focus '>
-          <label htmlFor='exampleFormControlTextarea5'>Answer</label>
+    
 
-          <div
-            contentEditable='true'
-            id='answer'
-            style={{ border: '1px solid', display: 'block', overflow: 'auto' }}
-          >
-            {interviewContext.speechToText}
+        <form autoComplete='off' >
+    
+          {/* <div className='form-group green-border-focus '> */}
+
+          <div className="row answer">
+            <div className="col-md-11">
+              <div
+                className=""
+                contentEditable='true'
+                id='answer'
+                style={{ border: '1px solid', display: 'block', overflow: 'auto' }}
+              >
+                {interviewContext.speechToText}
+              </div>
+              </div>
+              <div className="col-md-1">
+                <Speech></Speech>
+              </div>
+
           </div>
 
-          <Speech></Speech>
+          <div className="row action-buttons">
+          <div className="col-md-4 text-left">
+              <button className='btn btn-secondary' onClick={handleSkip}>
+                Skip
+              </button>
+            </div>
+            <div className="col-md-7 text-right">
+              <button className='btn btn-primary' onClick={handleSubmit}>
+                submit
+              </button>
+            </div>
+            
         </div>
-        <div className='m-10'>
-          <button className='btn btn-primary' onClick={handleSubmit}>
-            submit
-          </button>
 
-          {' | '}
-
-          <button className='btn btn-secondary' onClick={handleSkip}>
-            Skip
-          </button>
-          {' | '}
-          <Link to='/home' className='btn btn-danger' onClick={handleEnd}>
-            End
-          </Link>
+        <div className="row">
+          <div className="col-md-12">
+              <Link to='/home' className='btn btn-danger exit-interview' onClick={handleEnd}>
+                END THE INTERVIEW
+              </Link>
+          </div>
         </div>
-      </form>
-    </div>
+        </form>
   );
 };
 

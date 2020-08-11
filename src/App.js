@@ -46,7 +46,9 @@ function App() {
         <InterviewState>
           <UserState>
             <AlertState>
-                { localStorage.getItem('token') ?   <Navbar/> : null}
+                {/* { localStorage.getItem('token') ?   <Navbar/> : null} */}
+
+                <Navbar/>
                 <Alert />
                   <Switch>
                     <Route

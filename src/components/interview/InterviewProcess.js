@@ -3,6 +3,7 @@ import Question from './Question';
 import Answer from './Answer';
 import EndedInterview from './EndedInterview';
 import InterviewContext from '../../context/interview/interviewContext';
+import interviewerImage from './../../images/interviewer.jpg'
 const InterviewProcess = (props) => {
   const interviewContext = useContext(InterviewContext);
 
@@ -60,22 +61,40 @@ const InterviewProcess = (props) => {
   console.log('interview length: ', interviewContext.questions.length);
   if (interviewContext.currentQuestion < interviewContext.questions.length) {
     return (
-      <div className='center'>
-        <Question
-          question={
-            interviewContext.questions[interviewContext.currentQuestion]
-          }
-          mounted={true}
-        />
-        <Answer
-          submitAnswer={submitAnswer}
-          questionId={
-            interviewContext.questions[interviewContext.currentQuestion].id
-          }
-          skipAnswer={skipAnswer}
-          handleEndInterview={handleEndInterview}
-        />
+
+      <div className="inerview-room">
+
+        <div className='card'>
+          <div className="card-header">
+            INTERVIEW ROOM <span>.</span>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              <Question
+                question={
+                  interviewContext.questions[interviewContext.currentQuestion]
+                }
+                mounted={true}
+              />
+                <Answer
+                  submitAnswer={submitAnswer}
+                  questionId={
+                    interviewContext.questions[interviewContext.currentQuestion].id
+                  }
+                  skipAnswer={skipAnswer}
+                  handleEndInterview={handleEndInterview}
+                />
+
+            </div>
+            <div className="col-md-6">
+              <img src={interviewerImage} />
+            </div>
+          </div>
+              
+          
+        </div>
       </div>
+
     );
   } else {
     return <EndedInterview />;

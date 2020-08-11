@@ -4,7 +4,9 @@ import UserContext from '../../context/user/userContext';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 
-import logo from '../../images/logo.jpeg'
+import loginImage from './../../images/bg2.png'
+import logo from '../../images/logo.png'
+
 const Register = () => {
   const { register, errors, handleSubmit } = useForm();
   const userContext = useContext(UserContext);
@@ -26,8 +28,8 @@ const Register = () => {
           <div className="card">
 
             <div className="header">
-              <h1><span className="logo">Logo</span> HRBOT</h1>
-              {/* <img src={logo} /> */}
+              {/* <h1><span className="logo">Logo</span> HRBOT</h1> */}
+              <img src={logo} />
             </div>
             <div className="card-body">
               <div className="card-text">
@@ -129,6 +131,15 @@ const Register = () => {
                   </form>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="col-md-7 text-center">
+          <div className="login-image">
+          
+            <p><span className="colord-text">STAY HOME,</span> FIND A SUITABLE POSITION AND GET HIRED WITH AUTOMATED INTERVIEWS</p>
+            <img src={loginImage} />
+                  
           </div>
         </div>
 

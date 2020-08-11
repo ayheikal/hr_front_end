@@ -3,7 +3,9 @@ import { useForm } from 'react-hook-form';
 import UserContext from '../../context/user/userContext'
 import {Link} from 'react-router-dom'
 
-import bgimage from './../../images/bgbot.jpeg'
+import loginImage from './../../images/bg2.png'
+import logo from '../../images/logo.png'
+
 
 const Sign = () => {
     const userContext = useContext(UserContext);
@@ -21,7 +23,8 @@ const Sign = () => {
         <div className="card">
 
           <div className="header">
-            <h1><span className="logo">Logo</span> HRBOT</h1>
+            {/* <h1><span className="logo">Logo</span> HRBOT</h1> */}
+            <img src={logo} />
           </div>
 
         <div className="card-body">
@@ -105,8 +108,13 @@ const Sign = () => {
 
         </div>
 
-          <div className="col-md-7">
-              <img src={bgimage} />
+          <div className="col-md-7 text-center">
+              <div className="login-image">
+              
+                <p><span className="colord-text">STAY HOME,</span> FIND A SUITABLE POSITION AND GET HIRED WITH AUTOMATED INTERVIEWS</p>
+                <img src={loginImage} />
+                      
+              </div>
           </div>
       </div>
     </div>

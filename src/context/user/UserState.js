@@ -56,8 +56,8 @@ const UserState = (props) => {
         console.log('logged', res);
         localStorage.setItem('token', res.data.data.access_token);
         localStorage.setItem('userId', res.data.data.user.id);
-        // localStorage.setItem('role', res.data.data.user.role);
-        localStorage.setItem('role', 'admin')
+        localStorage.setItem('role', res.data.data.user.role);
+        // localStorage.setItem('role', 'admin')
         history.push('/');
       })
       .catch((err) => {

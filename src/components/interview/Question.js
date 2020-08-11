@@ -13,23 +13,27 @@ const Question = ({question,mounted}) => {
   const{body,id}=question;
   return (
     
-    <div>
+    <>
       <form>
-        <div className='form-group green-border w-50'>
-          <label htmlFor='exampleFormControlTextarea5 '>
-            Question{id}
-          </label>
-          <button type='button' onClick={(e)=>{say(body)}}>say </button>
-          <textarea
-            className='form-control'
-            id='exampleFormControlTextarea5'
-            rows='3'
-            value={body}
-            disabled
-          ></textarea>
+        <div className="row questions">
+          <div className="col-md-11 text-center">
+            <textarea
+              className='form-control'
+              id='exampleFormControlTextarea5'
+              cols="1"
+              rows='3'
+              value={body}
+              disabled
+            ></textarea>
+
+          </div>
+          <div className="col-md-1 listen">
+            <i className="fa fa-deaf"  onClick={(e)=>{say(body)}}></i>
+          </div>
+          
         </div>
       </form>
-    </div>
+    </>
   );
 };
 

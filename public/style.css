@@ -94,7 +94,7 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 
 /*** start navbar ***/
 .nav-bar{
-    background-color: #5F1E26;
+    background-color: #212121;
 }
 /*** end navbar **/
 
@@ -113,14 +113,14 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 
 .wrap-login .card .header{
     font-family: serif;
-    padding: 5px 50px;
+    padding: 0px 50px;
 }
 .wrap-login .header img{
     max-width: 100%;
 }
 
 .wrap-login .header .logo{
-    color: #86137B;
+    color: #c309b1;
     text-decoration: underline;
 }
 
@@ -159,4 +159,133 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     font-size: 13px;
     color: #0074AB;
 }
+
+.wrap-login .login-image{
+    font-family: sans-serif;
+    color: #fff;
+    padding: 100px;
+    width: 60%;
+    font-size: 25px;
+    text-align: left;
+    position: fixed;
+}
+
+.wrap-login .login-image img{
+    width: 430px;
+    padding: 50px 0 0 100px ;
+}
+
+.colord-text{
+    color: #c309b1;
+}
 /*** end login page ***/
+
+
+/*** start display jobs ***/
+.jobs-container .card{
+    color: #fff;
+    font-size: 16px;
+    background-color: #222222;
+}
+
+.jobs-container button,
+.search-box button{
+    background: #c309b1;
+    border: none;
+    color: #fff;
+}
+
+.jobs-container .card-title{
+    color: #c309b1;
+}
+
+.jobs-container .card hr{
+    background: rgb(184, 183, 183);
+}
+
+.jobs-container .positoin-image{
+    position: fixed;
+    top: 200px;
+    font-family: sans-serif;
+    color: #fff;
+    font-size: 20px;
+}
+
+.jobs-container .positoin-image img{
+    width: 400px;
+
+}
+
+/*** end display jobs ****/
+
+
+/**** start search box ****/
+.search-box{
+    padding: 30px;
+    background: url('./search-box.jpg');
+    background-size: cover;
+}
+
+/* .search-box input{
+    color: #fff;
+    background-color: transparent !important;
+} */
+
+/*** end search box ***/
+
+/** start interview room **/
+.inerview-room{
+    width: 100%;
+    height: 100vh;
+    padding: 30px;
+
+}
+.inerview-room .card{
+    padding: 0 10px;
+    width: 800px;
+    height: 500px;
+    margin: 5px auto;
+}
+
+.inerview-room .card-header{
+    padding: 0 15px;
+    background: #c309b1;
+    color: #0f0;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.inerview-room .card-header span{
+    font-weight: bold;
+    font-size: 50px;
+}
+.inerview-room img{
+    width: 250px;
+}
+
+.inerview-room .listen i{
+    padding: 30px 0px;
+
+}
+
+.questions{
+    margin-top: 20px;
+}
+
+#answer{
+    height: 80px;
+    margin-top: 86px;
+}
+
+#microphone-btn{
+    margin-top: 110px;
+}
+
+.action-buttons{
+    margin: 30px 0;
+}
+
+.exit-interview{
+    width: 90%;
+}
+/** end interview room **/
