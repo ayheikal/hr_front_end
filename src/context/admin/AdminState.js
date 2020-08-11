@@ -16,6 +16,8 @@ import {
   SET_ADMIN_LOADING,
   GET_SKILL_BY_ID,
   GET_QUESTIONS,
+  GET_MODEL_ANSWERS,
+  GET_MODEL_ANSWER_BY_ID,
 } from '../types';
 import Axios from 'axios';
 
@@ -26,6 +28,8 @@ const AdminState = (props) => {
     skill: {},
     questions: [],
     question: {},
+    modelAnswers: [],
+    modelAnswer: {},
     loading: false,
   };
   const [state, dispatch] = useReducer(AdminReducer, initialState);
@@ -74,7 +78,6 @@ const AdminState = (props) => {
       });
   };
   const deleteSkill = (skillId) => {
-    console.log('delete skill', skillId);
     axios
       .delete(
         `${process.env.REACT_APP_HOST_NAME}/api/admin/skills/${skillId}`,
@@ -105,7 +108,6 @@ const AdminState = (props) => {
         },
       })
       .then((res) => {
-        console.log('getSkills', res);
         dispatch({
           type: GET_SKILLS,
           payload: res.data.data,
@@ -126,7 +128,6 @@ const AdminState = (props) => {
         },
       })
       .then((res) => {
-        console.log('getSkills', res);
         dispatch({
           type: GET_SKILL_BY_ID,
           payload: res.data.data,
@@ -189,7 +190,7 @@ const AdminState = (props) => {
         }
       )
       .then((res) => {
-        console.log('updated', res);
+        history.push('/admin/skills');
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -209,7 +210,6 @@ const AdminState = (props) => {
         }
       )
       .then((res) => {
-        console.log('getQuestions', res);
         dispatch({
           type: GET_QUESTIONS,
           payload: res.data.data,
@@ -230,7 +230,6 @@ const AdminState = (props) => {
         },
       })
       .then((res) => {
-        console.log('getQuestions', res);
         dispatch({
           type: GET_SKILL_BY_ID,
           payload: res.data.data,
@@ -272,7 +271,6 @@ const AdminState = (props) => {
         },
       })
       .then((res) => {
-        console.log('getQuestions', res);
         dispatch({
           type: GET_QUESTION_BY_ID,
           payload: res.data.data,
@@ -282,6 +280,113 @@ const AdminState = (props) => {
         alert(err.response.data.message);
       });
   };
+  const getModelAnswers = (questionId) => {
+    setLoading();
+    axios
+      .get(
+        `${process.env.REACT_APP_HOST_NAME}/api/admin/questions/${questionId}/model_answers`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        dispatch({
+          type: GET_MODEL_ANSWERS,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+  const createModelAnswer = (skillObject, questionId) => {
+    console.log('createModelAnswer: ', skillObject);
+    axios
+      .post(
+        `${process.env.REACT_APP_HOST_NAME}/api/admin/questions/${questionId}/model_answers`,
+        skillObject,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        history.push(`/admin/questions/${questionId}/answers`);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+  const deleteModelAnswer = (modelAnswerId, questionId) => {
+    console.log('deleteModelAnswer: ', modelAnswerId);
+    axios
+      .delete(
+        `${process.env.REACT_APP_HOST_NAME}/api/admin/model_answers/${modelAnswerId}`,
+
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+  const updateModelAnswer = (object, modelAnswerId, questionId) => {
+    console.log('deleteModelAnswer: ', modelAnswerId);
+    axios
+      .put(
+        `${process.env.REACT_APP_HOST_NAME}/api/admin/model_answers/${modelAnswerId}`,
+        object,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        history.push(`/admin/questions/${questionId}/answers`);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+  const getModelAnswerById = (id) => {
+    setLoading();
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/admin/model_answers/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: GET_MODEL_ANSWER_BY_ID,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+
   return (
     <AdminContext.Provider
       value={{
@@ -290,6 +395,8 @@ const AdminState = (props) => {
         skill: state.skill,
         questions: state.questions,
         question: state.question,
+        modelAnswers: state.modelAnswers,
+        modelAnswer: state.modelAnswer,
         createSkill,
         deleteQuestion,
         deleteSkill,
@@ -300,6 +407,11 @@ const AdminState = (props) => {
         getQuestionsOfSkill,
         getSkillById,
         getQuestionById,
+        getModelAnswers,
+        createModelAnswer,
+        deleteModelAnswer,
+        getModelAnswerById,
+        updateModelAnswer,
       }}
     >
       {props.children}
