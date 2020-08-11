@@ -11,7 +11,7 @@ const UserProfile = ({ match }) => {
   const userContext = useContext(UserContext);
   const userId = match.params.userId;
   useEffect(() => {
-    userContext.getUserInfo(userId);
+    userContext.getUserInfo();
     userContext.getInterviewDescriptionOfApplicant(userId);
   }, []);
   const { name } = userContext.user;
@@ -29,10 +29,6 @@ const UserProfile = ({ match }) => {
         <div className='col-md-9'>
           <div className='row'>
             <div className='col-md-12'>
-              {console.log(
-                'inside userProfile: ',
-                userContext.userAppliedJobs[0]
-              )}
               <ApplicantInterviews
                 userAppliedJobs={userContext.userAppliedJobs}
                 userName={name}

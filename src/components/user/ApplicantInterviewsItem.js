@@ -34,7 +34,7 @@ const ApplicantInterviewsItem = ({ userAppliedJob, userName }) => {
   );
   return flag ? (
     <ApplicantInterviewSummary
-      userAppliedJob={userAppliedJob.job}
+      userAppliedJob={userAppliedJob}
       switchFlag={switchFlag}
     />
   ) : (

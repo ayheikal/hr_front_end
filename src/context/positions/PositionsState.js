@@ -25,7 +25,7 @@ const PositionsState = (props) => {
     currentPage: 0,
     numberOfPages: 0,
     error: '',
-    remaining_time: 0
+    questions: [],
   };
   const [state, dispatch] = useReducer(PositionsReducer, initialState);
 
@@ -38,6 +38,7 @@ const PositionsState = (props) => {
   //get all positions to show in home page "getPositions"
   const getPositions = () => {
     const isAuthed = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
     const headers = isAuthed
       ? {
           'Content-Type': 'application/json',
@@ -50,7 +51,16 @@ const PositionsState = (props) => {
         };
 
     setLoading();
-    const link = isAuthed ? 'applicant/jobs' : 'guest/jobs';
+    let link = null;
+    if (isAuthed && role === 'applicant') {
+      link = 'applicant/jobs';
+    } else if (isAuthed && role === 'recruiter') {
+      link = 'recruiter/jobs';
+    } else if (isAuthed && role === 'admin') {
+      link = 'admin/jobs';
+    } else {
+      link = 'guest/jobs';
+    }
 
     axios
       .get(`${process.env.REACT_APP_HOST_NAME}/api/${link}`, {
@@ -288,6 +298,9 @@ const PositionsState = (props) => {
 
   // //   //axios delete by id
   // // };
+  const setQuestions = (qs) => {
+    state.questions = qs;
+  };
 
   return (
     <positionsContext.Provider
@@ -299,6 +312,7 @@ const PositionsState = (props) => {
         currentPage: state.currentPage,
         error: state.error,
         position: state.position,
+        questions: state.questions,
         getPositions,
         getPositionsBySearch,
         addNewPosition,
@@ -308,6 +322,7 @@ const PositionsState = (props) => {
         getPositionById,
         deletePositionByRecruiter,
         updatePosition,
+        setQuestions,
       }}
     >
       {props.children}

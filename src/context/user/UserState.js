@@ -76,22 +76,24 @@ const UserState = (props) => {
   };
 
   // get user info
-  const getUserInfo = (id) => {
-    console.log('get user info: ', id);
-    setLoading();
-    //axios get info
-    // get name and email,
-    const res = {
-      id: 1,
-      name: 'heikal',
-      email: 'heikal@gmail.com',
-      joinedAt: 'february- 2017',
-    };
-
-    dispatch({
-      type: GET_USER,
-      payload: res,
-    });
+  const getUserInfo = () => {
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/applicant`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: GET_USER,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => {
+        console.log('err', err.response);
+      });
   };
 
   //get job that a user applied and their status
@@ -109,39 +111,13 @@ const UserState = (props) => {
       .then((res) => {
         // console.log('getInterviewDescriptionOfApplicant: ', res);
         const interviews = res.data.data;
-        console.log('inter :', interviews);
+
         dispatch({
           type: SET_APPLICANT_PROCESSING_INTERVIEW,
           payload: res.data.data,
         });
       })
       .catch((err) => console.log(err.response));
-    const res = [
-      {
-        id: 1,
-        title: 'java',
-        desc: 'ldksjdj',
-        status: '----',
-        feedback: '---',
-        joinedAt: '---',
-      },
-      {
-        id: 2,
-        title: 'javascript',
-        desc: 'java my love',
-        status: 'reviewing',
-        feedback: 'nothing',
-        joinedAt: '2020-08-07 00:14:19',
-      },
-      {
-        id: 3,
-        title: 'football player',
-        desc: 'java my love 3m elnas',
-        status: 'reviewing',
-        feedback: 'nothing',
-        joinedAt: '2020-08-07 00:14:19',
-      },
-    ];
   };
 
   //get all users
