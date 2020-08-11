@@ -3,19 +3,24 @@ import { useForm } from 'react-hook-form';
 import PositionsContext from '../../context/positions/positionsContext';
 import AdminContext from '../../context/admin/adminContext';
 import adminContext from '../../context/admin/adminContext';
+import positionsContext from '../../context/positions/positionsContext';
+import axios from 'axios'
+
 const CreatePosition = () => {
-  const { register, handleSubmit, watch } = useForm();
-  const watchSkills = watch('skills');
   const positionsContext = useContext(PositionsContext);
   const adminContext = useContext(AdminContext);
+  useEffect(() => {
+    adminContext.getSkills();
+  }, []);
+  const { register, handleSubmit, watch } = useForm();
+  const watchSkills = watch('skills');
+  
   const [skills, setSkills] = useState();
   const onSubmit = (data) => {
     console.log('craete position', data);
     positionsContext.addNewPosition(data);
   };
-  useEffect(() => {
-    adminContext.getSkills();
-  }, []);
+
   return (
     <div className='card'>
       {skills}
@@ -81,9 +86,11 @@ const CreatePosition = () => {
                 </div>
               </div>
             </div>
-            {watchSkills.map((skillId) =>
-              appendQuestions(getQuestionsBySkillId(skillId))
-            )}
+            {/* {watchSkills.map(skillId=> console.log('=====',skillId) )} */}
+            { (watchSkills) ? watchSkills.map((skillId) =>
+              positionsContext.getQuestionsBySkillId(skillId)
+            ): null  }
+            { console.log('all ==> ', positionsContext.questions )   }
 
             <div className='col-md-7'>
               <div className='form-group'>
@@ -113,10 +120,6 @@ const CreatePosition = () => {
   );
 };
 
-
-const appendQuestions(questions) =>{
-  let old = positionsContext.questions
-}
 
 
 export default CreatePosition;

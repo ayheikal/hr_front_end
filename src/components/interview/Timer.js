@@ -11,7 +11,7 @@ class Timer extends Component {
             secondsElapsed: this.props.secondes
         }
 
-        // this.handelStartInterview()
+        this.handelStartInterview()
     }
 
     // getInitialState = () =>{
@@ -44,7 +44,7 @@ class Timer extends Component {
     render(){
         return(
             <div>
-                {/* <h1>{this.getMinutes()}:{this.getSeconds()}</h1> */}
+                <h1>{this.getMinutes()}:{this.getSeconds()}</h1>
                 {/* <button onClick={this.handelStartClick} type="button">Start</button>
                 <button onClick={this.handelStopClick} type="button">Stop</button> */}
             </div>

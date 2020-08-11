@@ -298,9 +298,34 @@ const PositionsState = (props) => {
 
   // //   //axios delete by id
   // // };
-  const setQuestions = (qs) => {
-    state.questions = qs;
-  };
+
+
+  const appendQuestions = (qs) =>{
+    let old = state.questions
+    let newQ = qs
+    let all = old.concat(newQ)
+    state.questions = all;
+  }
+  
+  const getQuestionsBySkillId = (id) =>{
+  
+    axios.get(`${process.env.REACT_APP_HOST_NAME}/api/recruiter/skills/${id}/questions`,{
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+    .then(res => {
+      console.log('ques', res.data.data)
+      appendQuestions(res.data.data)
+    })
+    .catch( err =>{
+      console.log( err.response)
+    })
+    
+  }
+  
 
   return (
     <positionsContext.Provider
@@ -322,7 +347,8 @@ const PositionsState = (props) => {
         getPositionById,
         deletePositionByRecruiter,
         updatePosition,
-        setQuestions,
+        appendQuestions,
+        getQuestionsBySkillId,
       }}
     >
       {props.children}
