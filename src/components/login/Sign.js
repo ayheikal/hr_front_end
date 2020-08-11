@@ -22,10 +22,10 @@ const Sign = () => {
 
         <div className="card">
 
-          <div className="header">
+          {/* <div className="header"> */}
             {/* <h1><span className="logo">Logo</span> HRBOT</h1> */}
-            <img src={logo} />
-          </div>
+            {/* <img src={logo} />
+          </div> */}
 
         <div className="card-body">
           <div className="card-text">

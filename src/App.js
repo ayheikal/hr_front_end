@@ -38,6 +38,7 @@ import UpdateQuestion from './components/questions/UpdateQuestion'
 import ModelAnswersOperations from './components/modelAnswers/ModelAnswersOperations'
 import CreateModelAnswer from './components/modelAnswers/CreateModelAnswer'
 import UpdateModelAnswer from './components/modelAnswers/UpdateModelAnswer'
+import Timer from './components/interview/Timer';
 
 function App() {
   return (
@@ -52,9 +53,9 @@ function App() {
                 <Alert />
                   <Switch>
                     <Route
-                      path='/users/:userId/jobs/:jobId/interviews/:interviewId'
+                      exact path='/users/:userId/jobs/:jobId/interviews/:interviewId'
                       render={(props) =>
-                        localStorage.getItem('token') ? (
+                        (localStorage.getItem('token')  && localStorage.getItem('role') === 'applicant') ? (
                           <InterviewProcess {...props} />
                         ) : (
                           <Redirect to={{ pathname: '/signin' }} />
@@ -101,8 +102,18 @@ function App() {
                     <Route
                       exact
                       path='/users/:userId/profile'
-                      render={(props) => <UserProfile {...props} />}
+                      render={(props) =>
+                        (localStorage.getItem('token') && localStorage.getItem('role') === 'applicant') ? (
+                          <UserProfile {...props} />
+                        ):(
+                          <Redirect to={{ pathname: '/signin' }} />
+                        )
+                      }
                     ></Route>
+
+                    <Route exact path="/timer" component={Timer} ></Route>
+
+
 
                     <Route component={PageNotFound}></Route>
                   </Switch>

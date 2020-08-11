@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import Spinner from '../layouts/Spinner';
 import PositionItem from './PositionItem';
 import PositionsContext from '../../context/positions/positionsContext';
-import positionImag from './../../images/positionImag.png'
+import positionImag from './../../images/bot.png'
 
 
 const Positions = () => {
@@ -19,18 +19,23 @@ const Positions = () => {
     return (
       <div className="container jobs-container" >
         <div className="row">
-          <div className="col-md-7">
-            {positions.map((position) => (
-              <PositionItem key={position.id} position={position} />
-            ))}
-          </div>
-          <div className="col-md-3">
-              
+          <div className="col-md-5">
+
+
               <div className="positoin-image">
                 <p><span className="colord-text">STAY HOME,</span> FIND A SUITABLE POSITION AND GET HIRED WITH AUTOMATED INTERVIEWS</p>
 
                 <img src={positionImag} />
               </div>
+
+            
+          </div>
+          <div className="col-md-7">
+              
+            {positions.map((position) => (
+              <PositionItem key={position.id} position={position} />
+            ))}
+
           </div>
         </div>
       </div>

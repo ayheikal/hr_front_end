@@ -27,10 +27,7 @@ const Register = () => {
 
           <div className="card">
 
-            <div className="header">
-              {/* <h1><span className="logo">Logo</span> HRBOT</h1> */}
-              <img src={logo} />
-            </div>
+            
             <div className="card-body">
               <div className="card-text">
                 <form onSubmit={handleSubmit(onSubmit)}>

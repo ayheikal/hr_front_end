@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../../context/user/userContext';
+import logo from './../../images/logo.png'
+
+
 const Navbar = () => {
   const userContext = useContext(UserContext);
   let role = 'guest';
@@ -11,12 +14,12 @@ const Navbar = () => {
 
   const guestLinks = (
     <>
-      <li className='nav-item'>
+    <li>
         <a className='nav-link' href='/signUp'>
           Register
         </a>
-      </li>
-      <li className='nav-item'>
+        </li>
+      <li>
         <a className='nav-link' href='/signin'>
           Login
         </a>
@@ -25,54 +28,54 @@ const Navbar = () => {
   );
   const applicantLinks = (
     <>
-      <li className='nav-item'>
+    <li>
         <a
           className='nav-link'
           href={`/users/${localStorage.getItem('userId')}/profile`}
         >
-          Profile
+          {localStorage.getItem('name')}
         </a>
-      </li>
-      <li className='nav-item'>
+        </li>
+        <li>
         <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
           logOut
         </a>
-      </li>
+        </li>
     </>
   );
 
   const recruiterLinks = (
     <>
-      <li className='nav-item'>
+    <li>
         <a className='nav-link' href='/recruiter/positions'>
           positions
         </a>
-      </li>
-      <li className='nav-item'>
+        </li>
+        <li>
         <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
           logOut
         </a>
-      </li>
+        </li>
     </>
   );
 
   const adminLinks = (
     <>
-      <li className='nav-item'>
+    <li>
         <a className='nav-link' href='/admin/skills'>
           skills
         </a>
-      </li>
-      <li className='nav-item'>
+        </li>
+        <li>
         <a className='nav-link' href='/admin/questions'>
           Quesetions
         </a>
-      </li>
-      <li className='nav-item'>
+        </li>
+        <li>
         <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
           logOut
         </a>
-      </li>
+        </li>
     </>
   )
 
@@ -90,28 +93,15 @@ const Navbar = () => {
 
   return (
 
-    <div className= "">
-      <nav className='navbar navbar-expand-md navbar-dark nav-bar'>
-        <Link className='navbar-brand' to={'/'}>
-          HRBOT
-        </Link>
-
-        <ul className='navbar-nav '>
-          <li className='nav-item active'>
-            <Link className='nav-link' to='/'>
-              Home <span className='sr-only'>(current)</span>
-            </Link>
-          </li>
-          <li className='nav-item'>
-            <a className='nav-link' href='/about'>
-              About
-            </a>
-          </li>
-            {navLinks}
+    <header>
+      <Link to="/"><img src={logo} className="logo" /></Link>
+      <nav>
+        <ul className="nav__links">
+          {navLinks}
         </ul>
       </nav>
+    </header>
 
-    </div>
     
   );
 };

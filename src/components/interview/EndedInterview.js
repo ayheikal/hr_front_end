@@ -2,7 +2,9 @@ import React from 'react'
 
 const EndedInterview = () => {
   return (
-    <div>EnterView Ended</div>
+    <div class="alert alert-success" role="alert">
+      INTERVIEW ENDED
+    </div>
   )
 }
 

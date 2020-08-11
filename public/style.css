@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -93,9 +96,73 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 
 
 /*** start navbar ***/
-.nav-bar{
-    background-color: #212121;
+
+
+.nav__links li,
+.nav__links a{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
 }
+
+header{
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    align-items: center;
+    padding: 20px 10px 10px;
+}
+
+header nav{
+    float: right;
+}
+
+header .logo{
+    padding-left: 20px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.nav__links{
+    list-style: none;
+}
+
+.nav__links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav__links li a:hover{
+    color: #c309b1;
+}
+
+.nav__links .active{
+    color: #c309b1;
+}
+
+
+/* nav{
+color : #000;
+background-color: #f00;
+} */
+
+/* .nav-item .nav-link{
+    color: #000;
+} */
+
+/* .nav nav{
+    width: 100%;
+    background: #202020;
+}
+.nav .logo{
+    width: 120px;
+}
+.nav .nav-item{
+    background: #f00;
+}
+ */
+
 /*** end navbar **/
 
 /*** start login page ***/
@@ -111,21 +178,27 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     background-color: #0D0F12;
 }
 
-.wrap-login .card .header{
+/* .card-body,
+.card-text{
+    background-color: transparent;
+} */
+
+/* .wrap-login .card .header{
     font-family: serif;
     padding: 0px 50px;
-}
-.wrap-login .header img{
+} */
+/* .wrap-login .header img{
     max-width: 100%;
-}
+} */
 
-.wrap-login .header .logo{
+/* .wrap-login .header .logo{
     color: #c309b1;
     text-decoration: underline;
-}
+} */
 
 
 .wrap-login .card label{
+    /* background-color: transparent; */
     color: rgb(184, 183, 183);
     font-size: 13px;
     margin: 0;
@@ -181,9 +254,10 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 /*** end login page ***/
 
 
-/*** start display jobs ***/
 .jobs-container .card{
     color: #fff;
+    padding: 0;
+    margin: 0 0 8px;
     font-size: 16px;
     background-color: #222222;
 }
@@ -204,8 +278,10 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 }
 
 .jobs-container .positoin-image{
-    position: fixed;
-    top: 200px;
+    /* position: fixed; */
+    padding-top: 25px;
+    width: 80%;
+    /* top: 180px; */
     font-family: sans-serif;
     color: #fff;
     font-size: 20px;
@@ -221,15 +297,28 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 
 /**** start search box ****/
 .search-box{
+    width: 100%;
+    margin: 0px ;
+    /* position: fixed;
+    top: 60px; */
     padding: 30px;
-    background: url('./search-box.jpg');
-    background-size: cover;
+    /* background: url('./search-box.jpg'); */
+    /* background-size: cover; */
 }
 
-/* .search-box input{
+.search{
     color: #fff;
+}
+
+.search-box .row{
+    padding: 0 100px;
+}
+
+.search-box input{
     background-color: transparent !important;
-} */
+    /* color: #f00; */
+
+}
 
 /*** end search box ***/
 
@@ -289,3 +378,5 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     width: 90%;
 }
 /** end interview room **/
+
+

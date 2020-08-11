@@ -21,35 +21,47 @@ const Search = () => {
   };
 
   return (
-    <div className="row search-box">
-      <div className="col-md-12 text-center">
-        {/* <img src={searchImage} /> */}
-        <form className='form' onSubmit={submitHandler}>
-          <div className="row">
-            <div className="col-md-10 text-right">
-              <input
-                className="search"
-                type='text'
-                name='text'
-                placeholder='search position..'
-                onChange={textHandler}
-                className='form-control mr-sm-2'
-              />
+    <div className="container">
+
+      <div className="row search-box">
+        <div className="col-md-12 text-center">
+          {/* <img src={searchImage} /> */}
+          <form className='form' onSubmit={submitHandler}>
+            <div className="row">
+              {/* <div className="col-md-2"></div> */}
+              <div className="col-md-11 text-right">
+                <input
+                  style={input_style}
+                  className="search"
+                  type='text'
+                  name='text'
+                  placeholder='search position..'
+                  onChange={textHandler}
+                  className='form-control mr-sm-2'
+                />
+                </div>
+                <div className="col-md-1 text-left">
+                <button className="search-btn"
+                
+                  type='submit'
+                  className='btn colored-btn'
+                >search</button>
               </div>
-              <div className="col-md-1 text-left">
-              <button className="search-btn"
-              
-                type='submit'
-                className='btn colored-btn'
-              >search</button>
             </div>
-          </div>
-          
-          
-        </form>
+            
+            
+          </form>
+        </div>
       </div>
     </div>
+
   );
 };
 
 export default Search;
+
+
+const input_style = {
+  color: '#fff',
+  border: '1px solid #fff'
+}
