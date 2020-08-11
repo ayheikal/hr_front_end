@@ -1,58 +1,62 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import AdminContext from '../../context/admin/adminContext';
 
+const UpdateModelAnswer = (props) => {
+  const adminContext = useContext(AdminContext);
+  const questionId = props.match.params.questionId;
+  const answerId = props.match.params.answerId;
+  const { register, handleSubmit } = useForm();
+  useEffect(() => {
+    adminContext.getModelAnswerById(answerId);
+    adminContext.getQuestionById(questionId);
+  }, []);
+  const onSubmit = (data) => {
+    adminContext.updateModelAnswer(data, answerId, questionId);
+  };
 
-const UpdateModelAnswer = () =>{
-
-    const { register, handleSubmit } = useForm();
-    const onSubmit = (data) => console.log(data);
-
-    return (
-        <div class="card">
-          <div class="card-header">
-            Edit the Answer of the following Question :
-            <p className="card-category">Question_body_here?</p>
-          </div>
-          <div class="card-body">
-            <div class="card-text">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="row">
-                  <div className="col-md-5">
-    
-                    <div className='form-group'>
-                      <label>Answer Body</label>
-                      <input
-                        type='text'
-                        name='body'
-                        className='form-control'
-                        value="Answer_body_is_here"
-                        ref={register}
-                      />
-                    </div>
-    
-                  </div>
-                
+  return (
+    <div className='card'>
+      <div className='card-header'>
+        Edit the Answer of the following Question :
+        <p classNameName='card-category'>{adminContext.question.body}</p>
+      </div>
+      <div className='card-body'>
+        <div className='card-text'>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='row'>
+              <div className='col-md-5'>
+                <div className='form-group'>
+                  <label>Answer Body</label>
+                  <input
+                    type='hidden'
+                    name='question_id'
+                    value={questionId}
+                    ref={register}
+                  />
+                  <input
+                    type='text'
+                    name='body'
+                    className='form-control'
+                    defaultValue={adminContext.modelAnswer.body}
+                    ref={register}
+                  />
                 </div>
-    
-                <div className="row">
-    
-                  <div className="col-md-12 text-right" >
-                    <button type='submit' className='btn btn-primary'>
-                      Update
-                    </button>
-                  </div>
-                            
-                </div>
-        
-    
-                
-                
-    
-              </form>
+              </div>
             </div>
-          </div>
-        </div>
-    )
-}
 
-export default UpdateModelAnswer
+            <div className='row'>
+              <div className='col-md-12 text-right'>
+                <button type='submit' className='btn btn-primary'>
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UpdateModelAnswer;

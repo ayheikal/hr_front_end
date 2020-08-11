@@ -26,21 +26,21 @@ const UserState = (props) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
   const setLoading = () => dispatch({ type: SET_USER_LOADING });
 
-  const userRegister = async(user) => {
+  const userRegister = async (user) => {
     await axios
       .post(`${process.env.REACT_APP_HOST_NAME}/api/register`, user, {
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
       })
       .then((res) => {
-        console.log(res)
+        console.log(res);
         history.push('/signin');
       })
       .catch((err) => {
-        console.log(err.response)
-        alert( err.response.data.message)
+        console.log(err.response);
+        alert(err.response.data.message);
       });
   };
 
@@ -56,8 +56,8 @@ const UserState = (props) => {
         console.log('logged', res);
         localStorage.setItem('token', res.data.data.access_token);
         localStorage.setItem('userId', res.data.data.user.id);
-        // localStorage.setItem('role', res.data.data.user.role);
-        localStorage.setItem('role', 'admin')
+        //localStorage.setItem('role', res.data.data.user.role);
+        localStorage.setItem('role', 'admin');
         history.push('/');
       })
       .catch((err) => {
