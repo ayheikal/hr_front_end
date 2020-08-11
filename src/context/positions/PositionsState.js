@@ -1,8 +1,9 @@
-import React, { useReducer } from 'react';
+import React, { useReducer} from 'react';
 import axios from 'axios';
 import PositionsReducer from './positionsReducer';
 import { useHistory } from 'react-router-dom';
 import Moment from 'moment';
+
 import {
   SET_LOADING,
   GET_POSITIONS,
@@ -12,6 +13,7 @@ import {
   GET_POSITION_BY_ID,
 } from '../types';
 import positionsContext from './positionsContext';
+import interviewContext from './../../context/interview/interviewContext';
 
 const PositionsState = (props) => {
   let history = useHistory();
@@ -23,6 +25,7 @@ const PositionsState = (props) => {
     currentPage: 0,
     numberOfPages: 0,
     error: '',
+    remaining_time: 0
   };
   const [state, dispatch] = useReducer(PositionsReducer, initialState);
 
@@ -215,36 +218,7 @@ const PositionsState = (props) => {
       .catch((err) => console.log(err.response));
   };
 
-  const handleApply = (jobId, applicantId) => {
-    // create interview
-    axios
-      .post(
-        `${process.env.REACT_APP_HOST_NAME}/api/applicant/jobs/${jobId}/apply`,
-        { job_id: jobId, applicant_id: applicantId },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        }
-      )
-      .then((res) => {
-        let jobId = res.data.data.job_id;
-        let interviewId = res.data.data.id;
-        console.log('duration', res.data.data)
-        console.log('created interview', jobId, interviewId);
-        // redirect to the interview process
-        let userId = localStorage.getItem('userId');
-        history.push(
-          `/users/${userId}/jobs/${jobId}/interviews/${interviewId}/`
-        );
-      })
-      .catch((err) => {
-        console.log('err :', err.response);
-        history.push('/signin');
-      });
-  };
+  
   const getPositionById = (positionId) => {
     console.log('hello i am here');
     axios
@@ -331,7 +305,6 @@ const PositionsState = (props) => {
         getPositionsByRecruiterName,
         getPositionsBypage,
         setError,
-        handleApply,
         getPositionById,
         deletePositionByRecruiter,
         updatePosition,

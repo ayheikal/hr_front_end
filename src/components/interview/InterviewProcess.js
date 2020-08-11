@@ -5,8 +5,10 @@ import EndedInterview from './EndedInterview';
 import InterviewContext from '../../context/interview/interviewContext';
 import Timer from './Timer'
 import interviewerImage from './../../images/interviewer.jpg'
+import PositionsContext from './../../context/positions/positionsContext'
 const InterviewProcess = (props) => {
   const interviewContext = useContext(InterviewContext);
+  // const positionsContext = useContext(PositionsContext)
 
   useEffect(() => {
     //axios.get(questions)
@@ -69,8 +71,7 @@ const InterviewProcess = (props) => {
           <div className="card-header">
             INTERVIEW ROOM <span>.</span>
             <span className='timer'>
-              {/* console.log() */}
-              {/* <Timer secondes={InterviewContext.} /> */}
+              <Timer secondes={interviewContext.remaining_time} />
             </span>
           </div>
           <div className="row">

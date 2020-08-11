@@ -13,6 +13,7 @@ const Positions = () => {
   }, []);
 
   const { loading, positions } = positionsContext;
+  
   if (loading) {
     return <Spinner />;
   } else if(positions.length>0) {
@@ -45,9 +46,8 @@ const Positions = () => {
   }
   else{
     return(
-      <div className='card danger'>
-        <span className='center'>No Item to Show</span>
-
+      <div class="container alert alert-danger" role="alert">
+        There is no item to show.
       </div>
     )
   }

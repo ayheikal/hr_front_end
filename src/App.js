@@ -23,7 +23,7 @@ import RecruiterPositionOperations from './components/positions/RecruiterPositio
 import QuestionModelAnswersOperations from './components/answers/QuestionModelAnswersOperations';
 import UserState from './context/user/UserState';
 import Register from './components/login/Register';
-import sign from './components/login/Sign';
+import Sign from './components/login/Sign';
 import Alert from './components/layouts/Alert';
 import AlertState from './context/alert/AlertState';
 
@@ -50,7 +50,6 @@ function App() {
             <AlertState>
                 
               <AdminState>
-                  {/* { localStorage.getItem('token') ?   <Navbar/> : null} */}
 
                   <Navbar/>
                 <Alert />
@@ -87,7 +86,7 @@ function App() {
                           <Redirect to={{ pathname: '/' }} />
                           
                         ):(
-                          <sign {...props} />
+                          <Sign {...props} />
                         )
                       }
                     ></Route>

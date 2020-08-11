@@ -1,4 +1,6 @@
 import React, { useReducer } from 'react';
+import axios from 'axios'
+import {useHistory} from 'react-router-dom'
 import InterviewReducer from './interviewReducer';
 import InterviewContext from './interviewContext';
 import {
@@ -11,12 +13,15 @@ import {
 } from '../types';
 import Axios from 'axios';
 const InterviewState = (props) => {
+  const history = useHistory()
   const initialState = {
     questions: [],
     answers: [],
     currentQuestion: 0,
     speechToText: '',
     interviewId: null,
+    remaining_time: 0
+    
   };
 
   const [state, dispatch] = useReducer(InterviewReducer, initialState);
@@ -62,6 +67,38 @@ const InterviewState = (props) => {
       })
       .catch((err) => {
         console.log('question error: ', err.response);
+      });
+  };
+  // start interview
+  const handleApply = (jobId, applicantId) => {
+    // create interview
+    axios
+      .post(
+        `${process.env.REACT_APP_HOST_NAME}/api/applicant/jobs/${jobId}/apply`,
+        { job_id: jobId, applicant_id: applicantId },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        let jobId = res.data.data.job_id;
+        let interviewId = res.data.data.id;
+        state.remaining_time = res.data.data.remaining_time
+        console.log('duration', res.data.data.remaining_time)
+        console.log('created interview', jobId, interviewId);
+        // redirect to the interview process
+        let userId = localStorage.getItem('userId');
+        history.push(
+          `/users/${userId}/jobs/${jobId}/interviews/${interviewId}/`
+        );
+      })
+      .catch((err) => {
+        console.log('err :', err.response);
+        history.push('/signin');
       });
   };
   // saveANswer
@@ -111,12 +148,14 @@ const InterviewState = (props) => {
         answers: state.answers,
         currentQuestion: state.currentQuestion,
         speechToText: state.speechToText,
+        remaining_time: state.remaining_time,
         incrementQuestionCounter,
         getQuestions,
         saveAnswer,
         setSpeechToText,
         deleteSpeechToText,
         endInterview,
+        handleApply,
       }}
     >
       {props.children}
