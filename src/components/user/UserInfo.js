@@ -30,7 +30,8 @@ const UserInfo = ({ user }) => {
           <br />
           {/* <!-- joined at--> */}
           <small>
-            <i className='fas fa-calendar'>&nbsp;</i>joined at : {user.joinedAt}
+            <i className='fas fa-calendar'>&nbsp;</i>joined at :{' '}
+            {user.created_at}
             &nbsp;
           </small>
         </div>

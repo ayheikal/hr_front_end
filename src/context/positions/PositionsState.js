@@ -35,6 +35,7 @@ const PositionsState = (props) => {
   //get all positions to show in home page "getPositions"
   const getPositions = () => {
     const isAuthed = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
     const headers = isAuthed
       ? {
           'Content-Type': 'application/json',
@@ -47,7 +48,16 @@ const PositionsState = (props) => {
         };
 
     setLoading();
-    const link = isAuthed ? 'applicant/jobs' : 'guest/jobs';
+    let link = null;
+    if (isAuthed && role === 'applicant') {
+      link = 'applicant/jobs';
+    } else if (isAuthed && role === 'recruiter') {
+      link = 'recruiter/jobs';
+    } else if (isAuthed && role === 'admin') {
+      link = 'admin/jobs';
+    } else {
+      link = 'guest/jobs';
+    }
 
     axios
       .get(`${process.env.REACT_APP_HOST_NAME}/api/${link}`, {

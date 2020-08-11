@@ -19,7 +19,6 @@ export const ApplicantInterviews = ({ userAppliedJobs, userName }) => {
       </div>
       {userAppliedJobs.map((appliedjob) => (
         <div key={appliedjob.job.id}>
-          {console.log('inside applicant interview: ', appliedjob)}
           <ApplicantInterviewsItem userAppliedJob={appliedjob} />
         </div>
       ))}

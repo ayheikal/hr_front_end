@@ -1,18 +1,18 @@
 import React from 'react';
 
 const ApplicantInterviewSummary = (props) => {
+  const { status, feedback } = props.userAppliedJob;
   const {
     title,
     description,
-    status,
-    feedback,
     accept_interviews_from,
-  } = props.userAppliedJob;
+  } = props.userAppliedJob.job;
   return (
     <div className='job-cards'>
       <div className='card'>
         <div className='alert alert-primary' role='alert'>
           Interview Summary
+          {console.log('here: ', props.userAppliedJob)}
         </div>
         <div className='card-header'>
           <span>{title}</span>
