@@ -11,6 +11,7 @@ const CreateModelAnswer = (props) => {
     adminContext.createModelAnswer(data, props.match.params.questionId);
   };
   return (
+    <div className="container admin-cards">
     <div class='card'>
       <div class='card-header'>
         Add A New Answer of the following Question :
@@ -49,6 +50,7 @@ const CreateModelAnswer = (props) => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

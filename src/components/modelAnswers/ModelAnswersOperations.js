@@ -9,6 +9,7 @@ const ModelAnswersOperations = (props) => {
 
   const modelAnswers = adminContext.modelAnswers;
   return (
+    <div className="container admin-cards">
     <div className='row'>
       <div className='col-md-12'>
         <div className='card'>
@@ -79,6 +80,7 @@ const ModelAnswersOperations = (props) => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

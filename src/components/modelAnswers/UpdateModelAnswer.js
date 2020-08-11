@@ -16,6 +16,7 @@ const UpdateModelAnswer = (props) => {
   };
 
   return (
+    <div className="container admin-cards">
     <div className='card'>
       <div className='card-header'>
         Edit the Answer of the following Question :
@@ -55,6 +56,7 @@ const UpdateModelAnswer = (props) => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

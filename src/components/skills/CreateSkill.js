@@ -9,6 +9,7 @@ const CrateSkill = () => {
     adminContext.createSkill(data);
   };
   return (
+    <div className="container admin-cards">
     <div class='card'>
       <div class='card-header'>Add A New Skill</div>
       <div class='card-body'>
@@ -38,6 +39,7 @@ const CrateSkill = () => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

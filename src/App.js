@@ -79,9 +79,31 @@ function App() {
                       path='/user/:id'
                       render={(props) => <User {...props} />}
                     />
-                    <Route exact path='/signin' component={sign}></Route>
-                    <Route exact path='/signup' component={Register} />
 
+                    <Route
+                      exact path='/signin'
+                      render={(props) =>
+                        (localStorage.getItem('token') ) ? (
+                          <Redirect to={{ pathname: '/' }} />
+                          
+                        ):(
+                          <sign {...props} />
+                        )
+                      }
+                    ></Route>
+
+                    <Route
+                      exact path='/signup'
+                      render={(props) =>
+                        (localStorage.getItem('token') ) ? (
+                          <Redirect to={{ pathname: '/' }} />
+                          
+                        ):(
+                          <Register {...props} />
+                        )
+                      }
+                    ></Route>
+                  
 
 
                     <Route

@@ -15,6 +15,7 @@ const UpdateSkill = (props) => {
   }, []);
   const { id, name } = adminContext.skill;
   return (
+    <div className="container admin-cards">
     <div class='card'>
       <div class='card-header'>Edit Skill</div>
       <div class='card-body'>
@@ -45,6 +46,7 @@ const UpdateSkill = (props) => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

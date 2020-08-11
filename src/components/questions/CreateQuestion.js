@@ -14,6 +14,7 @@ const CreateQuestion = () => {
     adminContext.createQuestion(data);
   };
   return (
+    <div className="container admin-cards">
     <div class='card'>
       <div class='card-header'>Add A New Question</div>
       <div class='card-body'>
@@ -60,6 +61,7 @@ const CreateQuestion = () => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

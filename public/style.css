@@ -384,4 +384,8 @@ background-color: #f00;
 }
 /** end interview room **/
 
+/*** admin area ***/
 
+.admin-cards .card{
+    width: 100%;
+}

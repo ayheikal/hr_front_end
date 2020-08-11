@@ -19,6 +19,7 @@ const UpdateQuestion = (props) => {
     return e.id !== adminContext.skill.id;
   });
   return (
+    <div className="container admin-cards">
     <div className='card'>
       <div className='card-header'>Edit Question</div>
       <div className='card-body'>
@@ -77,6 +78,7 @@ const UpdateQuestion = (props) => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };
