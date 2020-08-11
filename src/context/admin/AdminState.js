@@ -11,7 +11,7 @@ import {
   DELETE_SKILL,
   ADD_QUESTION,
   UPDATE_QUESTION,
-  DELETE_QUESTION,
+  GET_QUESTION_BY_ID,
   GET_SKILLS,
   SET_ADMIN_LOADING,
   GET_SKILL_BY_ID,
@@ -138,8 +138,8 @@ const AdminState = (props) => {
   };
   const createQuestion = (questionBody) => {
     axios
-      .get(
-        `${process.env.REACT_APP_HOST_NAME}/api/admin/questions`,
+      .post(
+        `${process.env.REACT_APP_HOST_NAME}/api/admin/skills/${questionBody.skill_id}/questions`,
         questionBody,
         {
           headers: {
@@ -150,7 +150,7 @@ const AdminState = (props) => {
         }
       )
       .then((res) => {
-        console.log('created', res);
+        history.push('/admin/skills');
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -169,7 +169,7 @@ const AdminState = (props) => {
         }
       )
       .then((res) => {
-        console.log('deleted', res);
+        window.location.reload();
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -240,6 +240,48 @@ const AdminState = (props) => {
         alert(err.response.data.message);
       });
   };
+  // const getSkillById = (id) => {
+  //   setLoading();
+  //   axios
+  //     .get(`${process.env.REACT_APP_HOST_NAME}/api/admin/skills/${id}`, {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Accept: 'application/json',
+  //         Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log('getQuestions', res);
+  //       dispatch({
+  //         type: GET_SKILL_BY_ID,
+  //         payload: res.data.data,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       alert(err.response.data.message);
+  //     });
+  // };
+  const getQuestionById = (id) => {
+    setLoading();
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/admin/questions/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        console.log('getQuestions', res);
+        dispatch({
+          type: GET_QUESTION_BY_ID,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
   return (
     <AdminContext.Provider
       value={{
@@ -247,6 +289,7 @@ const AdminState = (props) => {
         loading: state.loading,
         skill: state.skill,
         questions: state.questions,
+        question: state.question,
         createSkill,
         deleteQuestion,
         deleteSkill,
@@ -256,6 +299,7 @@ const AdminState = (props) => {
         getSkills,
         getQuestionsOfSkill,
         getSkillById,
+        getQuestionById,
       }}
     >
       {props.children}

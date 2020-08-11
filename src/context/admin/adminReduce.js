@@ -3,6 +3,7 @@ import {
   GET_QUESTIONS,
   GET_SKILL_BY_ID,
   SET_ADMIN_LOADING,
+  GET_QUESTION_BY_ID,
 } from '../types';
 
 export default (state, action) => {
@@ -28,6 +29,12 @@ export default (state, action) => {
       return {
         ...state,
         questions: action.payload,
+        loading: false,
+      };
+    case GET_QUESTION_BY_ID:
+      return {
+        ...state,
+        question: action.payload,
         loading: false,
       };
     default:

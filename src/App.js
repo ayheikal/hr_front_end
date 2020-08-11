@@ -130,7 +130,7 @@ function App() {
                     ></Route>
                     <Route
                       exact
-                      path='/admin/questions/:questionId/update'
+                      path='/admin/skills/:skillId/questions/:questionId/update'
                       component={UpdateQuestion}
                     ></Route>
 

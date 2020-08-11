@@ -27,3 +27,4 @@ export const DELETE_QUESTION = 'DELETE_QUESTION';
 export const UPDATE_QUESTION = 'UPDATE_QUESTION';
 export const GET_SKILLS = 'GET_SKILLS';
 export const GET_SKILL_BY_ID = 'GET_SKILL_BY_ID';
+export const GET_QUESTION_BY_ID = 'GET_QUESTION_BY_ID';

@@ -35,9 +35,9 @@ const QuesionsOperations = (props) => {
                 <thead className=' text-primary'>
                   <tr>
                     <th>Questions Body</th>
-                    <th>Skill</th>
+                    {/* <th>Skill</th> */}
                     <th>Model Answers</th>
-                    <th>Approved</th>
+                    {/* <th>Approved</th> */}
                     <th className='text-right'>control</th>
                   </tr>
                 </thead>
@@ -45,14 +45,16 @@ const QuesionsOperations = (props) => {
                   <tbody key={question.id}>
                     <tr>
                       <td>{question.body}</td>
-                      <td></td>
+                      {/* <td></td> */}
                       <td>
-                        <a href='/admin/questions/1/answers'>Explore(5)</a>
+                        <a href={`/admin/questions/${question.id}/answers`}>
+                          Explore
+                        </a>
                       </td>
-                      <td>NO</td>
+                      {/* <td>NO</td> */}
                       <td className='td-actions text-right'>
                         <a
-                          href={`/admin/questions/1/update`}
+                          href={`/admin/skills/${props.match.params.skillId}/questions/${question.id}/update`}
                           rel='tooltip'
                           className='btn btn-white btn-link btn-sm'
                           data-original-title='Edit {{ $module_name }}'
