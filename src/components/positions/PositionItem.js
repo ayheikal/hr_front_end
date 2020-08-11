@@ -38,7 +38,7 @@ const PositionItem = ({ position }) => {
         <hr/>
 
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-4">
             <small>
               INTERVIEWS DEADLINE
             </small>
@@ -51,7 +51,7 @@ const PositionItem = ({ position }) => {
         </div>
 
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-4">
             <small>
               INTERVIEW DURATION
             </small>
