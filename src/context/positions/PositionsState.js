@@ -23,6 +23,7 @@ const PositionsState = (props) => {
     currentPage: 0,
     numberOfPages: 0,
     error: '',
+    questions: [],
   };
   const [state, dispatch] = useReducer(PositionsReducer, initialState);
 
@@ -323,6 +324,9 @@ const PositionsState = (props) => {
 
   // //   //axios delete by id
   // // };
+  const setQuestions = (qs) => {
+    state.questions = qs;
+  };
 
   return (
     <positionsContext.Provider
@@ -334,6 +338,7 @@ const PositionsState = (props) => {
         currentPage: state.currentPage,
         error: state.error,
         position: state.position,
+        questions: state.questions,
         getPositions,
         getPositionsBySearch,
         addNewPosition,
@@ -344,6 +349,7 @@ const PositionsState = (props) => {
         getPositionById,
         deletePositionByRecruiter,
         updatePosition,
+        setQuestions,
       }}
     >
       {props.children}

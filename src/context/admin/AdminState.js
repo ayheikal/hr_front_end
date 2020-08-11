@@ -98,9 +98,14 @@ const AdminState = (props) => {
   };
 
   const getSkills = () => {
+    const role = localStorage.getItem('role');
+    let link = null;
+    if (role === 'admin') link = 'admin';
+    else if (role === 'recruiter') link = 'recruiter';
+    else link = '';
     setLoading();
     axios
-      .get(`${process.env.REACT_APP_HOST_NAME}/api/admin/skills`, {
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/${link}/skills`, {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
