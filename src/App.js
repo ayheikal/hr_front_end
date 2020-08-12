@@ -17,10 +17,8 @@ import UserProfile from './components/user/UserProfile';
 import PositionsState from './context/positions/PositionsState';
 import InterviewState from './context/interview/InterviewState';
 import CreatePosition from './components/positions/CreatePosition';
-import UpdatePosition from './components/positions/UpdatePosition2';
+import UpdatePosition from './components/positions/UpdatePosition';
 import RecruiterPositionOperations from './components/positions/RecruiterPositionOperations';
-// import JobQuestionsOperations from './components/questions/JobQuestionsOperations'
-import QuestionModelAnswersOperations from './components/answers/QuestionModelAnswersOperations';
 import UserState from './context/user/UserState';
 import Register from './components/login/Register';
 import Sign from './components/login/Sign';
@@ -113,15 +111,22 @@ function App() {
                     <Route
                       exact path='/'
                       render={(props) =>
-                        (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') ? (
+                        (localStorage.getItem('token')&& localStorage.getItem('role') === 'admin') ? (
                           <Redirect to={{ pathname: '/admin/skills' }} />
                         ):(
                           <HomePage {...props} />
                         )
                       }
+                      
                     ></Route>
 
-
+                    
+                    {/* recruiter paths */}
+                    <Route
+                      exact
+                      path='/recruiter/positions'
+                      component={RecruiterPositionOperations}
+                    ></Route>
 
                     <Route
                       exact
@@ -133,17 +138,11 @@ function App() {
                       path='/recruiter/positions/:positionId/update'
                       component={UpdatePosition}
                     ></Route>
-                    {/* <Route exact path='/recruiter/positions/:positionsId/questions' component={JobQuestionsOperations}></Route> */}
-                    <Route
-                      exact
-                      path='/recruiter/questions/:quesionId/modelAnswers'
-                      component={QuestionModelAnswersOperations}
-                    ></Route>
-                    <Route
-                      exact
-                      path='/recruiter/positions'
-                      component={RecruiterPositionOperations}
-                    ></Route>
+                    <Route exact path="/recruiter/jobs/:jobId/interviews" component={RecruiterInterviews}></Route>
+                    <Route exact path="/recruiter/interviews/:interviewId/report" component={InterviewReport} ></Route>
+
+
+
 
                     <Route
                       exact path='/admin/skills'
@@ -262,8 +261,6 @@ function App() {
 
                     <Route exact path="/timer" component={Timer} ></Route>
 
-                    <Route exact path="/recruiter/jobs/:jobId/interviews" component={RecruiterInterviews}></Route>
-                    <Route exact path="/recruiter/interviews/:interviewId/report" component={InterviewReport} ></Route>
 
                     <Route component={PageNotFound}></Route>
                   </Switch>

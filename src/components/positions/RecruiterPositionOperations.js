@@ -1,21 +1,26 @@
 import React, { useContext, useEffect } from 'react';
+import {useHistory} from 'react-router-dom'
 import PositionsContext from '../../context/positions/positionsContext';
-// import PositionCard from './PositionCard';
 import Spinner from '../layouts/Spinner';
 const RecruiterPositionOperations = () => {
+  const history = useHistory()
   const positionsContext = useContext(PositionsContext);
   useEffect(() => {
+    if (!localStorage.getItem('token') || localStorage.getItem('role') !== 'recruiter'){
+      history.push('/signin')
+    }
     positionsContext.getPositionsByRecruiterName();
     //eslint-disable-next-line
   }, []);
 
   const { loading, recruiterPositions } = positionsContext;
+  
+
   if (loading) {
     return <Spinner />;
   } else {
     return (
-      <div className='row'>
-        <div className='col-md-12'>
+      <div className="container admin-cards">
           <div className='card'>
             <div className='card-header card-header-primary'>
               <div className='row'>
@@ -88,7 +93,7 @@ const RecruiterPositionOperations = () => {
             </div>
           </div>
         </div>
-      </div>
+     
     );
   }
 };

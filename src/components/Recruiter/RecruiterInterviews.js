@@ -1,15 +1,18 @@
 import React, { useContext, useEffect } from 'react';
 import RecruiterContext from '../../context/recruiter/recruiterContext';
+import {useHistory} from 'react-router-dom'
 
 const InterviewReport = (props) => {
+  const history = useHistory()
   const recruiterContext = useContext(RecruiterContext);
   useEffect(() => {
+    if (!localStorage.getItem('token') || localStorage.getItem('role') !== 'recruiter'){
+      history.push('/signin')
+    }
     recruiterContext.getJobInterviews(props.match.params.jobId);
   }, []);
   return (
     <div className="container admin-cards">
-      <div className='row'>
-        <div className='col-md-12'>
           <div className='card'>
             <div className='card-header card-header-primary'>
               <div className='row'>
@@ -54,8 +57,6 @@ const InterviewReport = (props) => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 export default InterviewReport;

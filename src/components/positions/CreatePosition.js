@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import {useHistory} from 'react-router-dom'
 import PositionsContext from '../../context/positions/positionsContext';
 import AdminContext from '../../context/admin/adminContext';
 import adminContext from '../../context/admin/adminContext';
@@ -7,6 +8,7 @@ import positionsContext from '../../context/positions/positionsContext';
 import axios from 'axios'
 
 const CreatePosition = () => {
+  const history = useHistory()
   const positionsContext = useContext(PositionsContext);
   const adminContext = useContext(AdminContext);
 
@@ -19,6 +21,9 @@ const CreatePosition = () => {
     positionsContext.addNewPosition(data);
   };
   useEffect(() => {
+    if (!localStorage.getItem('token') || localStorage.getItem('role') !== 'recruiter'){
+      history.push('/signin')
+    }
     adminContext.getSkills();
   if(watchSkills)
   { watchSkills.map((skillId) =>
@@ -27,6 +32,7 @@ const CreatePosition = () => {
   }, []);
 
   return (
+    <div className="container admin-cards">
     <div className='card'>
       {skills}
       <div className='card-header'>Add A New Position</div>
@@ -121,6 +127,7 @@ const CreatePosition = () => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };
