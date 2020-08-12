@@ -2,6 +2,8 @@ import React, { useContext ,useReducer} from 'react';
 import RecruiterReducer from './recruiterReducer';
 import recruiterContext from './recruiterContext'
 import axios from 'axios';
+import { APPEND } from '../types';
+
 import{
   GET_JOB_INTERVIEWS,
   GET_REPORT,
@@ -14,7 +16,7 @@ const RecruiterState = (props) => {
     report:[],
     quesanswer:[],
     loading:false,
-
+    questions: [],
   };
 
   const [state, dispatch] = useReducer(RecruiterReducer, initialState);
@@ -116,6 +118,31 @@ const RecruiterState = (props) => {
     
   }
 
+
+
+  const getQuestionsOfSkills = (arrayOfSKillIds) => {
+    console.log(localStorage.getItem('token'));
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/recruiter/questions`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        params: { skills: arrayOfSKillIds },
+      })
+      .then((res) => {
+        console.log('result:', res);
+
+        dispatch({
+          type: APPEND,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => {
+        console.log('hey', err.response.data.message);
+      });
+  };
   return (
     <recruiterContext.Provider value={{
       jobInterviews:state.jobInterviews,
@@ -123,13 +150,16 @@ const RecruiterState = (props) => {
       jobInfo:state.jobInfo,
       report:state.report,
       quesanswer:state.quesanswer,
+      questions: state.questions,
       getJobInterviews,
       getReport,
       updateScore,
-      updateStatus
+      updateStatus,
+      getQuestionsOfSkills,
 
 
     }}>
+    
       {props.children}
     </recruiterContext.Provider>
   );

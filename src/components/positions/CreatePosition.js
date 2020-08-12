@@ -4,37 +4,36 @@ import {useHistory} from 'react-router-dom'
 import PositionsContext from '../../context/positions/positionsContext';
 import AdminContext from '../../context/admin/adminContext';
 import adminContext from '../../context/admin/adminContext';
-import positionsContext from '../../context/positions/positionsContext';
-import axios from 'axios'
-
+import RecruiterContext from '../../context/recruiter/recruiterContext';
 const CreatePosition = () => {
-  const history = useHistory()
+  const { register, handleSubmit, watch } = useForm();
+  const watchSkills = [watch('skills')];
+  const watchQuestions = [watch('questions')];
   const positionsContext = useContext(PositionsContext);
   const adminContext = useContext(AdminContext);
-
-  const { register, handleSubmit, watch } = useForm();
-  const watchSkills = watch('skills');
-  
+  const recruiterContext = useContext(RecruiterContext);
   const [skills, setSkills] = useState();
-  const onSubmit = (data) => {
-    console.log('craete position', data);
-    positionsContext.addNewPosition(data);
-  };
+  // if (watchSkills) recruiterContext.getQuestionsOfSkills(watchSkills);
+
   useEffect(() => {
     if (!localStorage.getItem('token') || localStorage.getItem('role') !== 'recruiter'){
       history.push('/signin')
     }
     adminContext.getSkills();
-  if(watchSkills)
-  { watchSkills.map((skillId) =>
-      positionsContext.getQuestionsBySkillId(skillId))
-  }
+    if (watchSkills.length > 0) {
+      watchSkills.map((skillId) =>
+        recruiterContext.getQuestionsOfSkills(skillId)
+      );
+    }
   }, []);
-
+  const onSubmit = (data) => {
+    console.log('craete position-->', data);
+    positionsContext.addNewPosition(data);
+  };
   return (
     <div className="container admin-cards">
     <div className='card'>
-      {skills}
+      {watchQuestions}
       <div className='card-header'>Add A New Position</div>
       <div className='card-body'>
         <div className='card-text'>
@@ -85,24 +84,33 @@ const CreatePosition = () => {
                   {console.log('create position: ', adminContext.skills)}
 
                   {adminContext.skills.map((skill) => (
-                    <div key={skill.id}>
+                    <label>
                       <input
                         type='checkbox'
                         name='skills'
                         ref={register}
                         value={skill.id}
                       />
-                    </div>
+                      {skill.name}
+                    </label>
                   ))}
                 </div>
+                {recruiterContext.questions.map((question) => (
+                  <label>
+                    <input
+                      type='checkbox'
+                      name='questions'
+                      ref={register}
+
+                      value={question.id}
+                    />
+                    {question.body}
+                  </label>
+                ))}
               </div>
             </div>
-            {/* {watchSkills.map(skillId=> console.log('=====',skillId) )} */}
-            {/* { (watchSkills) ? watchSkills.map((skillId) =>
-              positionsContext.getQuestionsBySkillId(skillId)
-            ): null  } */}
-            { console.log('all ==> ', positionsContext.questions )   }
 
+            {console.log('======>', recruiterContext.questions)}
             <div className='col-md-7'>
               <div className='form-group'>
                 <label>Job Description</label>
@@ -132,6 +140,9 @@ const CreatePosition = () => {
   );
 };
 
-
+// const appendQuestions = (questions) => {
+//   let old = positionsContext.questions;
+// };
 
 export default CreatePosition;
+

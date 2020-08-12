@@ -1,4 +1,4 @@
 import { createContext } from 'react';
 
 const recruiterContext = createContext();
-export default  recruiterContext;
+export default recruiterContext;

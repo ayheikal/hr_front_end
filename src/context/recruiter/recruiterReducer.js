@@ -3,6 +3,8 @@ import {
   GET_REPORT,
 } from '../types'
 import { act } from 'react-dom/test-utils';
+import { APPEND } from '../types';
+
 export default (state, action) => {
 
   switch (action.type) {
@@ -21,6 +23,13 @@ export default (state, action) => {
           quesanswer:action.quesanswer,
           loading:false,
         }
+
+
+    case APPEND:
+      return {
+        ...state,
+        questions: action.payload,
+      };
     default:
       return state;
   }

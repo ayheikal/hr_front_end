@@ -33,11 +33,12 @@ import QuesionsOperations from './components/questions/QuestionsOperations';
 import CreateQuestion from './components/questions/CreateQuestion';
 import UpdateQuestion from './components/questions/UpdateQuestion';
 
-import ModelAnswersOperations from './components/modelAnswers/ModelAnswersOperations'
-import CreateModelAnswer from './components/modelAnswers/CreateModelAnswer'
-import UpdateModelAnswer from './components/modelAnswers/UpdateModelAnswer'
+import ModelAnswersOperations from './components/modelAnswers/ModelAnswersOperations';
+import CreateModelAnswer from './components/modelAnswers/CreateModelAnswer';
+import UpdateModelAnswer from './components/modelAnswers/UpdateModelAnswer';
 import Timer from './components/interview/Timer';
 import AdminState from './context/admin/AdminState';
+import RecruiterState from './context/recruiter/RecruiterState';
 
 import RecruiterInterviews from './components/Recruiter/RecruiterInterviews'
 import RecruiterState from './context/recruiter/RecruiterState';
@@ -50,17 +51,17 @@ function App() {
         <InterviewState>
           <UserState>
             <AlertState>
-                
               <AdminState>
                 <RecruiterState>
-
-                  <Navbar/>
-                <Alert />
+                  <Navbar />
+                  <Alert />
                   <Switch>
                     <Route
-                      exact path='/users/:userId/jobs/:jobId/interviews/:interviewId'
+                      exact
+                      path='/users/:userId/jobs/:jobId/interviews/:interviewId'
                       render={(props) =>
-                        (localStorage.getItem('token')  && localStorage.getItem('role') === 'applicant') ? (
+                        localStorage.getItem('token') &&
+                        localStorage.getItem('role') === 'applicant' ? (
                           <InterviewProcess {...props} />
                         ) : (
                           <Redirect to={{ pathname: '/signin' }} />
@@ -251,9 +252,10 @@ function App() {
                       exact
                       path='/users/:userId/profile'
                       render={(props) =>
-                        (localStorage.getItem('token') && localStorage.getItem('role') === 'applicant') ? (
+                        localStorage.getItem('token') &&
+                        localStorage.getItem('role') === 'applicant' ? (
                           <UserProfile {...props} />
-                        ):(
+                        ) : (
                           <Redirect to={{ pathname: '/signin' }} />
                         )
                       }
