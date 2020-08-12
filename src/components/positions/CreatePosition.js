@@ -6,6 +6,7 @@ import AdminContext from '../../context/admin/adminContext';
 import adminContext from '../../context/admin/adminContext';
 import RecruiterContext from '../../context/recruiter/recruiterContext';
 const CreatePosition = () => {
+  const history= useHistory()
   const { register, handleSubmit, watch } = useForm();
   const watchSkills = [watch('skills')];
   const watchQuestions = [watch('questions')];

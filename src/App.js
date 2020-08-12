@@ -41,7 +41,6 @@ import AdminState from './context/admin/AdminState';
 import RecruiterState from './context/recruiter/RecruiterState';
 
 import RecruiterInterviews from './components/Recruiter/RecruiterInterviews'
-import RecruiterState from './context/recruiter/RecruiterState';
 import InterviewReport from './components/Recruiter/InterviewReport'
 
 function App() {
