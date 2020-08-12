@@ -41,6 +41,10 @@ import UpdateModelAnswer from './components/modelAnswers/UpdateModelAnswer'
 import Timer from './components/interview/Timer';
 import AdminState from './context/admin/AdminState';
 
+import RecruiterInterviews from './components/Recruiter/RecruiterInterviews'
+import RecruiterState from './context/recruiter/RecruiterState';
+import InterviewReport from './components/Recruiter/InterviewReport'
+
 function App() {
   return (
     <Router>
@@ -50,6 +54,7 @@ function App() {
             <AlertState>
                 
               <AdminState>
+                <RecruiterState>
 
                   <Navbar/>
                 <Alert />
@@ -257,11 +262,12 @@ function App() {
 
                     <Route exact path="/timer" component={Timer} ></Route>
 
-
+                    <Route exact path="/recruiter/jobs/:jobId/interviews" component={RecruiterInterviews}></Route>
+                    <Route exact path="/recruiter/interviews/:interviewId/report" component={InterviewReport} ></Route>
 
                     <Route component={PageNotFound}></Route>
                   </Switch>
-            
+                  </RecruiterState>
               </AdminState>
             </AlertState>
           </UserState>

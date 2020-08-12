@@ -9,9 +9,7 @@ import axios from 'axios'
 const CreatePosition = () => {
   const positionsContext = useContext(PositionsContext);
   const adminContext = useContext(AdminContext);
-  useEffect(() => {
-    adminContext.getSkills();
-  }, []);
+
   const { register, handleSubmit, watch } = useForm();
   const watchSkills = watch('skills');
   
@@ -20,6 +18,13 @@ const CreatePosition = () => {
     console.log('craete position', data);
     positionsContext.addNewPosition(data);
   };
+  useEffect(() => {
+    adminContext.getSkills();
+  if(watchSkills)
+  { watchSkills.map((skillId) =>
+      positionsContext.getQuestionsBySkillId(skillId))
+  }
+  }, []);
 
   return (
     <div className='card'>
@@ -87,9 +92,9 @@ const CreatePosition = () => {
               </div>
             </div>
             {/* {watchSkills.map(skillId=> console.log('=====',skillId) )} */}
-            { (watchSkills) ? watchSkills.map((skillId) =>
+            {/* { (watchSkills) ? watchSkills.map((skillId) =>
               positionsContext.getQuestionsBySkillId(skillId)
-            ): null  }
+            ): null  } */}
             { console.log('all ==> ', positionsContext.questions )   }
 
             <div className='col-md-7'>

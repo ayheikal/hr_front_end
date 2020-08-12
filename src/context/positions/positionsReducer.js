@@ -6,6 +6,7 @@ import {
   SET_ERROR,
   SET_INTERVIEW_ID,
   GET_POSITION_BY_ID,
+  APPEND,
 } from '../types';
 
 export default (state, action) => {
@@ -45,6 +46,12 @@ export default (state, action) => {
         ...state,
         error: action.error,
       };
+      case APPEND:
+        return{
+          ...state,
+          questions:action.payload,
+          loading:false,
+        }
     default:
       return state;
   }

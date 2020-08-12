@@ -43,6 +43,7 @@ const RecruiterPositionOperations = () => {
                       <th>Title</th>
                       <th>Description</th>
                       <th>Status</th>
+                      <th>Interviews</th>
                       <th className='text-right'>control</th>
                     </tr>
                   </thead>
@@ -54,6 +55,7 @@ const RecruiterPositionOperations = () => {
                         </td>
                         <td>{position.description}</td>
                         <td>In Progress</td>
+                        <td><a href={`/recruiter/jobs/${position.id}/interviews`}>Explore</a></td>
                         <td className='td-actions text-right'>
                           <a
                             href={`/recruiter/positions/${position.id}/update`}

@@ -11,6 +11,7 @@ import {
   GET_POSITIONS_OF_RECRUITER,
   SET_ERROR,
   GET_POSITION_BY_ID,
+  APPEND,
 } from '../types';
 import positionsContext from './positionsContext';
 import interviewContext from './../../context/interview/interviewContext';
@@ -319,6 +320,10 @@ const PositionsState = (props) => {
     .then(res => {
       console.log('ques', res.data.data)
       appendQuestions(res.data.data)
+      dispatch({
+        type:"APPEND",
+        payload:res.data.data,
+      })
     })
     .catch( err =>{
       console.log( err.response)
