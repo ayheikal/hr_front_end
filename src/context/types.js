@@ -31,3 +31,5 @@ export const GET_QUESTION_BY_ID = 'GET_QUESTION_BY_ID';
 export const GET_MODEL_ANSWERS = 'GET_MODEL_ANSWERS';
 export const GET_MODEL_ANSWER_BY_ID = 'GET_MODEL_ANSWER_BY_ID';
 export const APPEND = 'APPEND';
+export const GET_SKILL = 'GET_SKILL';
+export const GET_QUESTION = 'GET_QUESTION';

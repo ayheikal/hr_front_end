@@ -37,6 +37,7 @@ const ApplicantInterviewSummary = (props) => {
                   <td>{status}</td>
                 </tr>
                 <tr>
+                  {console.log('feedback', feedback)}
                   <td>Feedback &amp; Recommendation</td>
                   <td>{feedback}</td>
                 </tr>

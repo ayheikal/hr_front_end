@@ -1,9 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import PositionContext from '../../context/positions/positionsContext';
+import recruiterContext from '../../context/recruiter/recruiterContext';
 const UpdatePosition = (props) => {
   const positionContext = useContext(PositionContext);
-
+  recruiterContext = useContext;
   useEffect(() => {
     positionContext.getPositionById(props.match.params.positionId);
   }, []);
@@ -20,6 +21,7 @@ const UpdatePosition = (props) => {
     accept_interviews_until,
     interview_duration,
   } = positionContext.position;
+
   return (
     <div class='card'>
       <div class='card-header'>Edit Position</div>
@@ -71,6 +73,17 @@ const UpdatePosition = (props) => {
                     ref={register}
                   />
                 </div>
+                {recruiterContext.skill.map((skill) => (
+                  <label>
+                    <input
+                      type='checkbox'
+                      name='skills'
+                      ref={register}
+                      value={skill.id}
+                    />
+                    {skill.name}
+                  </label>
+                ))}
               </div>
 
               <div className='col-md-7'>
