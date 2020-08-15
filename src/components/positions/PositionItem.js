@@ -49,13 +49,15 @@ const PositionItem = ({ position }) => {
           <div className='col-md-4'>
             <small>{interview_duration}</small>
           </div>
-          <div className="col-md-4 text-right">
-            <button className='btn btn-primary' onClick={() => { 
-              let userId = 1
-              interviewContext.handleApply(id, userId )
-              }}>
-            Apply
-          </button>
+          <div className='col-md-5 text-right'>
+            <button
+              className='btn btn-primary'
+              onClick={() => {
+                positionContext.handleApply(id, localStorage.getItem('userId'));
+              }}
+            >
+              Apply
+            </button>
           </div>
         </div>
       </div>

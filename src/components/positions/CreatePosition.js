@@ -27,6 +27,11 @@ const CreatePosition = () => {
     console.log('craete position-->', data);
     positionsContext.addNewPosition(data);
   };
+  const handleGetQuestions = () => {
+    watchSkills &&
+      watchSkills.length > 0 &&
+      recruiterContext.getQuestionsOfSkills(watchSkills);
+  };
   return (
     <div className="container admin-cards">
     <div className='card'>
@@ -150,12 +155,14 @@ const CreatePosition = () => {
           ))}
         </div>
         <label>
+          <button type='button' onClick={() => handleGetQuestions()}>
+            refresh
+          </button>
           <h3>Questions</h3>
         </label>
-        {pastWatchSkills !== watchSkills &&
-          watchSkills &&
+        {/* {watchSkills &&
           watchSkills.length > 0 &&
-          recruiterContext.getQuestionsOfSkills(watchSkills)}
+          recruiterContext.getQuestionsOfSkills(watchSkills)} */}
         {recruiterContext.questions.map((question) => (
           <p>
             <input
