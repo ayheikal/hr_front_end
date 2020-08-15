@@ -75,7 +75,7 @@ const InterviewReport = (props) => {
                     </tr>
                     <tr>
                       <td>Score</td>
-                      <td>{report.score?report.score:'-'}/10</td>
+                      <td>{report.score?report.score:'-'}</td>
                     </tr>
                   </tbody>
                 </table>

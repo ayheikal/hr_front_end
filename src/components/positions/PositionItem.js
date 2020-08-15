@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import InterviewContext from '../../context/interview/interviewContext'
-import PositionsContext from '../../context/positions/positionsContext';
 
 const PositionItem = ({ position }) => {
   const interviewContext = useContext(InterviewContext);
@@ -53,7 +52,7 @@ const PositionItem = ({ position }) => {
             <button
               className='btn btn-primary'
               onClick={() => {
-                positionContext.handleApply(id, localStorage.getItem('userId'));
+                interviewContext.handleApply(id, localStorage.getItem('userId'));
               }}
             >
               Apply

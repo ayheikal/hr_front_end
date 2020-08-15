@@ -46,7 +46,7 @@ const Positions = () => {
   }
   else{
     return(
-      <div class="container alert alert-danger" role="alert">
+      <div className="container alert alert-danger" role="alert">
         There is no item to show.
       </div>
     )

@@ -35,7 +35,6 @@ const CreatePosition = () => {
   return (
     <div className="container admin-cards">
     <div className='card'>
-      {watchSkills}
       <div className='card-header'>Add A New Position</div>
       <div className='card-body'>
         <div className='card-text'>
@@ -81,40 +80,8 @@ const CreatePosition = () => {
                     ref={register}
                   />
                 </div>
+
                 <div className='form-group'>
-                  <label>skills</label>
-                  {console.log('create position: ', adminContext.skills)}
-
-                  {adminContext.skills.map((skill) => (
-                    <label>
-                      <input
-                        type='checkbox'
-                        name='skills'
-                        ref={register}
-                        value={skill.id}
-                      />
-                      {skill.name}
-                    </label>
-                  ))}
-                </div>
-                {recruiterContext.questions.map((question) => (
-                  <label>
-                    <input
-                      type='checkbox'
-                      name='questions'
-                      ref={register}
-
-                      value={question.id}
-                    />
-                    {question.body}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {console.log('======>', recruiterContext.questions)}
-            <div className='col-md-7'>
-              <div className='form-group'>
                 <label>Job Description</label>
                 <textarea
                   rows='10'
@@ -124,8 +91,50 @@ const CreatePosition = () => {
                   ref={register}
                 ></textarea>
               </div>
+
+              </div>
+              <div className="col-md-7">
+                <h3>skills</h3>
+                <hr/>
+                <div>
+                  {' '}
+                  {adminContext.skills.map((skill) => (
+                    <p>
+                      <input
+                        type='checkbox'
+                        name='skills'
+                        ref={register}
+                        value={skill.id}
+                      />
+                      {skill.name}
+                    </p>
+                  ))}
+                </div>
+                <hr/>
+                <div className="row">
+                    <div className="col-md-2 text-right">
+                        <i class="fas fa-sync-alt" onClick={() => handleGetQuestions()}></i>
+                    </div>
+                </div>
+
+                <h3>Questions</h3>
+                <hr/>
+
+                
+                {recruiterContext.questions.map((question) => (
+                  <p>
+                    <input
+                      type='checkbox'
+                      name='questions'
+                      ref={register}
+                      value={question.id}
+                    />
+                    {question.body}
+                  </p>
+                ))}
+              </div>
             </div>
-            {/* </div> */}
+
 
             <div className='row'>
               <div className='col-md-12 text-right'>
@@ -137,44 +146,9 @@ const CreatePosition = () => {
           </form>
         </div>
       </div>
-      <div className='col-sm-6'>
-        <h3>skills</h3>
-        {console.log('create position: ', adminContext.skills)}
-        <div>
-          {' '}
-          {adminContext.skills.map((skill) => (
-            <p>
-              <input
-                type='checkbox'
-                name='skills'
-                ref={register}
-                value={skill.id}
-              />
-              {skill.name}
-            </p>
-          ))}
-        </div>
-        <label>
-          <button type='button' onClick={() => handleGetQuestions()}>
-            refresh
-          </button>
-          <h3>Questions</h3>
-        </label>
-        {/* {watchSkills &&
-          watchSkills.length > 0 &&
-          recruiterContext.getQuestionsOfSkills(watchSkills)} */}
-        {recruiterContext.questions.map((question) => (
-          <p>
-            <input
-              type='checkbox'
-              name='questions'
-              ref={register}
-              value={question.id}
-            />
-            {question.body}
-          </p>
-        ))}
-      </div>
+      {/* <div className='col-sm-6'>
+        
+      </div> */}
     </div>
     </div>
   );
