@@ -15,6 +15,7 @@ const UserProfile = ({ match }) => {
     userContext.getInterviewDescriptionOfApplicant(userId);
   }, []);
   const { name } = userContext.user;
+  console.log('user applied job', userContext.userAppliedJobs);
 
   return (
     <div className='wrap-profile'>

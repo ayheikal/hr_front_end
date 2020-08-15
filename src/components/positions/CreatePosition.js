@@ -8,24 +8,20 @@ import RecruiterContext from '../../context/recruiter/recruiterContext';
 const CreatePosition = () => {
   const history= useHistory()
   const { register, handleSubmit, watch } = useForm();
-  const watchSkills = [watch('skills')];
+  const watchSkills = watch('skills');
   const watchQuestions = [watch('questions')];
   const positionsContext = useContext(PositionsContext);
   const adminContext = useContext(AdminContext);
   const recruiterContext = useContext(RecruiterContext);
   const [skills, setSkills] = useState();
-  // if (watchSkills) recruiterContext.getQuestionsOfSkills(watchSkills);
-
+  const [flag, setFlag] = useState(false);
+  //if (watchSkills) recruiterContext.getQuestionsOfSkills(watchSkills);
+  let pastWatchSkills = [];
   useEffect(() => {
     if (!localStorage.getItem('token') || localStorage.getItem('role') !== 'recruiter'){
       history.push('/signin')
     }
     adminContext.getSkills();
-    if (watchSkills.length > 0) {
-      watchSkills.map((skillId) =>
-        recruiterContext.getQuestionsOfSkills(skillId)
-      );
-    }
   }, []);
   const onSubmit = (data) => {
     console.log('craete position-->', data);
@@ -34,7 +30,7 @@ const CreatePosition = () => {
   return (
     <div className="container admin-cards">
     <div className='card'>
-      {watchQuestions}
+      {watchSkills}
       <div className='card-header'>Add A New Position</div>
       <div className='card-body'>
         <div className='card-text'>
@@ -135,6 +131,42 @@ const CreatePosition = () => {
             </div>
           </form>
         </div>
+      </div>
+      <div className='col-sm-6'>
+        <h3>skills</h3>
+        {console.log('create position: ', adminContext.skills)}
+        <div>
+          {' '}
+          {adminContext.skills.map((skill) => (
+            <p>
+              <input
+                type='checkbox'
+                name='skills'
+                ref={register}
+                value={skill.id}
+              />
+              {skill.name}
+            </p>
+          ))}
+        </div>
+        <label>
+          <h3>Questions</h3>
+        </label>
+        {pastWatchSkills !== watchSkills &&
+          watchSkills &&
+          watchSkills.length > 0 &&
+          recruiterContext.getQuestionsOfSkills(watchSkills)}
+        {recruiterContext.questions.map((question) => (
+          <p>
+            <input
+              type='checkbox'
+              name='questions'
+              ref={register}
+              value={question.id}
+            />
+            {question.body}
+          </p>
+        ))}
       </div>
     </div>
     </div>

@@ -2,12 +2,7 @@ import React, { useContext ,useReducer} from 'react';
 import RecruiterReducer from './recruiterReducer';
 import recruiterContext from './recruiterContext'
 import axios from 'axios';
-import { APPEND } from '../types';
-
-import{
-  GET_JOB_INTERVIEWS,
-  GET_REPORT,
-}from '../types'
+import { APPEND, GET_SKILL, GET_QUESTION, GET_JOB_INTERVIEWS, GET_REPORT } from '../types';
 const RecruiterState = (props) => {
   const initialState = {
     jobInterviews:[],
@@ -17,6 +12,7 @@ const RecruiterState = (props) => {
     quesanswer:[],
     loading:false,
     questions: [],
+    skill: {},
   };
 
   const [state, dispatch] = useReducer(RecruiterReducer, initialState);
@@ -121,7 +117,8 @@ const RecruiterState = (props) => {
 
 
   const getQuestionsOfSkills = (arrayOfSKillIds) => {
-    console.log(localStorage.getItem('token'));
+    console.log('array: ', arrayOfSKillIds);
+    if (!arrayOfSKillIds || arrayOfSKillIds.length === 0) return;
     axios
       .get(`${process.env.REACT_APP_HOST_NAME}/api/recruiter/questions`, {
         headers: {
@@ -132,7 +129,7 @@ const RecruiterState = (props) => {
         params: { skills: arrayOfSKillIds },
       })
       .then((res) => {
-        console.log('result:', res);
+        console.log('result:', res.response);
 
         dispatch({
           type: APPEND,
@@ -140,7 +137,50 @@ const RecruiterState = (props) => {
         });
       })
       .catch((err) => {
+        console.log('error: ', err);
+      });
+  };
+
+  const getSkillById = (id) => {
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/recruiter/skills/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        console.log('result:', res);
+
+        dispatch({
+          type: GET_SKILL,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => {
         console.log('hey', err.response.data.message);
+      });
+  };
+  const getQuestions = (id) => {
+    axios
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/recruiter/questions/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        console.log('result:', res);
+
+        dispatch({
+          type: GET_QUESTION,
+          payload: res.data.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
       });
   };
   return (
@@ -151,12 +191,15 @@ const RecruiterState = (props) => {
       report:state.report,
       quesanswer:state.quesanswer,
       questions: state.questions,
+      skill: state.skill,
+
       getJobInterviews,
       getReport,
       updateScore,
       updateStatus,
       getQuestionsOfSkills,
-
+      getSkillById,
+      getQuestions,
 
     }}>
     

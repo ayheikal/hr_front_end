@@ -5,7 +5,7 @@ import AdminContext from '../../context/admin/adminContext';
 const UpdateQuestion = (props) => {
   const adminContext = useContext(AdminContext);
   useEffect(() => {
-    if (adminContext.skills.length == 0) {
+    if (adminContext.skills.length === 0) {
       adminContext.getSkills();
     }
     adminContext.getSkillById(props.match.params.skillId);

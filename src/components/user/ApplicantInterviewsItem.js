@@ -3,6 +3,7 @@ import ApplicantInterviewSummary from './ApplicantInterviewSummary';
 const ApplicantInterviewsItem = ({ userAppliedJob, userName }) => {
   const { title, description, accept_interviews_from } = userAppliedJob.job;
   // const feedback=userAppliedJob.feedback;
+  const feedback = userAppliedJob.feedback;
   const [flag, setFlag] = useState(false);
   const switchFlag = () => {
     setFlag(!flag);
@@ -37,6 +38,7 @@ const ApplicantInterviewsItem = ({ userAppliedJob, userName }) => {
     <ApplicantInterviewSummary
       userAppliedJob={userAppliedJob}
       switchFlag={switchFlag}
+      feedback={feedback}
     />
   ) : (
     component

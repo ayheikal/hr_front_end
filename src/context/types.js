@@ -33,3 +33,5 @@ export const GET_MODEL_ANSWER_BY_ID = 'GET_MODEL_ANSWER_BY_ID';
 export const APPEND="APPEND"
 export const GET_JOB_INTERVIEWS='GET_JOB_INTERVIEWS'
 export const GET_REPORT='GET_REPORT'
+export const GET_SKILL = 'GET_SKILL';
+export const GET_QUESTION = 'GET_QUESTION';

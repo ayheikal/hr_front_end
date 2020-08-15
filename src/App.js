@@ -39,6 +39,7 @@ import UpdateModelAnswer from './components/modelAnswers/UpdateModelAnswer';
 import Timer from './components/interview/Timer';
 import AdminState from './context/admin/AdminState';
 import RecruiterState from './context/recruiter/RecruiterState';
+import { Try } from './components/try';
 
 import RecruiterInterviews from './components/Recruiter/RecruiterInterviews'
 import InterviewReport from './components/Recruiter/InterviewReport'
@@ -259,9 +260,6 @@ function App() {
                         )
                       }
                     ></Route>
-
-                    <Route exact path="/timer" component={Timer} ></Route>
-
 
                     <Route component={PageNotFound}></Route>
                   </Switch>
