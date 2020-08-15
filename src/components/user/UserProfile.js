@@ -29,6 +29,7 @@ const UserProfile = ({ match }) => {
         <div className='col-md-9'>
           <div className='row'>
             <div className='col-md-12'>
+              {console.log('applied: ',userContext.userAppliedJobs)}
               <ApplicantInterviews
                 userAppliedJobs={userContext.userAppliedJobs}
                 userName={name}

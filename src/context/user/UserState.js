@@ -86,6 +86,7 @@ const UserState = (props) => {
         },
       })
       .then((res) => {
+        
         dispatch({
           type: GET_USER,
           payload: res.data.data,
@@ -109,7 +110,7 @@ const UserState = (props) => {
         },
       })
       .then((res) => {
-        // console.log('getInterviewDescriptionOfApplicant: ', res);
+        console.log('getInterviewDescriptionOfApplicant: ', res);
         const interviews = res.data.data;
 
         dispatch({

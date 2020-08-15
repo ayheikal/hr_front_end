@@ -136,6 +136,7 @@ const InterviewState = (props) => {
     )
       .then((res) => {
         console.log('endInterview: ', res);
+        history.push('/')
       })
       .catch((err) => {
         console.log('err: ', err.response);
