@@ -1,5 +1,5 @@
 import React from 'react';
-
+import profileImage from './../../images/profile.png'
 const UserInfo = ({ user }) => {
   return (
     <div className='user-bio'>
@@ -7,7 +7,7 @@ const UserInfo = ({ user }) => {
         <img
           className='user-photo img-rounded img-responsive'
           alt={user.name}
-          src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Mohamed_Salah_2018.jpg/200px-Mohamed_Salah_2018.jpg '
+          src={profileImage}
         />
       </div>
       <div className='user-info'>
