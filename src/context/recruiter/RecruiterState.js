@@ -10,8 +10,10 @@ const RecruiterState = (props) => {
   };
 
   const [state, dispatch] = useReducer(RecruiterReducer, initialState);
+
   const getQuestionsOfSkills = (arrayOfSKillIds) => {
-    console.log(localStorage.getItem('token'));
+    console.log('array: ', arrayOfSKillIds);
+    if (!arrayOfSKillIds || arrayOfSKillIds.length === 0) return;
     axios
       .get(`${process.env.REACT_APP_HOST_NAME}/api/recruiter/questions`, {
         headers: {
@@ -22,7 +24,7 @@ const RecruiterState = (props) => {
         params: { skills: arrayOfSKillIds },
       })
       .then((res) => {
-        console.log('result:', res);
+        console.log('result:', res.response);
 
         dispatch({
           type: APPEND,
@@ -30,7 +32,7 @@ const RecruiterState = (props) => {
         });
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        console.log('error: ', err);
       });
   };
 

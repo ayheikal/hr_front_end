@@ -6,31 +6,27 @@ import adminContext from '../../context/admin/adminContext';
 import RecruiterContext from '../../context/recruiter/recruiterContext';
 const CreatePosition = () => {
   const { register, handleSubmit, watch } = useForm();
-  const watchSkills = [watch('skills')];
+  const watchSkills = watch('skills');
   const watchQuestions = [watch('questions')];
   const positionsContext = useContext(PositionsContext);
   const adminContext = useContext(AdminContext);
   const recruiterContext = useContext(RecruiterContext);
   const [skills, setSkills] = useState();
-  // if (watchSkills) recruiterContext.getQuestionsOfSkills(watchSkills);
-
+  const [flag, setFlag] = useState(false);
+  //if (watchSkills) recruiterContext.getQuestionsOfSkills(watchSkills);
+  let pastWatchSkills = [];
   useEffect(() => {
     adminContext.getSkills();
-    if (watchSkills.length > 0) {
-      watchSkills.map((skillId) =>
-        recruiterContext.getQuestionsOfSkills(skillId)
-      );
-    }
   }, []);
   const onSubmit = (data) => {
     console.log('craete position-->', data);
     positionsContext.addNewPosition(data);
   };
   return (
-    <div className='card'>
-      {watchQuestions}
-      <div className='card-header'>Add A New Position</div>
-      <div className='card-body'>
+    <div className='card '>
+      {watchSkills}
+      <div className='card-header '>Add A New Position</div>
+      <div className='card-body col-sm-6'>
         <div className='card-text'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='row'>
@@ -74,33 +70,7 @@ const CreatePosition = () => {
                     ref={register}
                   />
                 </div>
-                <div className='form-group'>
-                  <label>skills</label>
-                  {console.log('create position: ', adminContext.skills)}
-
-                  {adminContext.skills.map((skill) => (
-                    <label>
-                      <input
-                        type='checkbox'
-                        name='skills'
-                        ref={register}
-                        value={skill.id}
-                      />
-                      {skill.name}
-                    </label>
-                  ))}
-                </div>
-                {recruiterContext.questions.map((question) => (
-                  <label>
-                    <input
-                      type='checkbox'
-                      name='questions'
-                      ref={register}
-                      value={question.id}
-                    />
-                    {question.body}
-                  </label>
-                ))}
+                <div className='form-group'></div>
               </div>
             </div>
 
@@ -128,6 +98,42 @@ const CreatePosition = () => {
             </div>
           </form>
         </div>
+      </div>
+      <div className='col-sm-6'>
+        <h3>skills</h3>
+        {console.log('create position: ', adminContext.skills)}
+        <div>
+          {' '}
+          {adminContext.skills.map((skill) => (
+            <p>
+              <input
+                type='checkbox'
+                name='skills'
+                ref={register}
+                value={skill.id}
+              />
+              {skill.name}
+            </p>
+          ))}
+        </div>
+        <label>
+          <h3>Questions</h3>
+        </label>
+        {pastWatchSkills !== watchSkills &&
+          watchSkills &&
+          watchSkills.length > 0 &&
+          recruiterContext.getQuestionsOfSkills(watchSkills)}
+        {recruiterContext.questions.map((question) => (
+          <p>
+            <input
+              type='checkbox'
+              name='questions'
+              ref={register}
+              value={question.id}
+            />
+            {question.body}
+          </p>
+        ))}
       </div>
     </div>
   );
