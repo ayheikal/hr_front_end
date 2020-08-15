@@ -1,15 +1,11 @@
 import React, { useEffect, useContext } from 'react';
-import {useHistory} from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import PositionContext from '../../context/positions/positionsContext';
+import RecruiterContext from '../../context/recruiter/recruiterContext';
 const UpdatePosition = (props) => {
-  const history = useHistory()
   const positionContext = useContext(PositionContext);
-
+  const recruiterContext = useContext(RecruiterContext);
   useEffect(() => {
-    if (!localStorage.getItem('token') || localStorage.getItem('role') !== 'recruiter'){
-      history.push('/signin')
-    }
     positionContext.getPositionById(props.match.params.positionId);
   }, []);
 
@@ -25,8 +21,8 @@ const UpdatePosition = (props) => {
     accept_interviews_until,
     interview_duration,
   } = positionContext.position;
+
   return (
-    <div className="container admin-cards">
     <div class='card'>
       <div class='card-header'>Edit Position</div>
       <div class='card-body'>
@@ -77,6 +73,17 @@ const UpdatePosition = (props) => {
                     ref={register}
                   />
                 </div>
+                {recruiterContext.skills.map((skill) => (
+                  <label>
+                    <input
+                      type='checkbox'
+                      name='skills'
+                      ref={register}
+                      value={skill.id}
+                    />
+                    {skill.name}
+                  </label>
+                ))}
               </div>
 
               <div className='col-md-7'>
@@ -104,7 +111,6 @@ const UpdatePosition = (props) => {
           </form>
         </div>
       </div>
-    </div>
     </div>
   );
 };
