@@ -1,4 +1,3 @@
-import adminContext from './adminContext';
 import React, { useReducer } from 'react';
 import AdminContext from './adminContext';
 import AdminReducer from './adminReduce';
@@ -6,11 +5,6 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 import {
-  CREATE_SKILL,
-  UPDATE_SKILL,
-  DELETE_SKILL,
-  ADD_QUESTION,
-  UPDATE_QUESTION,
   GET_QUESTION_BY_ID,
   GET_SKILLS,
   SET_ADMIN_LOADING,
@@ -19,7 +13,6 @@ import {
   GET_MODEL_ANSWERS,
   GET_MODEL_ANSWER_BY_ID,
 } from '../types';
-import Axios from 'axios';
 
 const AdminState = (props) => {
   const history = useHistory();

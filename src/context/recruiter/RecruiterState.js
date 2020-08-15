@@ -7,7 +7,6 @@ const RecruiterState = (props) => {
   const initialState = {
     questions: [],
     skill: {},
-    questions: [],
   };
 
   const [state, dispatch] = useReducer(RecruiterReducer, initialState);
@@ -80,7 +79,6 @@ const RecruiterState = (props) => {
   return (
     <recruiterContext.Provider
       value={{
-        questions: state.questions,
         skill: state.skill,
         questions: state.questions,
         getQuestionsOfSkills,

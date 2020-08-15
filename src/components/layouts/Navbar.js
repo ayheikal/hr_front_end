@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../../context/user/userContext';
-import logo from './../../images/logo.png'
-
+import logo from './../../images/logo.png';
 
 const Navbar = () => {
   const userContext = useContext(UserContext);
@@ -14,11 +13,11 @@ const Navbar = () => {
 
   const guestLinks = (
     <>
-    <li>
+      <li>
         <a className='nav-link' href='/signUp'>
           Register
         </a>
-        </li>
+      </li>
       <li>
         <a className='nav-link' href='/signin'>
           Login
@@ -28,81 +27,78 @@ const Navbar = () => {
   );
   const applicantLinks = (
     <>
-    <li>
+      <li>
         <a
           className='nav-link'
           href={`/users/${localStorage.getItem('userId')}/profile`}
         >
           {localStorage.getItem('name')}
         </a>
-        </li>
-        <li>
+      </li>
+      <li>
         <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
           logOut
         </a>
-        </li>
+      </li>
     </>
   );
 
   const recruiterLinks = (
     <>
-    <li>
+      <li>
         <a className='nav-link' href='/recruiter/positions'>
           positions
         </a>
-        </li>
-        <li>
+      </li>
+      <li>
         <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
           logOut
         </a>
-        </li>
+      </li>
     </>
   );
 
   const adminLinks = (
     <>
-    <li>
+      <li>
         <a className='nav-link' href='/admin/skills'>
           skills
         </a>
-        </li>
-        <li>
+      </li>
+      <li>
         <a className='nav-link' href='/admin/questions'>
           Quesetions
         </a>
-        </li>
-        <li>
+      </li>
+      <li>
         <a onClick={() => userContext.logOut()} className='nav-link' href='/'>
           logOut
         </a>
-        </li>
+      </li>
     </>
-  )
+  );
 
-  let navLinks = null
+  let navLinks = null;
 
-  if(!authed){
-    navLinks = guestLinks
-  }else if( role === 'applicant'){
-    navLinks = applicantLinks
-  }else if( role === 'recruiter'){
-    navLinks = recruiterLinks
-  }else {
-    navLinks = adminLinks
+  if (!authed) {
+    navLinks = guestLinks;
+  } else if (role === 'applicant') {
+    navLinks = applicantLinks;
+  } else if (role === 'recruiter') {
+    navLinks = recruiterLinks;
+  } else {
+    navLinks = adminLinks;
   }
 
   return (
-
     <header>
-      <Link to="/"><img src={logo} className="logo" /></Link>
+      <Link to='/'>
+        <img src={logo} alt='logo' className='logo' />
+      </Link>
       <nav>
-        <ul className="nav__links">
-          {navLinks}
-        </ul>
+        <ul className='nav__links'>{navLinks}</ul>
       </nav>
     </header>
-
-    
   );
 };
 

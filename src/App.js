@@ -41,6 +41,7 @@ import UpdateModelAnswer from './components/modelAnswers/UpdateModelAnswer';
 import Timer from './components/interview/Timer';
 import AdminState from './context/admin/AdminState';
 import RecruiterState from './context/recruiter/RecruiterState';
+import { Try } from './components/try';
 
 function App() {
   return (
@@ -170,6 +171,7 @@ function App() {
                     ></Route>
 
                     <Route exact path='/timer' component={Timer}></Route>
+                    <Route path='/try' component={Try} />
 
                     <Route component={PageNotFound}></Route>
                   </Switch>

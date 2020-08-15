@@ -2,17 +2,14 @@ import React, { useReducer } from 'react';
 import UserReducer from './userReducer';
 import userContext from './userContext';
 import axios from 'axios';
-import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import {
   GET_ALL_USERS,
   SET_USER_LOADING,
   GET_USER_BY_NAME_AND_TITLE,
-  LOGIN,
   GET_USER,
   SET_APPLICANT_PROCESSING_INTERVIEW,
 } from '../types';
-import Axios from 'axios';
 
 const UserState = (props) => {
   let history = useHistory();
@@ -101,20 +98,33 @@ const UserState = (props) => {
     setLoading();
     //axios to get job
     axios
-      .get(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews`, {
+      .get(`${process.env.REACT_APP_HOST_NAME}/api/applicant/interviews/`, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       })
-      .then((res) => {
-        // console.log('getInterviewDescriptionOfApplicant: ', res);
-        const interviews = res.data.data;
+      .then((result) => {
+        // console.log(result);
+        // result.data.data.map((interview) => {
+        //   console.log('interview feedback: ', interview.feedback);
+        //   if (interview.feedback !== null) {
+        //     interview.feedback.map((skill) => {
+        //       console.log('skill', skill);
+        //     });
+        //   }
+        // });
 
+        // console.log(
+        //   'result bgd: ',
+        //   result.data.data.feedback['Skill #1']['links'][0]
+        // );
+        console.log('hey', result);
+        console.log();
         dispatch({
           type: SET_APPLICANT_PROCESSING_INTERVIEW,
-          payload: res.data.data,
+          payload: result.data.data,
         });
       })
       .catch((err) => console.log(err.response));
@@ -157,15 +167,7 @@ const UserState = (props) => {
       payload: res,
     });
   };
-  // const search for a user by his title or name
-  const getUserByNameAndTitle = (searchAddress) => {
-    //axios
-    const res = [];
-    dispatch({
-      type: GET_USER_BY_NAME_AND_TITLE,
-      payload: res,
-    });
-  };
+
   // logout out
   const logOut = () => {
     console.log('logOut: ');
