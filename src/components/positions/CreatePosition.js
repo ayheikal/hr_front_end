@@ -4,7 +4,7 @@ import PositionsContext from '../../context/positions/positionsContext';
 import AdminContext from '../../context/admin/adminContext';
 import adminContext from '../../context/admin/adminContext';
 import RecruiterContext from '../../context/recruiter/recruiterContext';
-const CreatePosition = () => {
+const CreatePosition = (props) => {
   const { register, handleSubmit, watch } = useForm();
   const watchSkills = watch('skills');
   const watchQuestions = [watch('questions')];
@@ -17,10 +17,15 @@ const CreatePosition = () => {
   let pastWatchSkills = [];
   useEffect(() => {
     adminContext.getSkills();
-  }, []);
+  }, [props.isOpen]);
   const onSubmit = (data) => {
     console.log('craete position-->', data);
     positionsContext.addNewPosition(data);
+  };
+  const handleGetQuestions = () => {
+    watchSkills &&
+      watchSkills.length > 0 &&
+      recruiterContext.getQuestionsOfSkills(watchSkills);
   };
   return (
     <div className='card '>
@@ -117,12 +122,14 @@ const CreatePosition = () => {
           ))}
         </div>
         <label>
+          <button type='button' onClick={() => handleGetQuestions()}>
+            refresh
+          </button>
           <h3>Questions</h3>
         </label>
-        {pastWatchSkills !== watchSkills &&
-          watchSkills &&
+        {/* {watchSkills &&
           watchSkills.length > 0 &&
-          recruiterContext.getQuestionsOfSkills(watchSkills)}
+          recruiterContext.getQuestionsOfSkills(watchSkills)} */}
         {recruiterContext.questions.map((question) => (
           <p>
             <input

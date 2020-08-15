@@ -51,8 +51,7 @@ const PositionItem = ({ position }) => {
             <button
               className='btn btn-primary'
               onClick={() => {
-                let userId = 1;
-                positionContext.handleApply(id, userId);
+                positionContext.handleApply(id, localStorage.getItem('userId'));
               }}
             >
               Apply
